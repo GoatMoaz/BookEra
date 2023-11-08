@@ -14,6 +14,7 @@
 ### Brain Storming
 - [ ] Study JIRA
 	- for agile development 
-- [ ] ERD 
-	![[Pasted image 20231108213945.png]]
+- [ ] ERD
+	
+ ![](Pasted%20image%2020231108213945.png)
 # Resources
