@@ -1,0 +1,29 @@
+# Node.js
+node_modules/
+
+# WebStorm
+.idea/
+
+# User-specific files
+*.iml
+*.iws
+*.ipr
+
+# Logs
+npm-debug.log*
+
+# Dependency directories
+jspm_packages/
+
+# Typescript
+tsconfig.json
+*.ts
+*.map
+
+# Build output
+dist/
+build/
+
+# OS generated files
+.DS_Store
+Thumbs.db
