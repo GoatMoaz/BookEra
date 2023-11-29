@@ -10,6 +10,11 @@ const userSchema = new Schema({
         type: String,
         required: false,
     },
+    gender: {
+        type: String,
+        required: false,
+        enum: ['male', 'female'],
+    },
     username: {
         type: String,
         required: true,
@@ -22,7 +27,7 @@ const userSchema = new Schema({
     wallet_amount: {
         type: Number,
         required: false,
-        min: 0
+        min: 0,
     },
     type: {
         type: String,
