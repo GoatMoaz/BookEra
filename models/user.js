@@ -21,7 +21,8 @@ const userSchema = new Schema({
     },
     wallet_amount: {
         type: Number,
-        required: true,
+        required: false,
+        min: 0
     },
     type: {
         type: String,
