@@ -14,12 +14,12 @@ router.get('/create', userController.createUser_get);
 router.post('/create', userController.createUser_post);
 
 // update user
-router.get('/update', userController.updateUser_get);
-router.post('/update', userController.updateUser_post);
+router.get('/:id/update', userController.updateUser_get);
+router.post('/:id/update', userController.updateUser_post);
 
 // delete user
-router.get('/delete', userController.deleteUser_get);
-router.post('/delete', userController.deleteUser_post);
+router.get('/:id/delete', userController.deleteUser_get);
+router.post('/:id/delete', userController.deleteUser_post);
 
 // get user by id
 router.get('/:id', userController.getUserById);
