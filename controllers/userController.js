@@ -1,4 +1,12 @@
 const User = require('../models/user.js');
+// require passport for authentication
+const passport = require('passport');
+// require passport-local strategy
+const LocalStrategy = require('passport-local').Strategy;
+// require bcrypt for password hashing
+const bcrypt = require('bcrypt');
+
+
 
 // get all users
 exports.getAllUsers = async (req, res) => {
@@ -31,12 +39,30 @@ exports.getUserByUsername = async (req, res) => {
 }
 
 // create user
-exports.createUser_get = async (req, res) => {
+exports.signup_get = async (req, res) => {
     res.send('create user get');
 }
 
-exports.createUser_post = async (req, res) => {
-    res.send('create user post');
+exports.signup_post = async (req, res) => {
+    // create a user and hash the password
+    const user = new User({
+        first_name: req.body.first_name,
+        last_name: req.body.last_name,
+        username: req.body.username,
+        password: bcrypt.hashSync(req.body.password, 10),
+        wallet_amount: 10000,
+        type: 'buyer',
+        address: req.body.address,
+    });
+
+    try {
+        // save the user
+        const newUser = await user.save();
+        // redirect to login page
+        res.redirect('/users/login');
+    } catch (err) {
+        res.status(500).json(err);
+    }
 }
 
 
@@ -59,3 +85,12 @@ exports.deleteUser_post = async (req, res) => {
     res.send('delete user post');
 }
 
+
+// user login
+exports.login_get = async (req, res) => {
+    res.send('login get form');
+}
+
+exports.login_post = async (req, res) => {
+
+}
