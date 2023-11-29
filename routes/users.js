@@ -17,8 +17,6 @@ router.post('/signup', userController.signup_post);
 router.get('/login', userController.login_get);
 router.post('/login', userController.login_post);
 
-// logout
-router.post('/logout', userController.logout_post);
 
 // update user
 router.get('/:id/update', userController.updateUser_get);
@@ -27,6 +25,9 @@ router.post('/:id/update', userController.updateUser_post);
 // delete user
 router.get('/:id/delete', userController.deleteUser_get);
 router.post('/:id/delete', userController.deleteUser_post);
+
+// logout
+router.get('/logout', userController.logout_get);
 
 // get user by id
 router.get('/:id', userController.getUserById);

@@ -4,7 +4,6 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const passport = require("passport");
-const LocalStrategy = require("passport-local").Strategy;
 
 // use .env
 require('dotenv').config();

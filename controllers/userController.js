@@ -1,29 +1,24 @@
 const User = require('../models/user.js');
-// require passport for authentication
 const passport = require('passport');
-// require passport-local strategy
 const LocalStrategy = require('passport-local').Strategy;
-// require bcrypt for password hashing
 const bcrypt = require('bcrypt');
-
-
 
 passport.use(
     new LocalStrategy(async (username, password, done) => {
         try {
             const user = await User.findOne({ username: username });
             if (!user) {
-                return done(null, false, { message: "Incorrect username" });
+                return done(null, false, { message: 'Incorrect username' });
             }
             const match = await bcrypt.compare(password, user.password);
             if (!match) {
-                return done(null, false, { message: "Incorrect password" });
+                return done(null, false, { message: 'Incorrect password' });
             }
             return done(null, user);
         } catch (err) {
             return done(err);
         }
-    })
+    }),
 );
 
 passport.serializeUser((user, done) => {
@@ -38,6 +33,7 @@ passport.deserializeUser(async (id, done) => {
         done(err);
     }
 });
+
 // get all users
 exports.getAllUsers = async (req, res) => {
     try {
@@ -46,7 +42,7 @@ exports.getAllUsers = async (req, res) => {
     } catch (err) {
         res.status(500).json(err);
     }
-}
+};
 
 // get user by id
 exports.getUserById = async (req, res) => {
@@ -56,25 +52,24 @@ exports.getUserById = async (req, res) => {
     } catch (err) {
         res.status(500).json(err);
     }
-}
+};
 
 // get user by username
 exports.getUserByUsername = async (req, res) => {
     try {
-        const user = await User.findOne({username: req.params.username});
+        const user = await User.findOne({ username: req.params.username });
         res.status(200).json(user);
     } catch (err) {
         res.status(500).json(err);
     }
-}
+};
 
 // create user
 exports.signup_get = async (req, res) => {
-    res.send('create user get');
-}
+    res.render('signup_form');
+};
 
 exports.signup_post = async (req, res) => {
-    // create a user and hash the password
     const user = new User({
         first_name: req.body.first_name,
         last_name: req.body.last_name,
@@ -86,63 +81,49 @@ exports.signup_post = async (req, res) => {
     });
 
     try {
-        // save the user
         const newUser = await user.save();
-        // redirect to login page
         res.redirect('/users/login');
     } catch (err) {
         res.status(500).json(err);
     }
-}
-
+};
 
 // update user
 exports.updateUser_get = async (req, res) => {
     res.send('update user get');
-}
+};
 
 exports.updateUser_post = async (req, res) => {
     res.send('update user post');
-}
-
+};
 
 // delete user
 exports.deleteUser_get = async (req, res) => {
     res.send('delete user get');
-}
+};
 
 exports.deleteUser_post = async (req, res) => {
     res.send('delete user post');
-}
-
+};
 
 // user login
 exports.login_get = async (req, res) => {
+    res.render('login_form');
+};
 
-}
+exports.login_post = (req, res) => {
+    passport.authenticate('local', {
+        successRedirect: '/',
+        failureRedirect: '/users/login',
+    })(req, res);
+};
 
-exports.login_post = async (req, res) => {
-    // authenticate the user sent in the request body
-    passport.authenticate('local', (err, user, info) => {
+// user logout
+exports.logout_get = async (req, res) => {
+    req.logout((err) => {
         if (err) {
             return res.status(500).json(err);
         }
-        if (!user) {
-            return res.status(400).json(info);
-        }
-        // login the user
-        req.logIn(user, (err) => {
-            if (err) {
-                return res.status(500).json(err);
-            }
-            return res.redirect('/');
-        });
-    })(req, res);
-}
-
-// user logout
-exports.logout_post = async (req, res) => {
-   // logout the user
-    req.logout();
-    res.redirect('/')
-}
+        res.redirect('/');
+    });
+};
