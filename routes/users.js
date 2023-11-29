@@ -10,8 +10,12 @@ router.get('/', userController.getAllUsers);
 router.get('/username/:username', userController.getUserByUsername);
 
 // create user
-router.get('/create', userController.createUser_get);
-router.post('/create', userController.createUser_post);
+router.get('/signup', userController.signup_get);
+router.post('/signup', userController.signup_post);
+
+// login
+router.get('/login', userController.login_get);
+router.post('/login', userController.login_post);
 
 // update user
 router.get('/:id/update', userController.updateUser_get);
