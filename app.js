@@ -13,6 +13,7 @@ const booksRouter = require('./routes/books');
 const ordersRouter = require('./routes/orders');
 const orderDetailsRouter = require('./routes/orders_detail');
 const categoryRouter = require('./routes/categories');
+const reviewRouter = require('./routes/reviews');
 
 const mongoose = require('mongoose');
 const mongoDB = process.env.MONGODB_URL;
@@ -46,6 +47,7 @@ app.use('/books', booksRouter);
 app.use('/orders', ordersRouter);
 app.use('/orders_detail', orderDetailsRouter);
 app.use('/categories', categoryRouter);
+app.use('/reviews', reviewRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
