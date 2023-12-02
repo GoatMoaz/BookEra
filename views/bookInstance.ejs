@@ -1,0 +1,76 @@
+<!-- bookInstance.ejs -->
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>BookEra - <%= book.title %></title>
+
+    <!-- CSS FILES -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&family=Sono:wght@200;300;400;500;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/stylesheets/bootstrap.min.css" type="text/css">
+
+    <link rel="stylesheet" href="/stylesheets/bootstrap-icons.css" type="text/css">
+
+    <link href="/stylesheets/templatemo-pod-talk.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card">
+                <!-- Book cover image -->
+                <img src="<%= book.cover %>" class="card-img-top" alt="<%= book.title %>">
+                <div class="card-body">
+                    <!-- Book title -->
+                    <h5 class="card-title"><%= book.title %></h5>
+                    <!-- Book authors -->
+                    <p class="card-text">Authors: <%= book.authors.map(author => author.name).join(', ') %></p>
+                    <!-- Book publisher -->
+                    <p class="card-text">Publisher: <%= book.publisher.name %></p>
+                    <!-- Book categories -->
+                    <p class="card-text">Categories: <%= book.categories.map(category => category.name).join(', ') %></p>
+                    <!-- Book ISBN -->
+                    <p class="card-text">ISBN: <%= book.isbn %></p>
+                    <!-- Book description -->
+                    <p class="card-text">Description: <%= book.description %></p>
+                    <!-- Book price -->
+                    <p class="card-text">Price: $<%= book.price.toFixed(2) %></p>
+                    <!-- Book quantity -->
+                    <p class="card-text">Quantity: <%= book.quantity %></p>
+
+                    <!-- Book reviews -->
+                    <h6 class="mt-4">Reviews:</h6>
+                    <% if (reviews.length > 0) { %>
+                        <ul class="list-group">
+                            <% reviews.forEach(review => { %>
+                                <li class="list-group-item">
+                                    <strong>Rating:</strong> <%= review.rating %>
+                                    <% if (review.content) { %>
+                                        <p><strong>Review:</strong> <%= review.content %></p>
+                                    <% } %>
+                                    <p><em>By: <%= review.user.username %></em></p>
+                                </li>
+                            <% }) %>
+                        </ul>
+                    <% } else { %>
+                        <p>No reviews yet.</p>
+                    <% } %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+
+</html>
