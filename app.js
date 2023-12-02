@@ -3,7 +3,8 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-const passport = require("passport");
+const passport = require('passport');
+const RateLimit = require('express-rate-limit');
 
 // use .env
 require('dotenv').config();
@@ -16,20 +17,26 @@ const orderDetailsRouter = require('./routes/orders_detail');
 const categoryRouter = require('./routes/categories');
 const reviewRouter = require('./routes/reviews');
 
+const limiter = RateLimit({
+    windowMs: 1 * 60 * 1000,
+    max: 50,
+});
+
+app.use(limiter);
+
 const mongoose = require('mongoose');
-const session = require("express-session");
+const session = require('express-session');
 const mongoDB = process.env.MONGODB_URL;
 connectDB();
 
 async function connectDB() {
     try {
         await mongoose.connect(mongoDB);
-        console.log("MongoDB is Connected...");
+        console.log('MongoDB is Connected...');
     } catch (err) {
         console.error(err.message);
     }
 }
-
 
 const app = express();
 
@@ -39,16 +46,14 @@ app.set('view engine', 'ejs');
 
 app.use(logger('dev'));
 app.use(express.json());
-app.use(express.urlencoded({extended: false}));
+app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-
-app.use(session({ secret: "cats", resave: false, saveUninitialized: true }));
+app.use(session({ secret: 'cats', resave: false, saveUninitialized: true }));
 
 app.use(passport.initialize());
 app.use(passport.session());
-
 
 // routes
 app.use('/', indexRouter);
