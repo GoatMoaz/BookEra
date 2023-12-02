@@ -1,16 +1,22 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Login</title>
+  <meta charset="UTF-8">
+  <title></title>
 </head>
 <body>
-    <h2>Login</h2>
+  <% if (user) { %>
+    <h1>WELCOME BACK <%= user.username %></h1>
+    <a href="/users/logout">LOG OUT</a>
+  <% } else { %>
+    <h1>please log in</h1>
     <form action="/users/login" method="POST">
-        <label for="username">Username:</label><br>
-        <input type="text" id="username" name="username" required><br>
-        <label for="password">Password:</label><br>
-        <input type="password" id="password" name="password" required><br>
-        <input type="submit" value="Login">
+      <label for="username">Username</label>
+      <input name="username" placeholder="username" type="text" />
+      <label for="password">Password</label>
+      <input name="password" type="password" />
+      <button>Log In</button>
     </form>
+  <% } %>
 </body>
 </html>
