@@ -1,4 +1,5 @@
 const Book = require('../models/book.js');
+const Review = require('../models/review.js');
 
 // get all books
 exports.getAllBooks = async (req, res) => {
@@ -15,7 +16,10 @@ exports.getAllBooks = async (req, res) => {
 exports.getBookById = async (req, res) => {
     try {
         const book = await Book.findById(req.params.id);
-        res.status(200).json(book);
+        // send book to bookInstance.ejs with its reviews
+        // get reviews with book id = req.params.id and store each user's username in reviews
+        const reviews = await Review.find({book: req.params.id}).populate('user', 'username');
+        res.render('bookInstance', { title: 'Book Instance', book: book, reviews});
     } catch (err) {
         res.status(500).json(err);
     }
