@@ -22,7 +22,6 @@ const limiter = RateLimit({
     max: 50,
 });
 
-app.use(limiter);
 
 const mongoose = require('mongoose');
 const session = require('express-session');
@@ -44,6 +43,7 @@ const app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+app.use(limiter);
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -54,6 +54,11 @@ app.use(session({ secret: 'cats', resave: false, saveUninitialized: true }));
 
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.use((req, res, next) => {
+    res.locals.user = req.user;
+    next();
+});
 
 // routes
 app.use('/', indexRouter);
