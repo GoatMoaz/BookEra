@@ -108,7 +108,7 @@ exports.deleteUser_post = async (req, res) => {
 
 // user login
 exports.login_get = async (req, res) => {
-    res.render('login_form');
+    res.render('login_form',{user: req.user});
 };
 
 exports.login_post = (req, res) => {
