@@ -26,6 +26,7 @@ const limiter = RateLimit({
 const mongoose = require('mongoose');
 const session = require('express-session');
 const mongoDB = process.env.MONGODB_URL;
+const SECRET = process.env.SECRET;
 connectDB();
 
 async function connectDB() {
@@ -50,7 +51,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(session({ secret: 'cats', resave: false, saveUninitialized: true }));
+app.use(session({ secret: SECRET, resave: false, saveUninitialized: true }));
 
 app.use(passport.initialize());
 app.use(passport.session());
