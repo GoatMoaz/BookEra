@@ -20,3 +20,5 @@ router.post('/:id/delete', reviewController.deleteReview_post);
 
 // get a review
 router.get('/:id', reviewController.getReview);
+
+module.exports = router;
