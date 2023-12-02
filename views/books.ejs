@@ -29,6 +29,7 @@
     <div class="row">
         <% books.forEach(book => { %>
             <div class="col-md-4 mb-4">
+            <a href="/books/<%= book._id %>">
                 <div class="card">
                     <!-- Book cover image -->
                     <img src="<%= book.cover %>" class="card-img-top" alt="<%= book.title %>">
@@ -53,6 +54,7 @@
                         <!-- Add more details as needed -->
                     </div>
                 </div>
+            </a>
             </div>
         <% }) %>
     </div>
