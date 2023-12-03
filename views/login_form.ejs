@@ -8,6 +8,7 @@
     <link href="/stylesheets/templatemo-pod-talk.css" rel="stylesheet" type="text/css">
 </head>
 <body>
+<%- include('partials/navbar') %>
   <% if (user) { %>
     <h1>WELCOME BACK <%= user.username %></h1>
     <a href="/users/logout">LOG OUT</a>
