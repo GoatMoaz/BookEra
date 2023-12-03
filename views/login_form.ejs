@@ -10,23 +10,16 @@
 </head>
 <body>
 <div class="login">
-    <input type="text" placeholder="username" name="user"><br>
-    <input type="password" placeholder="password" name="password"><br>
-    <input type="button" value="Login">
+    <% if (user) { %>
+        <h1>WELCOME BACK <%= user.username %></h1>
+        <a href="/users/logout">LOG OUT</a>
+    <% } else { %>
+        <form action="/users/login" method="POST">
+            <input name="username" placeholder="username" type="text" />
+            <input name="password" placeholder="Password" type="password" />
+            <button>Log In</button>
+        </form>
+    <% } %>
 </div>
-</header>
-  <% if (user) { %>
-    <h1>WELCOME BACK <%= user.username %></h1>
-    <a href="/users/logout">LOG OUT</a>
-  <% } else { %>
-
-    <form action="/users/login" method="POST">
-      <label for="username"> <h5>user name</h5> </label>
-      <input name="username" placeholder="username" type="text" />
-      <label for="password"> <h5>Password</h5></label>
-      <input name="password" type="password" />
-      <button>Log In</button>
-    </form>
-  <% } %>
 </body>
 </html>

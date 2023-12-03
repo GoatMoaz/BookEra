@@ -10,7 +10,9 @@ body{
     font-family: Arial;
     font-size: 12px;
 }
-
+body {
+    background-image: url("paper.gif");
+}
 .body{
     position: absolute;
     top: -20px;
