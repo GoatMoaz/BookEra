@@ -1,26 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<div class="body"></div>
+<div class="grad"></div>
+<div class="header">
+    <div>Book<span>Era</span></div>
+</div>
+<br>
 <head>
-  <meta charset="UTF-8">
-  <title>BookEra-Login</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&family=Sono:wght@200;300;400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/stylesheets/bootstrap.min.css" type="text/css">
-    <link href="/stylesheets/templatemo-pod-talk.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/stylesheets/logstyle.css" type="text/css">
 </head>
 <body>
-<%- include('partials/navbar') %>
-  <% if (user) { %>
-    <h1>WELCOME BACK <%= user.username %></h1>
-    <a href="/users/logout">LOG OUT</a>
-  <% } else { %>
-    <h3>please log in</h3>
-    <form action="/users/login" method="POST">
-      <label for="username">Username</label>
-      <input name="username" placeholder="username" type="text" />
-      <label for="password">Password</label>
-      <input name="password" type="password" />
-      <button>Log In</button>
-    </form>
-  <% } %>
+<div class="login">
+    <% if (user) { %>
+        <h1>WELCOME BACK <%= user.username %></h1>
+        <a href="/users/logout">LOG OUT</a>
+    <% } else { %>
+        <form action="/users/login" method="POST">
+            <input name="username" placeholder="username" type="text" />
+            <input name="password" placeholder="Password" type="password" />
+            <button>Log In</button>
+        </form>
+    <% } %>
+</div>
 </body>
 </html>
