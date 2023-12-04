@@ -7,7 +7,7 @@ const Category = require('../models/category.js');
 // get all books
 exports.getAllBooks = async (req, res) => {
     try {
-        const books = await Book.find({}).populate('publisher', 'name').populate('authors', 'name').populate('categories', 'name');
+        const books = await Book.find({}).populate('publisher').populate('authors').populate('categories');
         // send books to books.ejs
         res.render('books', { title: 'Books', books: books });
     } catch (err) {
@@ -19,7 +19,7 @@ exports.getAllBooks = async (req, res) => {
 // get book by id
 exports.getBookById = async (req, res) => {
     try {
-        const book = await Book.findById(req.params.id).populate('publisher', 'name').populate('authors', 'name').populate('categories', 'name');
+        const book = await Book.findById(req.params.id).populate('publisher').populate('authors').populate('categories');
         // send book to bookInstance.ejs with its reviews
         // get reviews with book id = req.params.id and store each user's username in reviews
         const reviews = await Review.find({book: req.params.id}).populate('user', 'username');
@@ -82,6 +82,3 @@ exports.deleteBook_get = async (req, res) => {
 exports.deleteBook_post = async (req, res) => {
     res.send('delete book post');
 }
-
-
-
