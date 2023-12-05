@@ -18,7 +18,7 @@ Firstly, thank you for your interest in contributing to BookEra! Here's how you 
 
 ## Work Breakdown Structure (WBS)
 
-![BookEra WBS](System%20Analysis%20and%20Design/BookEra%20WPS.png)
+![BookEra WBS](./System%20Analysis%20and%20Design/BookEra%20WBS.png)
 
 ## Submitting Changes
 
