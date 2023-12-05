@@ -13,11 +13,18 @@ const bcrypt = require('bcryptjs');
 
 require('dotenv').config();
 
+const mongoDB = process.env.MONGODB_URL;
 
-mongoose.connect(process.env.MONGODB_URL, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-});
+
+connectDB();
+async function connectDB() {
+    try {
+        await mongoose.connect(mongoDB);
+        console.log('MongoDB is Connected...');
+    } catch (err) {
+        console.error(err.message);
+    }
+}
 
 const db = mongoose.connection;
 
@@ -175,13 +182,16 @@ const seed = async () => {
 
     // Create authors
     const author1 = new Author({
-        name: 'Hussein Hany',
+        first_name: 'Hussein',
+        last_name:'Hany',
     });
     await author1.save();
 
     const author2 = new Author({
-        name: 'Jane Author',
+        first_name: 'Jane',
+        last_name:'Doe',
     });
+
     await author2.save();
 
     // Create publishers
@@ -206,6 +216,11 @@ const seed = async () => {
     });
     await category2.save();
 
+    const seller1 = new Seller({
+        user: sellerUser,
+    });
+    await seller1.save();
+
     // Create books
     const book1 = new Book({
         title: 'Node.js in Action',
@@ -218,6 +233,7 @@ const seed = async () => {
         categories: [category1],
         quantity: 10,
         createdAt: new Date(),
+        seller:seller1,
     });
     await book1.save();
 
@@ -232,6 +248,7 @@ const seed = async () => {
         categories: [category1, category2],
         quantity: 15,
         createdAt: new Date(),
+        seller:seller1,
     });
     await book2.save();
 
@@ -256,12 +273,6 @@ const seed = async () => {
     });
     await review2.save();
 
-    // Create sellers
-    const seller1 = new Seller({
-        user: sellerUser,
-        books: [book1],
-    });
-    await seller1.save();
 
     console.log('Database seeded');
     process.exit();

@@ -49,6 +49,10 @@ const bookSchema = new Schema({
         type: Number,
         required: true,
     },
+    seller: {
+        type: Schema.Types.ObjectId,
+        ref: 'Seller',
+    },
     createdAt: {
         type: Date,
         required: true,
