@@ -20,6 +20,10 @@ Firstly, thank you for your interest in contributing to BookEra! Here's how you 
 
 ![BookEra WBS](./System%20Analysis%20and%20Design/BookEra%20WBS.png)
 
+## ER Diagram
+
+![BookEra ERD](./System%20Analysis%20and%20Design/ERD.png)
+
 ## Submitting Changes
 
 1. Submit a pull request to the repository in the GitHub UI.
