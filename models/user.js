@@ -29,11 +29,11 @@ const userSchema = new Schema({
         required: false,
         min: 0,
     },
-    type: {
-        type: String,
-        required: true,
-        enum: ['buyer', 'seller'],
-    },
+    // type: {
+    //     type: String,
+    //     required: true,
+    //     enum: ['buyer', 'seller'],
+    // },
     address: {
         type: String,
         required: false,
