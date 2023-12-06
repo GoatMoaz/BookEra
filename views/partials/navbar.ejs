@@ -23,9 +23,17 @@
                     <a href="/books" class="nav-item nav-link">Books</a>
                     <a href="#" class="nav-item nav-link">Authors</a>
                     <a href="/about" class="nav-item nav-link">About Us</a>
+
                 </div>
                 <div class="navbar-nav">
                     <a href="#" class="nav-item nav-link"> Cart</a>
+                     <% if (!user) { %>
+                        <a href="/users/login" class="nav-item nav-link">Login</a>
+                        <a href="/users/signup" class="nav-item nav-link">Signup</a>
+                    <% } else { %>
+                        <a href="/" class="nav-item nav-link"> <%= user.username %> </a>
+                        <a href="/users/logout" class="nav-item nav-link">Logout</a>
+                    <% } %>
                 </div>
             </div>
         </nav>
