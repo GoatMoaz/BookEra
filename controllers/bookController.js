@@ -3,6 +3,7 @@ const Review = require('../models/review.js');
 const Publisher = require('../models/publisher.js');
 const Author = require('../models/author.js');
 const Category = require('../models/category.js');
+const User = require('../models/user.js');
 
 // get all books
 exports.getAllBooks = async (req, res) => {
@@ -81,5 +82,29 @@ exports.deleteBook_get = async (req, res) => {
     res.send('delete book get');
 }
 exports.deleteBook_post = async (req, res) => {
-    res.send('delete book post');
+    try {
+        const book = await Book.findById(req.params.id);
+        const sellerUser = await User.findById(book.seller._id);
+
+        if (!req.user) {
+            req.flash('error', 'You are not authorized to delete this book');
+            return res.redirect('/books');
+        }
+
+        if (req.user._id.toString() === sellerUser._id.toString()) {
+            // delete reviews of this book
+            await Review.deleteMany({book: req.params.id});
+
+            await Book.findByIdAndDelete(req.params.id);
+
+            req.flash('success', 'Book deleted successfully');
+            return res.redirect('/books');
+        } else {
+            req.flash('error', 'You are not authorized to delete this book');
+            return res.redirect('/books');
+        }
+    } catch (err) {
+        console.log(err);
+        res.status(500).json(err);
+    }
 }
