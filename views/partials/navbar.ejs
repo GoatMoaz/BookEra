@@ -5,7 +5,6 @@
 <head>
     <title></title>
     <meta charset="utf-8">
-
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Saira:wght@500;600;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
@@ -13,10 +12,10 @@
     <link href="/stylesheets/nav.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-<div class="container-fluid bg-primary">
+<div class="container-fluid " style="background-color: black">
     <div class="container">
         <nav class="navbar navbar-dark navbar-expand-lg py-0">
-            <h1 class="text-white fw-bold d-block">BOOK<span class="text-secondary">ERA</span> </h1>
+            <h1 class="text-white fw-bold d-block">BOOK<span style="color: #5379fa">ERA</span> </h1>
             <div class="collapse navbar-collapse bg-transparent" id="navbarCollapse">
                 <div class="navbar-nav ms-auto mx-xl-auto p-0">
                     <a href="/" class="nav-item nav-link">Home</a>
@@ -25,8 +24,8 @@
                     <a href="/about" class="nav-item nav-link">About Us</a>
 
                 </div>
+
                 <div class="navbar-nav">
-                    <a href="#" class="nav-item nav-link"> Cart</a>
                      <% if (!user) { %>
                         <a href="/users/login" class="nav-item nav-link">Login</a>
                         <a href="/users/signup" class="nav-item nav-link">Signup</a>
@@ -34,6 +33,8 @@
                         <a href="/" class="nav-item nav-link"> <%= user.username %> </a>
                         <a href="/users/logout" class="nav-item nav-link">Logout</a>
                     <% } %>
+                         <a href="#"><i class="bi bi-cart nav-item nav-link"></i></a>
+
                 </div>
             </div>
         </nav>

@@ -43,95 +43,9 @@ body {
 }
 
 
-/*---------------------------------------
-  TYPOGRAPHY               
------------------------------------------*/
-
-h2,
-h3,
-h4,
-h5,
-h6 {
-  color: var(--dark-color);
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: var(--title-font-family); 
-  font-weight: var(--font-weight-semibold);
-}
-
-h1 {
-  font-size: var(--h1-font-size);
-  font-weight: var(--font-weight-bold);
-}
-
-h2 {
-  font-size: var(--h2-font-size);
-  font-weight: var(--font-weight-bold);
-}
-
-h3 {
-  font-size: var(--h3-font-size);
-}
-
-h4 {
-  font-size: var(--h4-font-size);
-}
-
-h5 {
-  font-size: var(--h5-font-size);
-}
-
-h6 {
-  font-size: var(--h6-font-size);
-}
-
-p {
-  color: var(--p-color);
-  font-size: var(--p-font-size);
-  font-weight: var(--font-weight-light);
-}
-
-ul li {
-  color: var(--p-color);
-  font-size: var(--p-font-size);
-  font-weight: var(--font-weight-light);
-}
-
-a, 
-button {
-  touch-action: manipulation;
-  transition: all 0.3s;
-}
-
-a {
-  display: inline-block;
-  color: var(--primary-color);
-  text-decoration: none;
-}
-
-a:hover {
-  color: var(--link-hover-color);
-}
-
-b,
-strong {
-  font-weight: var(--font-weight-bold);
-}
-
-::selection {
-  background-color: var(--primary-color);
-  color: var(--white-color);
-}
-
 
 /*---------------------------------------
-  SECTION               
+  SECTION
 -----------------------------------------*/
 .section-title-wrap {
   position: relative;
@@ -164,54 +78,6 @@ strong {
   padding-bottom: 100px;
 }
 
-main {
-  position: relative;
-  z-index: 1;
-}
-
-.section-bg {
-  background-color: var(--section-bg-color);
-}
-
-.section-overlay {
-  background-color: var(--primary-color);
-  position: absolute;
-  top: 0;
-  left: 0;
-  pointer-events: none;
-  width: 100%;
-  height: 100%;
-  opacity: 0.85;
-}
-
-.section-overlay + .container {
-  position: relative;
-}
-
-
-
-
-
-
-
-/*---------------------------------------
-  SITE HEADER              
------------------------------------------*/
-.site-header {
-  background-image: url('../images/templatemo-wave-header.jpg'), linear-gradient(#348CD2, #FFFFFF);;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  min-height: 480px;
-  position: relative;
-}
-
-.site-header h2 {
-  color: var(--white-color);
-}
-
-
-
 
 /*---------------------------------------
   CAROUSEL        
@@ -219,7 +85,7 @@ main {
 
 
 .badge {
-  background-color: var(--custom-btn-bg-color);
+  background-color: #5379fa;
   font-family: var(--title-font-family);
   border-radius: var(--border-radius-large);
   color: var(--white-color);
@@ -323,7 +189,7 @@ main {
 }
 
 .social-icon-link {
-  background: var(--secondary-color);
+  background: black;
   border-radius: var(--border-radius-large);
   color: var(--white-color);
   font-size: var(--p-font-size);
@@ -337,7 +203,7 @@ main {
 }
 
 .social-icon-link:hover {
-  background: var(--primary-color);
+  background: #5379fa;
   color: var(--white-color);
 }
 
