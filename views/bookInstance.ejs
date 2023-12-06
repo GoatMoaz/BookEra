@@ -88,9 +88,11 @@
                         <p>No reviews yet.</p>
                     <% } %>
                     <!-- Display the delete button -->
-                    <form action="/books/<%= book._id %>/delete" method="POST">
+                    <% if (user && user._id.toString() === book.seller.user._id.toString()) { %>
+                        <form action="/books/<%= book._id %>/delete" method="POST">
                         <button type="submit" class="btn btn-danger">Delete Book</button>
                     </form>
+                    <% } %>
                 </div>
 
             </div>
