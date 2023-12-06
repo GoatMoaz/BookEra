@@ -110,6 +110,7 @@ const seed = async () => {
         price: 1000,
         cover: 'https://images.manning.com/360/480/resize/book/9/be0e700-8ac5-44b7-92fc-0a0d250969be/Cantelon-Node-2ed.png',
         categories: [categoryNodejs],
+        seller: humanBeing,
         quantity: 10,
         createdAt: new Date(),
     });
@@ -123,6 +124,7 @@ const seed = async () => {
         publisher: publisherChicken,
         price: 800,
         cover: 'https://m.media-amazon.com/images/I/71-dQPtVFtL._SY466_.jpg',
+        seller: chicken,
         categories: [categoryChicken],
         quantity: 15,
         createdAt: new Date(),
