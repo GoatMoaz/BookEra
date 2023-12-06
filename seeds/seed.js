@@ -55,6 +55,11 @@ const seed = async () => {
     });
     await humanBeing.save();
 
+    const humanSeller = new Seller({
+        user: humanBeing,
+    });
+    await humanSeller.save();
+
     const chicken = new User({
         first_name: 'Chick',
         last_name: 'The Chicken',
@@ -64,6 +69,11 @@ const seed = async () => {
         address: '456 Farm St',
     });
     await chicken.save();
+
+    const chickenSeller = new Seller({
+        user: chicken,
+    });
+    await chickenSeller.save();
 
     // Create authors
     const authorHumanBeing = new Author({
@@ -110,7 +120,7 @@ const seed = async () => {
         price: 1000,
         cover: 'https://images.manning.com/360/480/resize/book/9/be0e700-8ac5-44b7-92fc-0a0d250969be/Cantelon-Node-2ed.png',
         categories: [categoryNodejs],
-        seller: humanBeing,
+        seller: humanSeller,
         quantity: 10,
         createdAt: new Date(),
     });
@@ -124,7 +134,7 @@ const seed = async () => {
         publisher: publisherChicken,
         price: 800,
         cover: 'https://m.media-amazon.com/images/I/71-dQPtVFtL._SY466_.jpg',
-        seller: chicken,
+        seller: chickenSeller,
         categories: [categoryChicken],
         quantity: 15,
         createdAt: new Date(),
