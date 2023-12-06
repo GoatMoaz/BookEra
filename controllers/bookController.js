@@ -4,6 +4,7 @@ const Publisher = require('../models/publisher.js');
 const Author = require('../models/author.js');
 const Category = require('../models/category.js');
 const User = require('../models/user.js');
+const Seller = require('../models/seller.js');
 
 // get all books
 exports.getAllBooks = async (req, res) => {
@@ -20,7 +21,7 @@ exports.getAllBooks = async (req, res) => {
 // get book by id
 exports.getBookById = async (req, res) => {
     try {
-        const book = await Book.findById(req.params.id).populate('publisher').populate('authors').populate('categories');
+        const book = await Book.findById(req.params.id).populate('publisher').populate('authors').populate('categories').populate('seller');
         // send book to bookInstance.ejs with its reviews
         // get reviews with book id = req.params.id and store each user's username in reviews
         const reviews = await Review.find({book: req.params.id}).populate('user', 'username');
@@ -83,15 +84,14 @@ exports.deleteBook_get = async (req, res) => {
 }
 exports.deleteBook_post = async (req, res) => {
     try {
-        const book = await Book.findById(req.params.id);
-        const sellerUser = await User.findById(book.seller._id);
+        const book = await Book.findById(req.params.id).populate('seller');
 
         if (!req.user) {
             req.flash('error', 'You are not authorized to delete this book');
             return res.redirect('/books');
         }
 
-        if (req.user._id.toString() === sellerUser._id.toString()) {
+        if (req.user._id.toString() === book.seller.user._id.toString()) {
             // delete reviews of this book
             await Review.deleteMany({book: req.params.id});
 
