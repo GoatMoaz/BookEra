@@ -25,6 +25,7 @@ exports.getBookById = async (req, res) => {
         const reviews = await Review.find({book: req.params.id}).populate('user', 'username');
         res.render('bookInstance', { title: 'Book Instance', book: book, reviews});
     } catch (err) {
+        console.log(err);
         res.status(500).json(err);
     }
 }
