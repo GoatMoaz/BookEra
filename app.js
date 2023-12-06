@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const passport = require('passport');
 const RateLimit = require('express-rate-limit');
+const flash = require('connect-flash');
 
 // use .env
 require('dotenv').config();
@@ -53,6 +54,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(session({ secret: SECRET, resave: false, saveUninitialized: true }));
 
+app.use(flash());
+app.use((req, res, next) => {
+    res.locals.success = req.flash('success');
+    res.locals.error = req.flash('error');
+    next();
+});
 app.use(passport.initialize());
 app.use(passport.session());
 

@@ -26,51 +26,65 @@
 <body>
 <%- include('partials/navbar') %>
 <div class="container mt-5">
-    <div class="row">
-        <div class="col-md-8 offset-md-2">
-            <div class="card">
-                <!-- Book cover image -->
-                <img src="<%= book.cover %>" class="card-img-top" alt="<%= book.title %>">
-                <div class="card-body">
-                    <!-- Book title -->
-                    <h5 class="card-title"><%= book.title %></h5>
-                    <!-- Book authors -->
-                    <p class="card-text">Authors: <%= book.authors.map(author => author.name).join(', ') %></p>
-                    <!-- Book publisher -->
-                    <p class="card-text">Publisher: <%= book.publisher.name %></p>
-                    <!-- Book categories -->
-                    <p class="card-text">
-                        Categories: <%= book.categories.map(category => category.name).join(', ') %></p>
-                    <!-- Book ISBN -->
-                    <p class="card-text">ISBN: <%= book.isbn %></p>
-                    <!-- Book description -->
-                    <p class="card-text">Description: <%= book.description %></p>
-                    <!-- Book price -->
-                    <p class="card-text">Price: $<%= book.price.toFixed(2) %></p>
-                    <!-- Book quantity -->
-                    <p class="card-text">Quantity: <%= book.quantity %></p>
+    <% if (success.length > 0) { %>
+    <div class="alert alert-success">
+        <%= success %>
+    </div>
+    <% } %>
+    <% if (error.length > 0) { %>
+    <div class="alert alert-danger">
+        <%= error %>
+    </div>
+        <% } %>
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <div class="card">
+                    <!-- Book cover image -->
+                    <img src="<%= book.cover %>" class="card-img-top" alt="<%= book.title %>">
+                    <div class="card-body">
+                        <!-- Book title -->
+                        <h5 class="card-title"><%= book.title %></h5>
+                        <!-- Book authors -->
+                        <p class="card-text">Authors: <%= book.authors.map(author => author.name).join(', ') %></p>
+                        <!-- Book publisher -->
+                        <p class="card-text">Publisher: <%= book.publisher.name %></p>
+                        <!-- Book categories -->
+                        <p class="card-text">
+                            Categories: <%= book.categories.map(category => category.name).join(', ') %></p>
+                        <!-- Book ISBN -->
+                        <p class="card-text">ISBN: <%= book.isbn %></p>
+                        <!-- Book description -->
+                        <p class="card-text">Description: <%= book.description %></p>
+                        <!-- Book price -->
+                        <p class="card-text">Price: $<%= book.price.toFixed(2) %></p>
+                        <!-- Book quantity -->
+                        <p class="card-text">Quantity: <%= book.quantity %></p>
+                        <!-- Book reviews -->
+                        <h6 class="mt-4">Reviews:</h6>
+                        <% if (reviews.length > 0) { %>
+                            <ul class="list-group">
+                                <% reviews.forEach(review => { %>
+                                    <li class="list-group-item">
+                                        <strong>Rating:</strong> <%= review.rating %>
+                                        <% if (review.content) { %>
+                                            <p><strong>Review:</strong> <%= review.content %></p>
+                                        <% } %>
+                                        <p><em>By: <%= review.user.username %></em></p>
+                                    </li>
+                                <% }) %>
+                            </ul>
+                        <% } else { %>
+                            <p>No reviews yet.</p>
+                        <% } %>
+                        <!-- Display the delete button -->
+                        <form action="/books/<%= book._id %>/delete" method="POST">
+                            <button type="submit" class="btn btn-danger">Delete Book</button>
+                        </form>
+                    </div>
 
-                    <!-- Book reviews -->
-                    <h6 class="mt-4">Reviews:</h6>
-                    <% if (reviews.length > 0) { %>
-                        <ul class="list-group">
-                            <% reviews.forEach(review => { %>
-                                <li class="list-group-item">
-                                    <strong>Rating:</strong> <%= review.rating %>
-                                    <% if (review.content) { %>
-                                        <p><strong>Review:</strong> <%= review.content %></p>
-                                    <% } %>
-                                    <p><em>By: <%= review.user.username %></em></p>
-                                </li>
-                            <% }) %>
-                        </ul>
-                    <% } else { %>
-                        <p>No reviews yet.</p>
-                    <% } %>
                 </div>
             </div>
         </div>
-    </div>
 </div>
 
 </body>
