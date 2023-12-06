@@ -6,26 +6,49 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&family=Sono:wght@200;300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/stylesheets/bootstrap.min.css" type="text/css">
     <link href="/stylesheets/templatemo-pod-talk.css" rel="stylesheet" type="text/css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/stylesheets/logstyle.css" type="text/css">
+    <link rel="stylesheet" href="/stylesheets/bootstrap-icons.css" type="text/css">
+
 </head>
+<style>
+    body, html {
+        height: 100%;
+        margin: 0;
+        overflow: hidden;
+    }
+    .background {
+        position: absolute;
+        background-size: cover;
+        background-position: center;
+        filter: blur(5px);
+        z-index: -1;
+    }
+</style>
 <body>
-    <h3>Sign up</h3>
+<%- include('partials/navbar') %>
+
+<div class="background">
+    <img src="/images/b2.png" alt="">
+</div>
+<div class="header">
+    <div>Book<span>Era</span></div>
+</div>
+<div class="login">
     <form action="/users/signup" method="POST">
-        <label  for="first_name">First Name:</label><br>
-        <input type="text" id="first_name" name="first_name" required><br>
-        <label for="last_name">Last Name:</label><br>
-        <input type="text" id="last_name" name="last_name"><br>
-        <label for="username">Username:</label><br>
-        <input type="text" id="username" name="username" required><br>
-        <label for="password">Password:</label><br>
-        <input type="password" id="password" name="password" required><br>
-        <label for="type">Type:</label><br>
-        <select id="type" name="type" required>
+        <input type="text" id="first_name" name="first_name" placeholder="First Name" required>
+        <input type="text" id="last_name" name="last_name" placeholder="Last Name" required>
+        <input type="text" id="username" name="username" placeholder="Username" required>
+        <input type="password" id="password" name="password" placeholder="Password" required><br><br>
+        <label for="type"><h5 style="color: rgba(255,255,255,0.92)">Type:</h5></label>
+        <select class="select" id="type" name="type" required>
             <option value="buyer">Buyer</option>
             <option value="seller">Seller</option>
         </select><br>
-        <label for="address">Address:</label><br>
-        <input type="text" id="address" name="address"><br>
-        <input type="submit" value="Signup">
+        <input type="text" id="address" name="address" placeholder="Address"><br>
+        <button class="button-64" role="button"><span class="text">Signup</span></button>
+
     </form>
+</div>
 </body>
 </html>
