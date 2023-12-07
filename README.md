@@ -26,7 +26,7 @@ Understand the database schema and relationships with our Entity-Relationship Di
 
 ### Sequence Diagrams
 
-For detailed insights into the system's interactions, view our Sequence Diagrams [here](./docs/Sequence%20Diagrams/ERD.png)
+For detailed insights into the system's interactions, view our Sequence Diagrams [here](./docs/Sequence%20Diagrams/)
 ## Contributing to BookEra
 
 Thank you for considering contributing to BookEra! Your involvement helps us build a vibrant community for book lovers. Here's how you can get started:
