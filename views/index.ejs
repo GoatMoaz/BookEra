@@ -12,26 +12,32 @@
 
   <link href="/stylesheets/templatemo-pod-talk.css" rel="stylesheet" type="text/css">
   <title>BookEra</title>
-
-  <style>
+<style>
     body {
       font-family: 'Montserrat', sans-serif;
       margin: 0;
       padding: 0;
-      background-color: #f8f9fa;
-      color: #495057;
+      background-color: #ffffff;
+      color: #333333;
     }
 
     header {
-      background-color: #343a40;
+      background-color: #f8f9fa;
       padding: 20px;
       text-align: center;
-      color: #ffffff;
+      color: #495057;
     }
 
     section {
       text-align: center;
       padding: 50px;
+      background-color: #f8f9fa;
+      height: 50vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      max-width: 50%;
+      margin: auto;
     }
 
     h1 {
@@ -58,17 +64,19 @@
     .cta-button:hover {
       background-color: #0056b3;
     }
-  </style>
+</style>
 </head>
 
 <body>
 <%- include('partials/navbar') %>
 
-<header>
-  <h1>Welcome to BookEra</h1>
-</header>
+
 
 <section>
+
+  <header>
+    <h1>Welcome to BookEra</h1>
+  </header>
   <p>Explore a world of books at your fingertips.</p>
   <a href="/books" class="cta-button">Discover Books</a>
 </section>
