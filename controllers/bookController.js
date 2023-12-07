@@ -64,10 +64,59 @@ exports.getBookByCategory = async (req, res) => {
 
 // create book
 exports.createBook_get = async (req, res) => {
-    res.send('create book get');
+    // Check if user is logged in
+    if (!req.user) {
+        req.flash('error', 'You must be logged in to create a book');
+        return res.redirect('/users/login');
+    }
+    else {
+        // check if logged in user is a seller
+        const seller = await Seller.findOne({user: req.user._id});
+        if (!seller) {
+            req.flash('error', 'You must be a seller to create a book');
+            return res.redirect('/books');
+        }
+    }
+
+    try {
+        const authors = await Author.find({});
+        const publishers = await Publisher.find({});
+        const categories = await Category.find({});
+        res.render('createBook', { authors, publishers, categories });
+    } catch (err) {
+        console.log(err);
+        res.status(500).json(err);
+    }
 }
 exports.createBook_post = async (req, res) => {
-    res.send('create book post');
+    try {
+        const { title, isbn, description, authors, publisher, price, cover, categories, quantity } = req.body;
+        const seller = await Seller.findOne({user: req.user._id});
+
+        const newBook = new Book({
+            title,
+            isbn,
+            description,
+            authors,
+            publisher,
+            price,
+            cover,
+            categories,
+            quantity,
+            seller,
+            createdAt: new Date(),
+            updatedAt: new Date(),
+        });
+
+        await newBook.save();
+
+        req.flash('success', 'Book created successfully');
+        res.redirect(`/books/${newBook._id}`);
+    } catch (err) {
+        console.log(err);
+        req.flash('error', 'Error creating book');
+        res.redirect('/books/create');
+    }
 }
 
 // update book by id
