@@ -70,21 +70,28 @@ exports.signup_get = async (req, res) => {
 };
 
 exports.signup_post = async (req, res) => {
-    const user = new User({
-        first_name: req.body.first_name,
-        last_name: req.body.last_name,
-        username: req.body.username,
-        password: bcrypt.hashSync(req.body.password, 10),
-        wallet_amount: 10000,
-        type: 'buyer',
-        address: req.body.address,
-    });
-
     try {
-        const newUser = await user.save();
+        const existingUser = await User.findOne({
+            username: req.body.username,
+        });
+        if (existingUser) {
+            req.flash('error', 'Username already exists');
+            return res.redirect('/users/signup');
+        }
+        const user = new User({
+            first_name: req.body.first_name,
+            last_name: req.body.last_name,
+            username: req.body.username,
+            password: bcrypt.hashSync(req.body.password, 10),
+            wallet_amount: 0,
+            type: req.body.type,
+            address: req.body.address,
+        });
+        await user.save();
         res.redirect('/users/login');
     } catch (err) {
-        res.status(500).json(err);
+        req.flash('error', 'An error occurred');
+        res.redirect('/users/signup');
     }
 };
 
