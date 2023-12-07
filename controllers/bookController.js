@@ -121,10 +121,52 @@ exports.createBook_post = async (req, res) => {
 
 // update book by id
 exports.updateBook_get = async (req, res) => {
-    res.send('update book get');
+    try {
+        const book = await Book.findById(req.params.id).populate('authors').populate('publisher').populate('categories');
+        const authors = await Author.find({});
+        const publishers = await Publisher.find({});
+        const categories = await Category.find({});
+        res.render('updateBook', { book, authors, publishers, categories });
+    } catch (err) {
+        console.log(err);
+        res.status(500).json(err);
+    }
 }
+
 exports.updateBook_post = async (req, res) => {
-    res.send('update book post');
+    try {
+        const { title, isbn, description, authors, publisher, price, cover, categories, quantity } = req.body;
+        const seller = await Seller.findOne({user: req.user._id});
+
+        // if not seller, redirect to books
+        if (!seller) {
+            req.flash('error', 'You are not authorized to update this book');
+            return res.redirect('/books');
+        }
+
+        const updatedBook = {
+            title,
+            isbn,
+            description,
+            authors,
+            publisher,
+            price,
+            cover,
+            categories,
+            quantity,
+            seller,
+            updatedAt: new Date(),
+        };
+
+        await Book.findByIdAndUpdate(req.params.id, updatedBook);
+
+        req.flash('success', 'Book updated successfully');
+        res.redirect(`/books/${req.params.id}`);
+    } catch (err) {
+        console.log(err);
+        req.flash('error', 'Error updating book');
+        res.redirect(`/books/${req.params.id}/update`);
+    }
 }
 
 // delete book by id

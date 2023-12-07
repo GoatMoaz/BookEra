@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="/stylesheets/logstyle.css" type="text/css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&family=Sono:wght@200;300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/stylesheets/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="/stylesheets/bootstrap-icons.css" type="text/css">
+    <link href="/stylesheets/templatemo-pod-talk.css" rel="stylesheet" type="text/css">
+
+    <title>Update Book Page</title></head>
+<body>
+<%- include('partials/navbar') %>
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <h1>Update Book</h1>
+            <form action="/books/<%= book._id %>/update" method="POST">
+                <div class="form-group">
+                    <label for="title">Title</label>
+                    <input type="text" class="form-control" id="title" name="title" value="<%= book.title %>" required>
+                </div>
+                <div class="form-group">
+                    <label for="isbn">ISBN</label>
+                    <input type="text" class="form-control" id="isbn" name="isbn" value="<%= book.isbn %>" required>
+                </div>
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea class="form-control" id="description" name="description" required><%= book.description %></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="authors">Authors</label>
+                    <select multiple class="form-control" id="authors" name="authors" required>
+                        <% const bookAuthorIds = book.authors.map(author => author._id.toString()); %>
+                        <% authors.forEach(author => { %>
+                            <option value="<%= author._id %>" <%= bookAuthorIds.includes(author._id.toString()) ? 'selected' : '' %>><%= author.name %></option>
+                        <% }) %>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="publisher">Publisher</label>
+                    <select class="form-control" id="publisher" name="publisher" required>
+                        <% publishers.forEach(publisher => { %>
+                            <option value="<%= publisher._id %>" <%= book.publisher._id.equals(publisher._id) ? 'selected' : '' %>><%= publisher.name %></option>
+                        <% }) %>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="price">Price</label>
+                    <input type="number" class="form-control" id="price" name="price" value="<%= book.price %>" required>
+                </div>
+                <div class="form-group">
+                    <label for="cover">Cover Image URL</label>
+                    <input type="text" class="form-control" id="cover" name="cover" value="<%= book.cover %>" required>
+                </div>
+                <div class="form-group">
+                    <label for="categories">Categories</label>
+                    <select multiple class="form-control" id="categories" name="categories" required>
+                        <% const bookCategoryIds = book.categories.map(category => category._id.toString()); %>
+                        <% categories.forEach(category => { %>
+                            <option value="<%= category._id %>" <%= bookCategoryIds.includes(category._id.toString()) ? 'selected' : '' %>><%= category.name %></option>
+                        <% }) %>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="quantity">Quantity</label>
+                    <input type="number" class="form-control" id="quantity" name="quantity" value="<%= book.quantity %>" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Update Book</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
