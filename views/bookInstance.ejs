@@ -81,6 +81,31 @@
                     <% } else { %>
                         <p>No reviews yet.</p>
                     <% } %>
+<% if (user) { %>
+    <h6 class="mt-4">Add a Review:</h6>
+    <form action="/reviews/<%= book._id %>/create" method="POST">
+        <div class="form-group">
+            <label for="rating">Rating:</label>
+            <div>
+                <input type="radio" id="star1" name="rating" value="1">
+                <label for="star1">1</label>
+                <input type="radio" id="star2" name="rating" value="2">
+                <label for="star2">2</label>
+                <input type="radio" id="star3" name="rating" value="3">
+                <label for="star3">3</label>
+                <input type="radio" id="star4" name="rating" value="4">
+                <label for="star4">4</label>
+                <input type="radio" id="star5" name="rating" value="5">
+                <label for="star5">5</label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="content">Review:</label>
+            <textarea class="form-control" id="content" name="content" rows="3" required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Add Review</button>
+    </form>
+<% } %>
                     <!-- Display the delete button -->
                     <% if (user && user._id.toString() === book.seller.user._id.toString()) { %>
                         <form action="/books/<%= book._id %>/delete" method="POST">

@@ -15,7 +15,27 @@ exports.createReview_get = async (req, res) => {
    res.send('NOT IMPLEMENTED: createReview GET');
 }
 exports.createReview_post = async (req, res) => {
-    res.send('NOT IMPLEMENTED: createReview POST');
+    try {
+        const { content, rating } = req.body;
+        const bookId = req.params.id;
+        const userId = req.user._id;
+
+        const newReview = await Review.create({
+            content,
+            rating,
+            book: bookId,
+            user: userId,
+            createdAt: new Date(),
+            updatedAt: new Date(),
+        });
+
+        req.flash('success', 'Review created successfully');
+        res.redirect(`/books/${bookId}`);
+    } catch (err) {
+        console.log(err);
+        req.flash('error', 'Error creating review');
+        res.redirect(`/books/${bookId}`);
+    }
 }
 
 // update a review

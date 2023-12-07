@@ -8,7 +8,7 @@ router.get('/', reviewController.getAllReviews);
 
 // create a review
 router.get('/create', reviewController.createReview_get);
-router.post('/create', reviewController.createReview_post);
+router.post('/:id/create', reviewController.createReview_post);
 
 // update a review
 router.get('/:id/update', reviewController.updateReview_get);
