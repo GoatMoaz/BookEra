@@ -18,7 +18,6 @@
         position: absolute;
         background-size: cover;
         background-position: center;
-        filter: blur(5px);
         z-index: -1;
     }
 </style>
@@ -47,11 +46,10 @@
         <input type="text" id="last_name" name="last_name" placeholder="Last Name" required>
         <input type="text" id="username" name="username" placeholder="Username" required>
         <input type="password" id="password" name="password" placeholder="Password" required>
-        <select class="select" id="type" name="type" required>
-            <option value="" disabled selected>Choose your type</option>
-            <option value="buyer" class="form-select">Buyer</option>
-            <option value="seller" class="form-select">Seller</option>
-        </select>
+            <select class="select" id="type" name="type" required>
+                <option value="buyer" class="form-select">Buyer</option>
+                <option value="seller" class="form-select">Seller</option>
+            </select>
         <input type="text" id="address" name="address" placeholder="Address">
         <button class="button-64" role="button"><span class="text">Signup</span></button>
 
