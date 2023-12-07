@@ -37,6 +37,16 @@
 
 <%- include('partials/navbar') %>
 
+<% if (success.length > 0) { %>
+    <div class="alert alert-success">
+        <%= success %>
+    </div>
+<% } %>
+<% if (error.length > 0) { %>
+    <div class="alert alert-danger">
+        <%= error %>
+    </div>
+<% } %>
 <div class="header">
     <div>Book<span>Era</span></div>
 </div>
