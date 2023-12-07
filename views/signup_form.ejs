@@ -2,13 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>BookEra-Sign up</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&family=Sono:wght@200;300;400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/stylesheets/bootstrap.min.css" type="text/css">
-    <link href="/stylesheets/templatemo-pod-talk.css" rel="stylesheet" type="text/css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="/stylesheets/logstyle.css" type="text/css">
-    <link rel="stylesheet" href="/stylesheets/bootstrap-icons.css" type="text/css">
+    <title>BookEra-Sign up</title>
+    <link rel="stylesheet" href="/stylesheets/boot.css" type="text/css">
+    <link rel="stylesheet" href="/stylesheets/log.css" type="text/css">
 
 </head>
 <style>
@@ -31,7 +28,7 @@
 <div class="background">
     <img src="/images/b2.png" alt="">
 </div>
-<div class="header">
+<div class="header" style="position: relative; bottom:40px">
     <div>Book<span>Era</span></div>
 </div>
 <div class="login">
@@ -39,16 +36,17 @@
         <input type="text" id="first_name" name="first_name" placeholder="First Name" required>
         <input type="text" id="last_name" name="last_name" placeholder="Last Name" required>
         <input type="text" id="username" name="username" placeholder="Username" required>
-        <input type="password" id="password" name="password" placeholder="Password" required><br><br>
-        <label for="type"><h5 style="color: rgba(255,255,255,0.92)">Type:</h5></label>
+        <input type="password" id="password" name="password" placeholder="Password" required>
         <select class="select" id="type" name="type" required>
-            <option value="buyer">Buyer</option>
-            <option value="seller">Seller</option>
-        </select><br>
-        <input type="text" id="address" name="address" placeholder="Address"><br>
+            <option value="" disabled selected>Choose your type</option>
+            <option value="buyer" class="form-select">Buyer</option>
+            <option value="seller" class="form-select">Seller</option>
+        </select>
+        <input type="text" id="address" name="address" placeholder="Address">
         <button class="button-64" role="button"><span class="text">Signup</span></button>
 
     </form>
+
 </div>
 </body>
 </html>
