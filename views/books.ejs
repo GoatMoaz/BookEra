@@ -13,23 +13,7 @@
 
 
     <link rel="stylesheet" href="/stylesheets/boot.css" type="text/css">
-
-
-    <style>
-        /* Additional styles for card customization */
-        .card {
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s;
-        }
-
-        .card:hover {
-            transform: scale(1.02);
-        }
-
-        .card-body {
-            background-color: #f8f9fa; /* Set your desired background color */
-        }
-    </style>
+    <link rel="stylesheet" href="/stylesheets/style.css" type="text/css">
 </head>
 <body>
 <%- include('partials/navbar') %>
@@ -51,38 +35,33 @@
      <% if (user) {%>
     <a href="/books/create" class="btn btn-primary">Create New Book</a>
     <% } %>
-    <div class="row">
-        <% books.forEach(book => { %>
-            <div class="col-md-4 mb-4">
-            <a href="/books/<%= book._id %>">
-                <div class="card">
-                    <!-- Book cover image -->
-                    <img src="<%= book.cover %>" class="card-img-top" alt="<%= book.title %>">
-                    <div class="card-body">
-                        <!-- Book title -->
-                        <h5 class="card-title"><%= book.title %></h5>
-                        <!-- Book authors -->
-                        <p class="card-text">Authors: <%= book.authors.map(author => author.name).join(', ') %></p>
-                        <!-- Book publisher -->
-                        <p class="card-text">Publisher: <%= book.publisher.name %></p>
-                        <!-- Book categories -->
-                        <p class="card-text">Categories: <%= book.categories.map(category => category.name).join(', ') %></p>
-                        <!-- Book ISBN -->
-                        <p class="card-text">ISBN: <%= book.isbn %></p>
-                        <!-- Book description -->
-                        <p class="card-text">Description: <%= book.description %></p>
-                        <!-- Book price -->
-                        <p class="card-text">Price: $<%= book.price.toFixed(2) %></p>
-                        <!-- Book quantity -->
-                        <p class="card-text">Quantity: <%= book.quantity %></p>
-                        <!-- Other book details can be added here -->
-                        <!-- Add more details as needed -->
-                    </div>
-                </div>
-            </a>
-            </div>
-        <% }) %>
-    </div>
+
+         <div class="row">
+             <% books.forEach(book => { %>
+                 <div class="col-md-4 mb-4">
+                     <a href="/books/<%= book._id %>" class="text-decoration-none">
+                         <div class="card shadow-lg">
+                             <!-- Book cover image as the background -->
+                             <div class="card-img-top" style="background-image: url('<%= book.cover %>'); height: 100%; background-size: cover; background-position: center;"></div>
+                             <!-- Details overlay -->
+                             <div class="card-img-overlay">
+                                 <!-- Book details -->
+                                 <div class="card-body text-dark">
+                                     <h5 class="card-title"><%= book.title %></h5>
+                                     <p class="card-text">Authors: <%= book.authors.map(author => author.name).join(', ') %></p>
+                                     <p class="card-text">Publisher: <%= book.publisher.name %></p>
+                                     <p class="card-text">Categories: <%= book.categories.map(category => category.name).join(', ') %></p>
+                                     <p class="card-text">ISBN: <%= book.isbn %></p>
+                                     <p class="card-text">Description: <%= book.description %></p>
+                                     <p class="card-text">Price: $<%= book.price.toFixed(2) %></p>
+                                     <p class="card-text">Quantity: <%= book.quantity %></p>
+                                 </div>
+                             </div>
+                         </div>
+                     </a>
+                 </div>
+             <% }) %>
+         </div>
 </div>
 </body>
 </html>
