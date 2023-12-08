@@ -53,8 +53,8 @@
     </div>
     <div class="login">
     <% if (user) { %>
-        <h1>WELCOME BACK <%= user.username %></h1>
-        <a href="/users/logout">LOG OUT</a>
+        <h1 class="text-white">WELCOME BACK <%= user.username %></h1>
+        <a class="btn btn-primary" href="/users/logout">LOG OUT</a>
 
     <% } else { %>
         <form action="/users/login" method="POST">
