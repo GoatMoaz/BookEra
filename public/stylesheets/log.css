@@ -58,6 +58,16 @@
     margin-top: 10px;
 }
 
+.login input[type=text],
+.login input[type=password] {
+    padding: 16px; /* Increase inner padding */
+}
+
+.login input[type=text]::placeholder,
+.login input[type=password]::placeholder {
+    font-weight: 700; /* Make placeholder text more bold */
+}
+
 
 .login input[type=text]:focus{
     outline: none;
