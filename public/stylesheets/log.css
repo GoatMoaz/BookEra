@@ -126,11 +126,14 @@
     touch-action: manipulation;
     white-space: nowrap;
     cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 .button-64:active,
 .button-64:hover {
     outline: 0;
+    background-color: #5379fa;
+    transform: scale(1.05);
 }
 
 .button-64 span {
@@ -151,4 +154,9 @@
         font-size: 24px;
         min-width: 196px;
     }
+}
+
+.login input[type=text],
+.login input[type=password] {
+    transition: padding 0.3s ease, font-weight 0.3s ease;
 }
