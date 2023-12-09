@@ -4,7 +4,6 @@ const Publisher = require('../models/publisher.js');
 const Author = require('../models/author.js');
 const Category = require('../models/category.js');
 const User = require('../models/user.js');
-const Seller = require('../models/seller.js');
 
 // get all books
 exports.getAllBooks = async (req, res) => {
@@ -21,7 +20,7 @@ exports.getAllBooks = async (req, res) => {
 // get book by id
 exports.getBookById = async (req, res) => {
     try {
-        const book = await Book.findById(req.params.id).populate('publisher').populate('authors').populate('categories').populate('seller');
+        const book = await Book.findById(req.params.id).populate('publisher').populate('authors').populate('categories');
         // send book to bookInstance.ejs with its reviews
         // get reviews with book id = req.params.id and store each user's username in reviews
         const reviews = await Review.find({book: req.params.id}).populate('user', 'username');
