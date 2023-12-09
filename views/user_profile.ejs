@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Profile</title>
+
+    <link rel="stylesheet" href="/stylesheets/boot.css" type="text/css">
+    <link rel="stylesheet" href="/stylesheets/style.css" type="text/css">
+    <link rel="stylesheet" type="text/css" href="/styles/common.css">
+</head>
+<body>
+    <%- include('./partials/navbar') %>
+
+    <div class="container">
+        <h1><%= user.username %>'s Profile</h1>
+        <p>First Name: <%= user.first_name %></p>
+        <p>Last Name: <%= user.last_name %></p>
+        <p>Username: <%= user.username %></p>
+        <p>Address: <%= user.address %></p>
+        <p>Wallet Amount: <%= user.wallet_amount %></p>
+        <p>Type: <%= user.type %></p>
+    </div>
+</body>
+</html>

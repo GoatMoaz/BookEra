@@ -5,7 +5,8 @@
 <head>
     <title></title>
     <meta charset="utf-8">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Saira:wght@500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Saira:wght@500;600;700&display=swap"
+          rel="stylesheet">
     <link rel="stylesheet" href="/stylesheets/icons.css" type="text/css">
     <link href="/stylesheets/boot.css" rel="stylesheet" type="text/css">
     <link href="/stylesheets/nav.css" rel="stylesheet" type="text/css">
@@ -14,27 +15,28 @@
 <div class="container-fluid " style="background-color: black">
     <div class="container">
         <nav class="navbar navbar-dark navbar-expand-lg py-0">
-            <h1 class="text-white fw-bold d-block">BOOK<span style="color: #5379fa">ERA</span> </h1>
+            <h1 class="text-white fw-bold d-block">BOOK<span style="color: #5379fa">ERA</span></h1>
             <div class="collapse navbar-collapse bg-transparent" id="navbarCollapse">
                 <div class="navbar-nav ms-auto mx-xl-auto p-0">
                     <a href="/" class="nav-item nav-link">Home</a>
                     <a href="/books" class="nav-item nav-link">Books</a>
-<!--                    <a href="#" class="nav-item nav-link">Authors</a>-->
+                    <!--                    <a href="#" class="nav-item nav-link">Authors</a>-->
                     <a href="/about" class="nav-item nav-link">About Us</a>
 
                 </div>
 
                 <div class="navbar-nav">
-                     <% if (!user) { %>
+                    <% if (!user) { %>
                         <a href="/users/login" class="nav-item nav-link">Login</a>
                         <a href="/users/signup" class="nav-item nav-link">Signup</a>
                     <% } else { %>
-                        <a href="/" class="nav-item nav-link"> <%= user.username %> </a>
+                        <!-- Add a link to the user's profile page -->
+                        <a href="/users/<%= user._id %>" class="nav-item nav-link"> <%= user.username %> </a>
                         <a href="/users/logout" class="nav-item nav-link">Logout</a>
                     <% } %>
-                         <a href="#"><i class="bi bi-cart nav-item nav-link"></i></a>
-
+                    <a href="#"><i class="bi bi-cart nav-item nav-link"></i></a>
                 </div>
+
             </div>
         </nav>
     </div>
