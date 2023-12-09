@@ -7,8 +7,6 @@ const Publisher = require('../models/publisher');
 const Category = require('../models/category');
 const Review = require('../models/review');
 const User = require('../models/user');
-const Seller = require('../models/seller');
-const Buyer = require('../models/buyer');
 const bcrypt = require('bcryptjs');
 
 require('dotenv').config();
@@ -52,13 +50,10 @@ const seed = async () => {
         password: bcrypt.hashSync('password', 10),
         wallet_amount: 10000,
         address: '123 Main St',
+        type: 'seller'
     });
     await humanBeing.save();
 
-    const humanSeller = new Seller({
-        user: humanBeing,
-    });
-    await humanSeller.save();
 
     const chicken = new User({
         first_name: 'Chick',
@@ -67,13 +62,9 @@ const seed = async () => {
         password: bcrypt.hashSync('password', 10),
         wallet_amount: 10000,
         address: '456 Farm St',
+        type: 'seller'
     });
     await chicken.save();
-
-    const chickenSeller = new Seller({
-        user: chicken,
-    });
-    await chickenSeller.save();
 
     // Create authors
     const authorHumanBeing = new Author({
@@ -120,7 +111,7 @@ const seed = async () => {
         price: 1000,
         cover: 'https://images.manning.com/360/480/resize/book/9/be0e700-8ac5-44b7-92fc-0a0d250969be/Cantelon-Node-2ed.png',
         categories: [categoryNodejs],
-        seller: humanSeller,
+        seller: humanBeing,
         quantity: 10,
         createdAt: new Date(),
     });
@@ -134,7 +125,7 @@ const seed = async () => {
         publisher: publisherChicken,
         price: 800,
         cover: 'https://m.media-amazon.com/images/I/71-dQPtVFtL._SY466_.jpg',
-        seller: chickenSeller,
+        seller: chicken,
         categories: [categoryChicken],
         quantity: 15,
         createdAt: new Date(),
@@ -161,6 +152,48 @@ const seed = async () => {
         updatedAt: new Date(),
     });
     await reviewChicken.save();
+
+    const reviewNodejs2 = new Review({
+        book: bookNodejs,
+        user: humanBeing,
+        content: 'Excellent resource for mastering Node.js!',
+        rating: 4,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+    });
+    await reviewNodejs2.save();
+
+    const reviewNodejs3 = new Review({
+        book: bookNodejs,
+        user: chicken,
+        content: 'The examples provided are very helpful.',
+        rating: 4,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+    });
+    await reviewNodejs3.save();
+
+// Create more reviews for All About Chickens
+    const reviewChicken2 = new Review({
+        book: bookChicken,
+        user: humanBeing,
+        content: 'Informative and well-written!',
+        rating: 4,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+    });
+    await reviewChicken2.save();
+
+    const reviewChicken3 = new Review({
+        book: bookChicken,
+        user: chicken,
+        content: 'A great guide for beginners.',
+        rating: 4,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+    });
+    await reviewChicken3.save();
+
 
     console.log('Database seeded');
     process.exit();
