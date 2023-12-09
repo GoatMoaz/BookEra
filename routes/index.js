@@ -9,4 +9,10 @@ router.get('/about', function (req, res, next) {
     res.render('about', {title: 'Express'});
 });
 
+router.get('/cart', function (req, res, next) {
+    let cart = req.session.cart || [];
+    res.render('cart', { cart: cart });
+});
+
+
 module.exports = router;
