@@ -1,23 +1,33 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Profile</title>
 
+    <!-- External Stylesheets -->
     <link rel="stylesheet" href="/stylesheets/boot.css" type="text/css">
     <link rel="stylesheet" href="/stylesheets/style.css" type="text/css">
     <link rel="stylesheet" type="text/css" href="/styles/common.css">
+
+    <!-- Internal Styles -->
+    <style>
+        /* Add more styles as needed */
+    </style>
 </head>
 <body>
-    <%- include('./partials/navbar') %>
+<%- include('./partials/navbar') %>
 
-    <div class="container">
-        <h1><%= user.username %>'s Profile</h1>
-        <p>First Name: <%= user.first_name %></p>
-        <p>Last Name: <%= user.last_name %></p>
-        <p>Username: <%= user.username %></p>
-        <p>Address: <%= user.address %></p>
-        <p>Wallet Amount: <%= user.wallet_amount %></p>
-        <p>Type: <%= user.type %></p>
+<div class="container">
+    <h1><%= user.username %>'s Profile</h1>
+    <div class="profile-info">
+        <p><strong>First Name:</strong><br><%= user.first_name %></p>
+        <p><strong>Last Name:</strong><br><%= user.last_name %></p>
+        <p><strong>Username:</strong><br><%= user.username %></p>
+        <p><strong>Address:</strong><br><%= user.address %></p>
+        <p><strong>Wallet Amount:</strong><br>$<%= user.wallet_amount %></p>
+        <p><strong>Type:</strong><br><%= user.type %></p>
     </div>
+</div>
 </body>
 </html>
