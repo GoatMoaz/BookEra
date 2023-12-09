@@ -32,7 +32,7 @@
         <%= error %>
     </div>
         <% } %>
-     <% if (user) {%>
+     <% if (user && user.type === 'seller') {%>
     <a href="/books/create" class="btn btn-primary">Create New Book</a>
     <% } %>
 

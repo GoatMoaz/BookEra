@@ -64,14 +64,15 @@ exports.getBookByCategory = async (req, res) => {
 // create book
 exports.createBook_get = async (req, res) => {
     // Check if user is logged in
+
     if (!req.user) {
         req.flash('error', 'You must be logged in to create a book');
         return res.redirect('/users/login');
     }
     else {
         // check if logged in user is a seller
-        const seller = await Seller.findOne({user: req.user._id});
-        if (!seller) {
+        const user = await User.findById(req.user._id);
+        if (!user.type === 'seller') {
             req.flash('error', 'You must be a seller to create a book');
             return res.redirect('/books');
         }
@@ -90,7 +91,6 @@ exports.createBook_get = async (req, res) => {
 exports.createBook_post = async (req, res) => {
     try {
         const { title, isbn, description, authors, publisher, price, cover, categories, quantity } = req.body;
-        const seller = await Seller.findOne({user: req.user._id});
 
         const newBook = new Book({
             title,
@@ -102,7 +102,7 @@ exports.createBook_post = async (req, res) => {
             cover,
             categories,
             quantity,
-            seller,
+            seller: req.user._id,
             createdAt: new Date(),
             updatedAt: new Date(),
         });
@@ -135,7 +135,7 @@ exports.updateBook_get = async (req, res) => {
 exports.updateBook_post = async (req, res) => {
     try {
         const { title, isbn, description, authors, publisher, price, cover, categories, quantity } = req.body;
-        const seller = await Seller.findOne({user: req.user._id});
+        const seller = req.user._id;
 
         // if not seller, redirect to books
         if (!seller) {
@@ -174,14 +174,14 @@ exports.deleteBook_get = async (req, res) => {
 }
 exports.deleteBook_post = async (req, res) => {
     try {
-        const book = await Book.findById(req.params.id).populate('seller');
+        const book = await Book.findById(req.params.id);
 
         if (!req.user) {
             req.flash('error', 'You are not authorized to delete this book');
             return res.redirect('/books');
         }
 
-        if (req.user._id.toString() === book.seller.user._id.toString()) {
+        if (req.user._id.toString() === book.seller._id.toString()) {
             // delete reviews of this book
             await Review.deleteMany({book: req.params.id});
 
