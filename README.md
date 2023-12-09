@@ -29,9 +29,7 @@ Understand the database schema and relationships with our Entity-Relationship Di
 
 The class diagram provides a visual representation of the classes in this project, their attributes, methods, and the relationships between them. It is a useful tool for understanding the overall structure of the code and how different components interact with each other.
 
-You can view the class diagram for this project at the following link:
-
-[Class Diagram](./docs/classDigram.png)
+![here](./docs/class_digram.png)
 
 
 ### Sequence Diagrams
