@@ -17,7 +17,8 @@ exports.getAuthorById = async (req, res) => {
 
 // create author
 exports.createAuthor_get = async (req, res) => {
-    res.json({ title: 'Create Author' });
+    // render createAuthor.ejs
+    res.render('createAuthor', {title: 'Create Author'});
 }
 
 exports.createAuthor_post = async (req, res) => {
