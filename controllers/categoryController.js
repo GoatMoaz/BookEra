@@ -2,22 +2,29 @@ const Category = require('../models/category');
 
 // Display list of all Categories.
 exports.category_list = async (req, res) => {
-    res.send('NOT IMPLEMENTED: Category list');
-};
-
-// Display detail page for a specific Category.
-exports.category_detail = async (req, res) => {
-    res.send('NOT IMPLEMENTED: Category detail: ' + req.params.id);
+    try {
+        const category_list = await Category.find();
+        res.json(category_list);
+    } catch (err) {
+        res.send(err.message);
+    }
 };
 
 // Display Category create form on GET.
 exports.category_create_get = async (req, res) => {
-    res.send('NOT IMPLEMENTED: Category create GET');
-};
-
+    res.render('category_form', { title: 'Create Category'});   
+}
 // Handle Category create on POST.
 exports.category_create_post = async (req, res) => {
-    res.send('NOT IMPLEMENTED: Category create POST');
+    const category = new Category({
+        name: req.body.name
+    });
+    try {
+        await category.save();
+        res.redirect('/books/create');
+    } catch (err) {
+        res.send(err.message);
+    }
 };
 
 // Display Category delete form on GET.
