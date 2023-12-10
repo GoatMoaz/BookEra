@@ -29,7 +29,7 @@
                     </div>
                     <div class="form-group">
                         <label for="authors">Authors</label>
-                        <select multiple class="form-control" id="authors" name="authors" required>
+                        <select class="form-control" id="authors" name="authors" required>
                             <% authors.forEach(author => { %>
                                 <option value="<%= author._id %>"><%= author.name %></option>
                             <% }) %>
@@ -43,6 +43,7 @@
                                 <option value="<%= publisher._id %>"><%= publisher.name %></option>
                             <% }) %>
                         </select>
+                        <button type="button" class="btn btn-primary" id="add-publisher" onclick="location.href='/publishers/create'">Add New Publisher</button>
                     </div>
                     <div class="form-group">
                         <label for="price">Price</label>
@@ -54,7 +55,7 @@
                     </div>
                     <div class="form-group">
                         <label for="categories">Categories</label>
-                        <select multiple class="form-control" id="categories" name="categories" required>
+                        <select class="form-control" id="categories" name="categories" required>
                             <% categories.forEach(category => { %>
                                 <option value="<%= category._id %>"><%= category.name %></option>
                             <% }) %>
