@@ -18,6 +18,7 @@ const orderDetailsRouter = require('./routes/orders_detail');
 const categoryRouter = require('./routes/categories');
 const reviewRouter = require('./routes/reviews');
 const authorRouter = require('./routes/authors');
+const publisherRouter = require('./routes/publishers');
 
 const limiter = RateLimit({
     windowMs: 1 * 60 * 1000,
@@ -78,6 +79,7 @@ app.use('/orders_detail', orderDetailsRouter);
 app.use('/categories', categoryRouter);
 app.use('/reviews', reviewRouter);
 app.use('/authors', authorRouter);
+app.use('/publishers', publisherRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
