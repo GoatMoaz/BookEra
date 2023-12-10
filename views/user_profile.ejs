@@ -1,32 +1,78 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Profile</title>
+    <meta charset="utf-8">
 
-    <!-- External Stylesheets -->
+
+    <title>User profile</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/stylesheets/boot.css" type="text/css">
-    <link rel="stylesheet" href="/stylesheets/style.css" type="text/css">
-    <link rel="stylesheet" type="text/css" href="/styles/common.css">
-
-    <!-- Internal Styles -->
-    <style>
-        /* Add more styles as needed */
-    </style>
+    <link rel="stylesheet" href="/stylesheets/profile.css" type="text/css">
 </head>
 <body>
-<%- include('./partials/navbar') %>
+<%- include('partials/navbar') %>
 
 <div class="container">
-    <h1><%= user.username %>'s Profile</h1>
-    <div class="profile-info">
-        <p><strong>First Name:</strong><br><%= user.first_name %></p>
-        <p><strong>Last Name:</strong><br><%= user.last_name %></p>
-        <p><strong>Username:</strong><br><%= user.username %></p>
-        <p><strong>Address:</strong><br><%= user.address %></p>
-        <p><strong>Wallet Amount:</strong><br>$<%= user.wallet_amount %></p>
-        <p><strong>Type:</strong><br><%= user.type %></p>
+    <div class="row gutters">
+        <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 col-12">
+            <div class="card h-100">
+                <div class="card-body">
+                    <div class="account-settings">
+                        <div class="user-profile">
+                            <div class="user-avatar">
+                                <img src="https://bootdey.com/img/Content/avatar/avatar7.png">
+                            </div>
+                            <h5><%= user.username %></h5>
+                        </div>
+                        <div class="about">
+                            <h5>Welcome to <strong>BookEra</strong></h5>
+                            <% if(user.type === 'seller'){ %>
+                                <p>Your presence as a distinguished <strong>seller</strong> within <strong>BookEra</strong> is truly an honor, and we are grateful to welcome you into our esteemed literary community.</p>
+                            <% } else { %>
+                            <p>Your status as an exceptional <strong>Customer</strong> brings us great joy,
+                                and we sincerely appreciate your decision to join <strong>BookEra</strong>.
+                                We extend our warmest welcome and wish you a pleasant shopping experience.</p>
+                            <% } %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-9 col-lg-9 col-md-12 col-sm-12 col-12">
+            <div class="card h-100">
+                <div class="card-body">
+                    <div class="row gutters">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                            <h6 style="color: #5379fa">Personal Details</h6>
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                        <div class="form-group">
+                            <label>Full Name</label>
+                            <p class="form-control"><%= user.first_name %> <%= user.last_name %></p>
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                        <div class="form-group">
+                            <label>User Name</label>
+                            <p class="form-control"><%= user.username %></p>
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                        <div class="form-group">
+                            <label>Wallet Amount</label>
+                            <p class="form-control">$<%= user.wallet_amount %></p>
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                        <div class="form-group">
+                            <label>Address</label>
+                            <p class="form-control"><%= user.address %></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 </body>
