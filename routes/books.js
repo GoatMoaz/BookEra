@@ -24,7 +24,7 @@ const path = require('path');
 // get all books
 router.get('/', bookController.getAllBooks);
 // get book by title
-router.get('/title/:title', bookController.getBookByTitle);
+router.get('/search', bookController.search_book);
 
 // get book by author
 router.get('/author/:author', bookController.getBookByAuthor);
@@ -47,7 +47,7 @@ router.post('/:id/update', bookController.updateBook_post);
 router.get('/:id/delete', bookController.deleteBook_get);
 router.post('/:id/delete', bookController.deleteBook_post);
 
-// get book by id
+//get book by id
 router.get('/:id', bookController.getBookById);
 
 // export
