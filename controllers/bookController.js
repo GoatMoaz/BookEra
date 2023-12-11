@@ -8,59 +8,88 @@ const User = require('../models/user.js');
 // get all books
 exports.getAllBooks = async (req, res) => {
     try {
-        const books = await Book.find({}).populate('publisher').populate('authors').populate('categories');
+        const books = await Book.find({})
+            .populate('publisher')
+            .populate('authors')
+            .populate('categories');
         // send books to books.ejs
         const cart = req.session.cart || [];
-        res.render('books', { title: 'Books', books: books, cart});
+        res.render('books', { title: 'Books', books: books, cart });
     } catch (err) {
         console.log(err);
         res.status(500).json(err);
     }
-}
+};
 
 // get book by id
 exports.getBookById = async (req, res) => {
     try {
-        const book = await Book.findById(req.params.id).populate('publisher').populate('authors').populate('categories');
+        const book = await Book.findById(req.params.id)
+            .populate('publisher')
+            .populate('authors')
+            .populate('categories');
         // send book to bookInstance.ejs with its reviews
         // get reviews with book id = req.params.id and store each user's username in reviews
-        const reviews = await Review.find({book: req.params.id}).populate('user', 'username');
-        res.render('bookInstance', { title: 'Book Instance', book: book, reviews});
+        const reviews = await Review.find({ book: req.params.id }).populate(
+            'user',
+            'username',
+        );
+        res.render('bookInstance', {
+            title: 'Book Instance',
+            book: book,
+            reviews,
+        });
     } catch (err) {
         console.log(err);
         res.status(500).json(err);
     }
-}
+};
 
-// get book by title
-exports.getBookByTitle = async (req, res) => {
+// search book by title, author, publisher, category
+
+exports.search_book = async (req, res) => {
     try {
-        const book = await Book.findOne({title: req.params.title});
-        res.status(200).json(book);
+        const title = req.query.title;
+        const author = req.query.author;
+        const publisher = req.query.publisher;
+        const category = req.query.category;
+        const query = {};
+        if (title) {
+            query.title = title;
+        }
+        if (author) {
+            query.authors = author;
+        }
+        if (publisher) {
+            query.publisher = publisher;
+        }
+        if (category) {
+            query.categories = category;
+        }
+        const books = await Book.find(query)
+            .populate('publisher')
+            .populate('authors')
+            .populate('categories');
+        res.render('bookSearchResult', { title: 'Books', books: books });
     } catch (err) {
-        res.status(500).json(err);
+        res.status(500).json({ message: err.message });
     }
-}
+};
 
 // get book by author
 exports.getBookByAuthor = async (req, res) => {
-    try {
-        const book = await Book.findOne({author: req.params.author});
-        res.status(200).json(book);
-    } catch (err) {
-        res.status(500).json(err);
-    }
-}
+    res.send('get book by author');
+};
 
 // get book by publisher
 exports.getBookByPublisher = async (req, res) => {
     res.send('get book by publisher');
-}
+};
 
 // get book by category
 exports.getBookByCategory = async (req, res) => {
     res.send('get book by category');
-}
+};
 
 // create book
 exports.createBook_get = async (req, res) => {
@@ -69,8 +98,7 @@ exports.createBook_get = async (req, res) => {
     if (!req.user) {
         req.flash('error', 'You must be logged in to create a book');
         return res.redirect('/users/login');
-    }
-    else {
+    } else {
         // check if logged in user is a seller
         const user = await User.findById(req.user._id);
         if (!user.type === 'seller') {
@@ -88,10 +116,20 @@ exports.createBook_get = async (req, res) => {
         console.log(err);
         res.status(500).json(err);
     }
-}
+};
 exports.createBook_post = async (req, res) => {
     try {
-        const { title, isbn, description, authors, publisher, price, cover, categories, quantity } = req.body;
+        const {
+            title,
+            isbn,
+            description,
+            authors,
+            publisher,
+            price,
+            cover,
+            categories,
+            quantity,
+        } = req.body;
 
         const newBook = new Book({
             title,
@@ -117,12 +155,15 @@ exports.createBook_post = async (req, res) => {
         req.flash('error', 'Error creating book');
         res.redirect('/books/create');
     }
-}
+};
 
 // update book by id
 exports.updateBook_get = async (req, res) => {
     try {
-        const book = await Book.findById(req.params.id).populate('authors').populate('publisher').populate('categories');
+        const book = await Book.findById(req.params.id)
+            .populate('authors')
+            .populate('publisher')
+            .populate('categories');
         const authors = await Author.find({});
         const publishers = await Publisher.find({});
         const categories = await Category.find({});
@@ -131,11 +172,21 @@ exports.updateBook_get = async (req, res) => {
         console.log(err);
         res.status(500).json(err);
     }
-}
+};
 
 exports.updateBook_post = async (req, res) => {
     try {
-        const { title, isbn, description, authors, publisher, price, cover, categories, quantity } = req.body;
+        const {
+            title,
+            isbn,
+            description,
+            authors,
+            publisher,
+            price,
+            cover,
+            categories,
+            quantity,
+        } = req.body;
         const seller = req.user._id;
 
         // if not seller, redirect to books
@@ -167,12 +218,12 @@ exports.updateBook_post = async (req, res) => {
         req.flash('error', 'Error updating book');
         res.redirect(`/books/${req.params.id}/update`);
     }
-}
+};
 
 // delete book by id
 exports.deleteBook_get = async (req, res) => {
     res.send('delete book get');
-}
+};
 exports.deleteBook_post = async (req, res) => {
     try {
         const book = await Book.findById(req.params.id);
@@ -184,7 +235,7 @@ exports.deleteBook_post = async (req, res) => {
 
         if (req.user._id.toString() === book.seller._id.toString()) {
             // delete reviews of this book
-            await Review.deleteMany({book: req.params.id});
+            await Review.deleteMany({ book: req.params.id });
 
             await Book.findByIdAndDelete(req.params.id);
 
@@ -198,4 +249,4 @@ exports.deleteBook_post = async (req, res) => {
         console.log(err);
         res.status(500).json(err);
     }
-}
+};
