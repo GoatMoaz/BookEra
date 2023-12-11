@@ -74,7 +74,8 @@
                                                 </form>
                                             </div>
                                             <div class="col-md-6">
-                                                <a href="/reviews/<%= review._id %>/update" class="btn btn-primary">Update Review</a>
+                                                <a href="/reviews/<%= review._id %>/update" class="btn btn-primary">Update
+                                                    Review</a>
                                             </div>
                                         <% } %>
                                     </div>
@@ -84,37 +85,42 @@
                     <% } else { %>
                         <p>No reviews yet.</p>
                     <% } %>
-<% if (user) { %>
-    <h6 class="mt-4">Add a Review:</h6>
-    <form action="/reviews/<%= book._id %>/create" method="POST">
-        <div class="form-group">
-            <label for="rating">Rating:</label>
-            <div>
-                <input type="radio" id="star1" name="rating" value="1">
-                <label for="star1">1</label>
-                <input type="radio" id="star2" name="rating" value="2">
-                <label for="star2">2</label>
-                <input type="radio" id="star3" name="rating" value="3">
-                <label for="star3">3</label>
-                <input type="radio" id="star4" name="rating" value="4">
-                <label for="star4">4</label>
-                <input type="radio" id="star5" name="rating" value="5">
-                <label for="star5">5</label>
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="content">Review:</label>
-            <textarea class="form-control" id="content" name="content" rows="3" required></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary">Add Review</button>
-    </form>
-<% } %>
+                    <% if (user) { %>
+                        <h6 class="mt-4">Add a Review:</h6>
+                        <form action="/reviews/<%= book._id %>/create" method="POST">
+                            <div class="form-group">
+                                <label for="rating">Rating:</label>
+                                <div>
+                                    <input type="radio" id="star1" name="rating" value="1">
+                                    <label for="star1">1</label>
+                                    <input type="radio" id="star2" name="rating" value="2">
+                                    <label for="star2">2</label>
+                                    <input type="radio" id="star3" name="rating" value="3">
+                                    <label for="star3">3</label>
+                                    <input type="radio" id="star4" name="rating" value="4">
+                                    <label for="star4">4</label>
+                                    <input type="radio" id="star5" name="rating" value="5">
+                                    <label for="star5">5</label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="content">Review:</label>
+                                <textarea class="form-control" id="content" name="content" rows="3" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Add Review</button>
+                        </form>
+                    <% } %>
                     <!-- Display the delete button -->
                     <% if (user && user._id.toString() === book.seller._id.toString()) { %>
                         <form action="/books/<%= book._id %>/delete" method="POST">
-                        <button type="submit" class="btn btn-danger">Delete Book</button>
-                        <a href="/books/<%= book._id %>/update" class="btn btn-primary">Update Book</a>
-                    </form>
+                            <button type="submit" class="btn btn-danger">Delete Book</button>
+                            <a href="/books/<%= book._id %>/update" class="btn btn-primary">Update Book</a>
+                        </form>
+
+                        <div class="mt-4">
+                            <h6>Soft Copy:</h6>
+                            <canvas id="pdf-canvas" data-pdf-url="<%= book.softCopy %>"></canvas>
+                        </div>
                     <% } %>
                 </div>
 
@@ -123,6 +129,10 @@
     </div>
 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.worker.js"></script>
+
+<script src="/javascripts/bookInstance.js"></script>
 </body>
 
 </html>
