@@ -62,6 +62,10 @@ const bookSchema = new Schema({
         required: true,
         default: Date.now,
     },
+    softCopy: {
+        type: String,
+        required: false,
+    },
 });
 
 module.exports = mongoose.model('Book', bookSchema);
