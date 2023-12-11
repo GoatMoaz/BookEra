@@ -166,5 +166,8 @@
 }
 .login_link:hover {
     text-decoration: underline;
-    color: #008585;
+    color:  #5379fa;
+    transform: rotateX(0deg);
+    transition: .3s;
+    opacity: 1;
 }
