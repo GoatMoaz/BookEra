@@ -1,4 +1,6 @@
 const Review = require('../models/review');
+const Book = require('../models/book');
+const User = require('../models/user');
 
 // get all reviews
 exports.getAllReviews = async (req, res) => {
@@ -40,10 +42,26 @@ exports.createReview_post = async (req, res) => {
 
 // update a review
 exports.updateReview_get = async (req, res) => {
-    res.send('NOT IMPLEMENTED: updateReview GET');
+    const review = await Review.findById(req.params.id);
+    res.render('updateReview', { review });
 }
+
 exports.updateReview_post = async (req, res) => {
-    res.send('NOT IMPLEMENTED: updateReview POST');
+    const review = await Review.findById(req.params.id).populate('book').populate('user');
+    const bookId = review.book._id;
+    if (review.user._id.toString() !== req.user._id.toString()) {
+        req.flash('error', 'You are not authorized to do that!');
+        return res.status(401).send('Unauthorized');
+    }
+    const { content, rating } = req.body;
+    console.log(content);
+    await Review.findByIdAndUpdate(req.params.id, {
+        content,
+        rating,
+        updatedAt: new Date(),
+    });
+    req.flash('success', 'Review updated successfully!');
+    res.redirect(`/books/${bookId}`);    
 }
 
 // delete a review
