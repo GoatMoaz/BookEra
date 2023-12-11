@@ -58,11 +58,12 @@
         <a class="btn btn-primary" href="/users/logout">LOG OUT</a>
 
     <% } else { %>
-        <form action="/users/login" method="POST" style="position:relative;bottom: 60px">
+        <form action="/users/login" method="POST" style="position:relative;bottom: 35px">
             <input name="username" placeholder="Username" type="text" />
             <input name="password" placeholder="Password" type="password" />
             <button class="button-64" role="button"><span class="text">Log In</span></button>
         </form>
+            <p style="color: white">Do not have an account? <a href="/users/signup" class="login_link">Signup</a> </p>
     <% } %>
 </div>
 </body>

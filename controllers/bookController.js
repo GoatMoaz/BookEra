@@ -5,6 +5,22 @@ const Author = require('../models/author.js');
 const Category = require('../models/category.js');
 const User = require('../models/user.js');
 
+const multer = require('multer');
+const cloudinary = require('cloudinary');
+const path = require('path');
+// multer config
+const storage = multer.diskStorage({});
+const upload = multer({ storage });
+
+require('dotenv').config();
+
+// cloudinary config
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET,
+});
+
 // get all books
 exports.getAllBooks = async (req, res) => {
     try {
@@ -116,20 +132,25 @@ exports.createBook_get = async (req, res) => {
         console.log(err);
         res.status(500).json(err);
     }
+
 };
+
+       
+
 exports.createBook_post = async (req, res) => {
     try {
-        const {
-            title,
-            isbn,
-            description,
-            authors,
-            publisher,
-            price,
-            cover,
-            categories,
-            quantity,
-        } = req.body;
+        const { title, isbn, description, authors, publisher, price, cover, categories, quantity } = req.body;
+        console.log(req.body);
+        console.log(req.file);
+
+        // Upload file to Cloudinary using unsigned upload
+        const result = await cloudinary.v2.uploader.upload(req.file.path, {
+            folder: 'bookstore',
+            // resource is a pdf
+            resource_type: 'raw',
+            // use unsigned upload
+            upload_preset: 'bookstore',
+        });
 
         const newBook = new Book({
             title,
@@ -141,6 +162,7 @@ exports.createBook_post = async (req, res) => {
             cover,
             categories,
             quantity,
+            softCopy: result.secure_url, // Save Cloudinary URL
             seller: req.user._id,
             createdAt: new Date(),
             updatedAt: new Date(),
