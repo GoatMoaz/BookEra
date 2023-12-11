@@ -68,10 +68,13 @@
                                             <p><em>By: <%= review.user.username %></em></p>
                                         </div>
                                         <% if (user && user._id.toString() === review.user._id.toString()) { %>
-                                            <div class="col-md-2">
+                                            <div class="col-md-6">
                                                 <form action="/reviews/<%= review._id %>/delete" method="POST">
-                                                    <button type="submit" class="btn btn-warning">Delete Review</button>
+                                                    <button type="submit" class="btn btn-danger">Delete Review</button>
                                                 </form>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <a href="/reviews/<%= review._id %>/update" class="btn btn-primary">Update Review</a>
                                             </div>
                                         <% } %>
                                     </div>
