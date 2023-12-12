@@ -38,6 +38,10 @@ const userSchema = new Schema({
         type: String,
         required: false,
     },
+    cart : {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Cart',
+    },
 });
 
 userSchema.virtual('fullName').get(function () {
