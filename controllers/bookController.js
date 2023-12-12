@@ -30,7 +30,13 @@ exports.getAllBooks = async (req, res) => {
             .populate('authors')
             .populate('categories');
         // send books to books.ejs
-        const cart = req.session.cart || [];
+
+        // get cart of logged in user
+        let cart = null;
+        if (req.user) {
+            cart = await Cart.findOne({ user: req.user._id }).populate('books');
+        }
+
         res.render('books', { title: 'Books', books: books, cart });
     } catch (err) {
         console.log(err);
@@ -290,14 +296,18 @@ exports.addToCart = async function(req, res, next) {
     await cart.save();
 
     res.redirect('/books');
-};exports.addToCart = async function(req, res, next) {
+};
+
+exports.addToCart = async function(req, res, next) {
     const userId = req.user._id;
-    const bookId = req.body.bookId;
+    const bookId = req.params.id;
 
     let cart = await Cart.findOne({ user: userId });
     if (!cart) {
         cart = new Cart({ user: userId });
     }
+
+    console.log(cart);
 
     cart.books.push(bookId);
     await cart.save();
