@@ -45,18 +45,14 @@
         <%= error %>
     </div>
 <% } %>
-<div class="header">
+<div class="header animate__animated animate__fadeInDown">
     <div style="font-weight: bold;position: relative;bottom: 60px">BOOK<span>ERA</span></div>
 </div>
-
-    <div class="background">
-        <img src="/images/b2.png" alt="">
-    </div>
-    <div class="login">
+<img src="/images/b2.png" alt="">
+<div class="login animate__animated animate__fadeInDown">
     <% if (user) { %>
         <h1 class="text-white">WELCOME BACK <%= user.username %></h1>
         <a class="btn btn-primary" href="/users/logout">LOG OUT</a>
-
     <% } else { %>
         <form action="/users/login" method="POST" style="position:relative;bottom: 60px">
             <input name="username" placeholder="Username" type="text" />
