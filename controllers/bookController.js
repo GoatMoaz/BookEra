@@ -72,15 +72,19 @@ exports.search_book = async (req, res) => {
         const query = {};
         if (title) {
             query.title = title;
+            query.title = new RegExp(title, 'i');
         }
         if (author) {
             query.authors = author;
+            query.authors = new RegExp(author, 'i');
         }
         if (publisher) {
             query.publisher = publisher;
+            query.publisher = new RegExp(publisher, 'i');
         }
         if (category) {
             query.categories = category;
+            query.categories = new RegExp(category, 'i');
         }
         const books = await Book.find(query)
             .populate('publisher')

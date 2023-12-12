@@ -27,10 +27,12 @@
             <div class="collapse navbar-collapse" id="collapsibleNavbar">
                 <div class="navbar-nav ms-auto mx-xl-auto p-0">
                     <!-- Navbar links-->
-                    <div class="search-box">
-                        <button class="btn-search"><i class="bi-search nav-item nav-link"></i></button>
-                        <input type="text" class="input-search" placeholder="Type to Search...">
-                    </div>
+                    <form action="/books/search" method="GET">
+                        <div class="search-box">
+                            <button type="submit" class="btn-search"><i class="bi-search nav-item nav-link"></i></button>
+                            <input type="text" name="title" class="input-search" placeholder="Search books, authors, publishers and categories...">
+                        </div>
+                    </form>
                     <a href="/" class="nav-item nav-link">Home</a>
                     <a href="/books" class="nav-item nav-link">Books</a>
                     <a href="/about" class="nav-item nav-link">About Us</a>
