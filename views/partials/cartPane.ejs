@@ -1,13 +1,13 @@
 <div id="cart-pane" class="cart-pane">
     <h1>Your Cart</h1>
-    <% if (cart && cart.length > 0) { %>
-        <% cart.forEach(function(item) { %>
+    <% if (cart && cart.books && cart.books.length > 0) { %>
+        <% cart.books.forEach(function(book) { %>
             <div class="cart-item">
-                <h2><%= item.book.title %></h2>
-                <p>Quantity: <%= item.quantity %></p>
+                <h2><%= book.title %></h2>
+                <p class="price">Price: <%= book.price %></p>
             </div>
         <% }) %>
-        <button class="btn btn-primary">Checkout</button>
+        <button class="btn btn-primary">Buy Books</button>
     <% } else { %>
         <p>Your cart is empty.</p>
     <% } %>
