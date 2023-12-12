@@ -125,6 +125,7 @@ exports.login_post = (req, res, next) => {
             return next(err);
         }
         if (!user) {
+            req.flash('error', info.message);
             return res.redirect('/users/login');
         }
         req.logIn(user, function(err) {
