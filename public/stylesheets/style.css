@@ -76,5 +76,25 @@ strong {
     padding : 20px;
 }
 
+.cart-item {
+    background-color: #f0f0f0; /* Change this to the color you want for the card background */
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.cart-item h2 {
+    margin-bottom: 10px;
+}
+
+.cart-item p {
+    margin-bottom: 10px;
+}
+
+.cart-item .price {
+    color: #ff0000; /* Change this to the color you want for the price */
+    font-weight: bold;
+}
+
 
 
