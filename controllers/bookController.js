@@ -4,6 +4,7 @@ const Publisher = require('../models/publisher.js');
 const Author = require('../models/author.js');
 const Category = require('../models/category.js');
 const User = require('../models/user.js');
+const Cart = require('../models/cart.js');
 
 const multer = require('multer');
 const cloudinary = require('cloudinary');
@@ -275,4 +276,31 @@ exports.deleteBook_post = async (req, res) => {
         console.log(err);
         res.status(500).json(err);
     }
+};
+exports.addToCart = async function(req, res, next) {
+    const userId = req.user._id;
+    const bookId = req.body.bookId;
+
+    let cart = await Cart.findOne({ user: userId });
+    if (!cart) {
+        cart = new Cart({ user: userId });
+    }
+
+    cart.books.push(bookId);
+    await cart.save();
+
+    res.redirect('/books');
+};exports.addToCart = async function(req, res, next) {
+    const userId = req.user._id;
+    const bookId = req.body.bookId;
+
+    let cart = await Cart.findOne({ user: userId });
+    if (!cart) {
+        cart = new Cart({ user: userId });
+    }
+
+    cart.books.push(bookId);
+    await cart.save();
+
+    res.redirect('/books');
 };
