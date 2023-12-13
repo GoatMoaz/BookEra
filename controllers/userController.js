@@ -49,7 +49,7 @@ exports.getUserById = async (req, res) => {
     try {
         const user = await User.findById(req.params.id);
         // render the user profile page
-        res.render('user/user_profile', { user });
+        res.render('user_profile', { user });
     } catch (err) {
         res.status(500).json(err);
     }
@@ -67,7 +67,7 @@ exports.getUserByUsername = async (req, res) => {
 
 // create user
 exports.signup_get = async (req, res) => {
-    res.render('user/signup_form');
+    res.render('signup_form');
 };
 
 exports.signup_post = async (req, res) => {
@@ -98,7 +98,7 @@ exports.signup_post = async (req, res) => {
 
 // update user
 exports.updateUser_get = async (req, res) => {
-    res.render('user/update_user_profile');
+    res.render('update_user_profile');
 };
 
 exports.updateUser_post = async (req, res) => {
@@ -125,7 +125,7 @@ exports.deleteUser_post = async (req, res) => {
 
 // user login
 exports.login_get = async (req, res) => {
-    res.render('user/login_form');
+    res.render('login_form');
 };
 
 exports.login_post = (req, res, next) => {
