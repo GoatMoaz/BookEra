@@ -21,52 +21,52 @@
 
 
 <div class="container mt-5">
-     <% if (success.length > 0) { %>
-    <div class="alert alert-success">
-        <%= success %>
-    </div>
+    <% if (success.length > 0) { %>
+        <div class="alert alert-success">
+            <%= success %>
+        </div>
     <% } %>
     <% if (error.length > 0) { %>
-    <div class="alert alert-danger">
-        <%= error %>
-    </div>
-        <% } %>
-     <% if (user && user.type === 'seller') {%>
-    <a href="/books/create" class="btn btn-primary">Create New Book</a>
+        <div class="alert alert-danger">
+            <%= error %>
+        </div>
+    <% } %>
+    <% if (user && user.type === 'seller') {%>
+        <a href="/books/create" class="btn btn-primary">Create New Book</a>
     <% } %>
 
-         <div class="row">
-             <% books.forEach(book => { %>
-                 <div class="col-md-4 mb-4">
-                     <a href="/books/<%= book._id %>" class="text-decoration-none">
-                         <div class="card shadow-lg">
-                             <!-- Book cover image as the background -->
-                             <div class="card-img-top" style="background-image: url('<%= book.cover %>'); height: 100%; background-size: cover; background-position: center;"></div>
-                             <!-- Details overlay -->
-                             <div class="card-img-overlay">
-                                 <!-- Book details -->
-                                 <div class="card-body text-dark">
-                                     <h5 class="card-title"><%= book.title %></h5>
-                                     <p class="card-text">Authors: <%= book.authors.map(author => author.name).join(', ') %></p>
-                                     <p class="card-text">Publisher: <%= book.publisher.name %></p>
-                                     <p class="card-text">Categories: <%= book.categories.map(category => category.name).join(', ') %></p>
-                                     <p class="card-text">ISBN: <%= book.isbn %></p>
-                                     <p class="card-text">Description: <%= book.description %></p>
-                                     <p class="card-text">Price: $<%= book.price.toFixed(2) %></p>
-                                     <p class="card-text">Quantity: <%= book.quantity %></p>
-                                     <% if (user) { %>
-                                         <form action="/books/<%= book._id %>/addToCart" method="post">
-                                             <button type="submit" class="btn btn-primary add-to-cart">Add to Cart
-                                             </button>
-                                         </form>
-                                     <% } %>
-                                 </div>
-                             </div>
-                         </div>
-                     </a>
-                 </div>
-             <% }) %>
-         </div>
+    <div class="row">
+        <% books.forEach(book => { %>
+            <div class="col-md-4 mb-4">
+                <a href="/books/<%= book._id %>" class="text-decoration-none">
+                    <div class="card shadow-lg">
+                        <!-- Book cover image as the background -->
+                        <div class="card-img-top" style="background-image: url('<%= book.cover %>'); height: 100%; background-size: cover; background-position: center;"></div>
+                        <!-- Details overlay -->
+                        <div class="card-img-overlay">
+                            <!-- Book details -->
+                            <div class="card-body text-dark">
+                                <h5 class="card-title"><%= book.title %></h5>
+                                <p class="card-text">Authors: <%= book.authors.map(author => author.name).join(', ') %></p>
+                                <p class="card-text">Publisher: <%= book.publisher.name %></p>
+                                <p class="card-text">Categories: <%= book.categories.map(category => category.name).join(', ') %></p>
+                                <p class="card-text">ISBN: <%= book.isbn %></p>
+                                <p class="card-text">Description: <%= book.description %></p>
+                                <p class="card-text">Price: $<%= book.price.toFixed(2) %></p>
+                                <p class="card-text">Quantity: <%= book.quantity %></p>
+                                <% if (user) { %>
+                                    <form action="/books/<%= book._id %>/addToCart" method="post">
+                                        <button type="submit" class="btn btn-primary add-to-cart">Add to Cart
+                                        </button>
+                                    </form>
+                                <% } %>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        <% }) %>
+    </div>
 </div>
 <script src="/javascripts/main.js"></script>
 </body>
