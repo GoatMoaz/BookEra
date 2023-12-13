@@ -1,0 +1,64 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+#resizer {
+    box-shadow: 0 0 8px #000;
+    height: 500px;
+    border-radius: 10px;
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 20px;
+    width: 100%;
+    height: 100%;
+    gap: 20px;
+    color: black;
+}
+
+.preview {
+    display: flex;
+    margin: 20px;
+    width: 90%;
+    gap: 20px;
+    color: black;
+    max-height: 500px;
+}
+
+.description {
+    padding: 10px;
+    border: 1px solid gray;
+    background-color: #d3d3d3;
+    border-radius: 10px;
+    height: auto;
+    max-width: 500px;
+}
+
+.imgInfo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left: 80px;
+    gap: 10px;
+    align-self: flex-start;
+}
+
+.btn {
+    margin-top: 5px;
+}
+
+.stars {
+    display: inline;
+    font-size: 24px;
+    cursor: pointer;
+
+}
+
+.rated {
+    color: gold;
+}

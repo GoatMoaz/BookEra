@@ -48,8 +48,12 @@ exports.getAllUsers = async (req, res) => {
 exports.getUserById = async (req, res) => {
     try {
         const user = await User.findById(req.params.id);
+
         // render the user profile page
         res.render('user/user_profile', { user });
+
+        res.status(200).json(user);
+
     } catch (err) {
         res.status(500).json(err);
     }
