@@ -14,11 +14,11 @@ const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const booksRouter = require('./routes/books');
 const ordersRouter = require('./routes/orders');
-const orderDetailsRouter = require('./routes/orders_detail');
 const categoryRouter = require('./routes/categories');
 const reviewRouter = require('./routes/reviews');
 const authorRouter = require('./routes/authors');
 const publisherRouter = require('./routes/publishers');
+const cartsRouter = require('./routes/carts');
 
 const limiter = RateLimit({
     windowMs: 1 * 60 * 1000,
@@ -74,8 +74,8 @@ app.use((req, res, next) => {
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/books', booksRouter);
+app.use('/carts', cartsRouter);
 app.use('/orders', ordersRouter);
-app.use('/orders_detail', orderDetailsRouter);
 app.use('/categories', categoryRouter);
 app.use('/reviews', reviewRouter);
 app.use('/authors', authorRouter);
