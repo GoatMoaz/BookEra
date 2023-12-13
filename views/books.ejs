@@ -55,7 +55,7 @@
                                      <p class="card-text">Price: $<%= book.price.toFixed(2) %></p>
                                      <p class="card-text">Quantity: <%= book.quantity %></p>
                                      <% if (user) { %>
-                                         <form action="/books/<%= book._id %>/addToCart" method="post">
+                                         <form action="/carts/<%= book._id %>/addToCart" method="post">
                                              <button type="submit" class="btn btn-primary add-to-cart">Add to Cart
                                              </button>
                                          </form>

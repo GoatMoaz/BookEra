@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Checkout</title>
+
+    <link rel="stylesheet" href="/stylesheets/boot.css" type="text/css">
+    <link rel="stylesheet" href="/stylesheets/style.css" type="text/css">
+</head>
+<body>
+<%- include('partials/navbar') %>
+
+<div class="container mt-5">
+    <% if (cart && cart.books && cart.books.length > 0) { %>
+        <% cart.books.forEach(function(book) { %>
+            <div class="cart-item">
+                <h2><%= book.title %></h2>
+                <p class="price">Price: <%= book.price %></p>
+            </div>
+        <% }) %>
+        <div class="total-price">
+            <h2>Total Price: <%= total_price %></h2>
+        </div>
+        <div class="wallet-amount">
+            <h2>Wallet Amount: <%= wallet_amount %></h2>
+        </div>
+        <form action="/orders" method="get">
+            <button type="submit" class="btn btn-primary">Checkout</button>
+        </form>
+    <% } else { %>
+        <div class="empty-cart">
+            <h2>Your cart is empty</h2>
+        </div>
+    <% } %>
+</div>
+
+<script src="/javascripts/main.js"></script>
+</body>
+</html>
