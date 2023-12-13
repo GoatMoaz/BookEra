@@ -16,9 +16,9 @@ const orderSchema = new Schema({
         required: true,
         min: 0,
     },
-    order_details: [{
+    bought_books: [{
         type: Schema.Types.ObjectId,
-        ref: 'OrderDetail',
+        ref: 'Book',
     }],
 });
 
