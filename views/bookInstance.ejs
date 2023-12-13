@@ -1,3 +1,5 @@
+<!-- bookInstance.ejs -->
+
 <!doctype html>
 <html lang="en">
 
@@ -11,185 +13,126 @@
     <title>BookEra - <%= book.title %></title>
 
 
-    <link rel="stylesheet" href="/stylesheets/bookInstance.css" type="text/css">
+    <link rel="stylesheet" href="/stylesheets/boot.css" type="text/css">
 
 </head>
 
 <body>
 <%- include('partials/navbar') %>
-<% if (success.length > 0) { %>
-    <div class="alert alert-success">
-        <%= success %>
-    </div>
-<% } %>
-<% if (error.length > 0) { %>
-    <div class="alert alert-danger">
-        <%= error %>
-    </div>
-<% } %>
-<div class="main">
-    <!-- Book cover image -->
-    <div class="preview">
-        <div class="imgInfo">
-            <img src="<%= book.cover %>" id="myImage" alt="<%= book.title %> " style="display: none">
-            <canvas id="resizer"></canvas>
-            <p class="card-text">Publisher: <%= book.publisher.name %></p>
-            <p class="card-text">ISBN: <%= book.isbn %></p>
-            <p class="card-text">Price: $<%= book.price.toFixed(2) %></p>
-            <% const stock = book.quantity %>
-            <% if( stock > 0 ){ %>
-                <p class="card-text" style="color: #0c442d ; font-weight: bold">In stock: <%= book.quantity %></p>
-                <form action="/cart/<%= book._id %>/add" method="POST">
-                    <button type="submit" class="btn btn-primary">Add to Cart</button>
-                </form>
-
-            <% } %>
-            <% if( stock <= 0 ){ %>
-                <p class="card-text" style="color: #ff0000">Out of stock</p>
-            <% } %>
+<div class="container mt-5">
+    <% if (success.length > 0) { %>
+        <div class="alert alert-success">
+            <%= success %>
         </div>
-        <div class="description">
-            <h5 class="card-title"><%= book.title %></h5>
-            <p>hi there, if you locking for <%= book.description %>, this book might be a great help for you</p>
-            <p class="card-text">Authors: <%= book.authors.map(author => author.name).join(', ') %></p>
-            <p class="card-text">Categories: <%= book.categories.map(category => category.name).join(', ') %></p>
+    <% } %>
+    <% if (error.length > 0) { %>
+        <div class="alert alert-danger">
+            <%= error %>
         </div>
-        <div class="reviwes">
-            <% if (reviews.length > 0) { %>
-                <ul class="list-group">
-                    <% reviews.forEach(review => { %>
-                        <li class="list-group-item">
-                            <div class="row">
-                                <div class="col-md-10">
-                                    <p>
-                                        <strong>Rating:</strong>
-                                        <% for (let i = 0; i < review.rating; i++) { %>
-                                            <span style="color: gold ; font-size: 24px">★</span>
+    <% } %>
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card">
+                <!-- Book cover image -->
+                <img src="<%= book.cover %>" class="card-img-top" alt="<%= book.title %>">
+                <div class="card-body">
+                    <!-- Book title -->
+                    <h5 class="card-title"><%= book.title %></h5>
+                    <!-- Book authors -->
+                    <p class="card-text">Authors: <%= book.authors.map(author => author.name).join(', ') %></p>
+                    <!-- Book publisher -->
+                    <p class="card-text">Publisher: <%= book.publisher.name %></p>
+                    <!-- Book categories -->
+                    <p class="card-text">
+                        Categories: <%= book.categories.map(category => category.name).join(', ') %></p>
+                    <!-- Book ISBN -->
+                    <p class="card-text">ISBN: <%= book.isbn %></p>
+                    <!-- Book description -->
+                    <p class="card-text">Description: <%= book.description %></p>
+                    <!-- Book price -->
+                    <p class="card-text">Price: $<%= book.price.toFixed(2) %></p>
+                    <!-- Book quantity -->
+                    <p class="card-text">Quantity: <%= book.quantity %></p>
+                    <!-- Book reviews -->
+                    <h6 class="mt-4">Reviews:</h6>
+                    <% if (reviews.length > 0) { %>
+                        <ul class="list-group">
+                            <% reviews.forEach(review => { %>
+                                <li class="list-group-item">
+                                    <div class="row">
+                                        <div class="col-md-10">
+                                            <strong>Rating:</strong> <%= review.rating %>
+                                            <% if (review.content) { %>
+                                                <p><strong>Review:</strong> <%= review.content %></p>
+                                            <% } %>
+                                            <p><em>By: <%= review.user.username %></em></p>
+                                        </div>
+                                        <% if (user && user._id.toString() === review.user._id.toString()) { %>
+                                            <div class="col-md-6">
+                                                <form action="/reviews/<%= review._id %>/delete" method="POST">
+                                                    <button type="submit" class="btn btn-danger">Delete Review</button>
+                                                </form>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <a href="/reviews/<%= review._id %>/update" class="btn btn-primary">Update
+                                                    Review</a>
+                                            </div>
                                         <% } %>
-                                    </p>
-                                    <% if (review.content) { %>
-                                        <p><strong>Review:</strong> <%= review.content %></p>
-                                    <% } %>
-                                    <p><em>By: <%= review.user.username %></em></p>
-                                </div>
-
-                                <% if (user && user._id.toString() === review.user._id.toString()) { %>
-                                    <div class="btn">
-                                        <a href="/reviews/<%= review._id %>/update" class="btn btn-primary">Update
-                                            Review</a>
-                                        <form action="/reviews/<%= review._id %>/delete" method="POST">
-                                            <button type="submit" class="btn btn-danger">Delete Review</button>
-                                        </form>
-
                                     </div>
-                                <% } %>
+                                </li>
+                            <% }) %>
+                        </ul>
+                    <% } else { %>
+                        <p>No reviews yet.</p>
+                    <% } %>
+                    <% if (user) { %>
+                        <h6 class="mt-4">Add a Review:</h6>
+                        <form action="/reviews/<%= book._id %>/create" method="POST">
+                            <div class="form-group">
+                                <label for="rating">Rating:</label>
+                                <div>
+                                    <input type="radio" id="star1" name="rating" value="1">
+                                    <label for="star1">1</label>
+                                    <input type="radio" id="star2" name="rating" value="2">
+                                    <label for="star2">2</label>
+                                    <input type="radio" id="star3" name="rating" value="3">
+                                    <label for="star3">3</label>
+                                    <input type="radio" id="star4" name="rating" value="4">
+                                    <label for="star4">4</label>
+                                    <input type="radio" id="star5" name="rating" value="5">
+                                    <label for="star5">5</label>
+                                </div>
                             </div>
-                        </li>
-                    <% }) %>
-                </ul>
-            <% } else { %>
-                <p>No reviews yet.</p>
-            <% } %>
-            <% if (user) { %>
-                <h6 class="mt-4">Add a Review:</h6>
-                <form action="/reviews/<%= book._id %>/create" method="POST">
-                    <div class="form-group">
-                        <label for="rating">Rating:</label>
-                        <input type="hidden" id="rating" name="rating" value="0">
-                        <div class="stars" id="star1" onmouseover="hoverStars(1)" onclick="rate(1)">★</div>
-                        <div class="stars" id="star2" onmouseover="hoverStars(2)" onclick="rate(2)">★</div>
-                        <div class="stars" id="star3" onmouseover="hoverStars(3)" onclick="rate(3)">★</div>
-                        <div class="stars" id="star4" onmouseover="hoverStars(4)" onclick="rate(4)">★</div>
-                        <div class="stars" id="star5" onmouseover="hoverStars(5)" onclick="rate(5)">★</div>
-                    </div>
-                    <div class="form-group">
-                        <label for="content">Review:</label>
-                        <textarea class="form-control" id="content" name="content" rows="3" required></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Add Review</button>
-                </form>
-            <% } %>
-        </div>
-        <% if (user && user._id.toString() === book.seller._id.toString()) { %>
-            <form action="/books/<%= book._id %>/delete" method="POST">
-                <button type="submit" class="btn btn-danger">Delete Book</button>
-                <a href="/books/<%= book._id %>/update" class="btn btn-primary">Update Book</a>
-            </form>
+                            <div class="form-group">
+                                <label for="content">Review:</label>
+                                <textarea class="form-control" id="content" name="content" rows="3" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Add Review</button>
+                        </form>
+                    <% } %>
+                    <!-- Display the delete button -->
+                    <% if (user && user._id.toString() === book.seller._id.toString()) { %>
+                        <form action="/books/<%= book._id %>/delete" method="POST">
+                            <button type="submit" class="btn btn-danger">Delete Book</button>
+                            <a href="/books/<%= book._id %>/update" class="btn btn-primary">Update Book</a>
+                        </form>
 
-            <div class="mt-4">
-                <h6>Soft Copy:</h6>
-                <canvas id="pdf-canvas" data-pdf-url="<%= book.softCopy %>"></canvas>
+                        <div class="mt-4">
+                            <h6>Soft Copy:</h6>
+                            <canvas id="pdf-canvas" data-pdf-url="<%= book.softCopy %>"></canvas>
+                        </div>
+                    <% } %>
+                </div>
+
             </div>
-        <% } %>
+        </div>
     </div>
-
 </div>
 
-
-<script>
-    window.onload = function () {
-        const img = document.getElementById('myImage');
-        const canvas = document.getElementById('resizer');
-        const ctx = canvas.getContext('2d');
-        const newWidth = 350;
-        img.onload = function () {
-
-            const newHeight = (newWidth / img.width) * img.height;
-            canvas.width = newWidth;
-            canvas.height = newHeight;
-
-            ctx.imageSmoothingEnabled = true;
-
-            ctx.drawImage(img, 0, 0, newWidth, newHeight);
-        };
-        img.src = '<%= book.cover %>';
-    };
-    let currentRating = 0;
-    let ratingLocked = false;
-
-    function hoverStars(stars) {
-
-        if (!ratingLocked) {
-            const allStars = document.querySelectorAll('.stars');
-            allStars.forEach((star, index) => {
-                star.classList.remove('rated');
-                if (index < stars) {
-                    star.classList.add('rated');
-                }
-            });
-        }
-    }
-
-    function rate(stars) {
-        if (!ratingLocked) {
-            currentRating = stars;
-            document.getElementById('rating').value = stars;
-            ratingLocked = true;
-            displayRating();
-        } else {
-
-            currentRating = 0;
-            document.getElementById('rating').value = stars;
-            ratingLocked = false;
-            displayRating();
-        }
-    }
-
-    function displayRating() {
-        const ratingElement = document.getElementById('rating');
-        ratingElement.innerHTML = `You've rated this ${currentRating} star(s).`;
-        const stars = document.querySelectorAll('.stars');
-        stars.forEach((star, index) => {
-            star.classList.remove('rated');
-            if (index < currentRating) {
-                star.classList.add('rated');
-            }
-        });
-    }
-</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.worker.js"></script>
 
+<script src="/javascripts/bookInstance.js"></script>
 </body>
 
 </html>

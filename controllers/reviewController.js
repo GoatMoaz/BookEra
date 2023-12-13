@@ -48,7 +48,7 @@ exports.updateReview_get = async (req, res) => {
 exports.updateReview_post = async (req, res) => {
     const review = await Review.findById(req.params.id).populate('book').populate('user');
     const bookId = review.book._id;
-    if (review.user.id.toString() !== req.user.id.toString()) {
+    if (review.user._id.toString() !== req.user._id.toString()) {
         req.flash('error', 'You are not authorized to do that!');
         return res.status(401).send('Unauthorized');
     }
