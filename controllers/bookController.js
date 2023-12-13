@@ -305,3 +305,21 @@ exports.addToCart = async function(req, res, next) {
 
     res.redirect('/books');
 };
+
+exports.checkout_get = async function(req, res, next) {
+    try {
+        const cart = await Cart.findOne({ user: req.user._id }).populate('books');
+        const user = await User.findById(req.user._id);
+
+        let totalCost = 0;
+        cart.books.forEach(book => {
+            totalCost += book.price;
+        });
+        const canAfford = user.balance >= totalCost;
+        res.render('book/checkout', { cart, totalCost, canAfford });
+    }
+    catch (e) {
+       console.log(e);
+       res.status(500).json(e);
+    }
+};
