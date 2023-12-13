@@ -7,7 +7,9 @@
                 <p class="price">Price: <%= book.price %></p>
             </div>
         <% }) %>
-        <button class="btn btn-primary">Buy Books</button>
+       <form action="/orders" method="get">
+          <button class="btn btn-primary">Buy Books</button>
+       </form>
     <% } else { %>
         <p>Your cart is empty.</p>
     <% } %>
