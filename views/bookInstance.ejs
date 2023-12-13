@@ -54,10 +54,10 @@
                 <a href="/books/<%= book._id %>/update" class="btn btn-primary">Update Book</a>
             </form>
 
-            <div class="mt-4">
-                <h6>Soft Copy:</h6>
-                <canvas id="pdf-canvas" data-pdf-url="<%= book.softCopy %>"></canvas>
-            </div>
+                    <div class="mt-4">
+                        <h6>Soft Copy:</h6>
+                        <canvas id="pdf-canvas" data-pdf-url="<%= book.softCopy %>"></canvas>
+                    </div>
         <% } %>
 
             <% } %>
@@ -201,7 +201,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.worker.js"></script>
 
 
-<!--<script src="/javascripts/bookInstance.js"></script>-->
+<script src="/javascripts/bookInstance.js"></script>
 </body>
 
 </html>
