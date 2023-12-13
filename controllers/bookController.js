@@ -11,7 +11,7 @@ const cloudinary = require('cloudinary');
 const path = require('path');
 // multer config
 const storage = multer.diskStorage({});
-const upload = multer({storage});
+const upload = multer({ storage });
 
 require('dotenv').config();
 
@@ -21,8 +21,6 @@ cloudinary.config({
     api_key: process.env.CLOUDINARY_API_KEY,
     api_secret: process.env.CLOUDINARY_API_SECRET,
 });
-
-require('dotenv').config();
 
 // get all books
 exports.getAllBooks = async (req, res) => {
@@ -36,11 +34,10 @@ exports.getAllBooks = async (req, res) => {
         // get cart of logged in user
         let cart = null;
         if (req.user) {
-            cart = await Cart.findOne({user: req.user._id}).populate('books');
+            cart = await Cart.findOne({ user: req.user._id }).populate('books');
         }
 
-        res.render('book/books', { title: 'Books', books: books, cart });
-
+        res.render('books', { title: 'Books', books: books, cart });
     } catch (err) {
         console.log(err);
         res.status(500).json(err);
@@ -56,11 +53,11 @@ exports.getBookById = async (req, res) => {
             .populate('categories');
         // send book to bookInstance.ejs with its reviews
         // get reviews with book id = req.params.id and store each user's username in reviews
-        const reviews = await Review.find({book: req.params.id}).populate(
+        const reviews = await Review.find({ book: req.params.id }).populate(
             'user',
             'username',
         );
-        res.render('book/bookInstance', {
+        res.render('bookInstance', {
             title: 'Book Instance',
             book: book,
             reviews,
@@ -91,11 +88,9 @@ exports.search_book = async (req, res) => {
             .populate('publisher')
             .populate('authors')
             .populate('categories');
-
-        res.render('book/bookSearchResult', { title: 'Books', books: books });
-
+        res.render('bookSearchResult', { title: 'Books', books: books });
     } catch (err) {
-        res.status(500).json({message: err.message});
+        res.status(500).json({ message: err.message });
     }
 };
 
@@ -134,9 +129,7 @@ exports.createBook_get = async (req, res) => {
         const authors = await Author.find({});
         const publishers = await Publisher.find({});
         const categories = await Category.find({});
-
-        res.render('book/createBook', { authors, publishers, categories });
-
+        res.render('createBook', { authors, publishers, categories });
     } catch (err) {
         console.log(err);
         res.status(500).json(err);
@@ -145,9 +138,10 @@ exports.createBook_get = async (req, res) => {
 };
 
 
+
 exports.createBook_post = async (req, res) => {
     try {
-        const {title, isbn, description, authors, publisher, price, cover, categories, quantity} = req.body;
+        const { title, isbn, description, authors, publisher, price, cover, categories, quantity } = req.body;
         console.log(req.body);
         console.log(req.file);
 
@@ -197,9 +191,7 @@ exports.updateBook_get = async (req, res) => {
         const authors = await Author.find({});
         const publishers = await Publisher.find({});
         const categories = await Category.find({});
-
-        res.render('book/updateBook', { book, authors, publishers, categories });
-
+        res.render('updateBook', { book, authors, publishers, categories });
     } catch (err) {
         console.log(err);
         res.status(500).json(err);
@@ -267,7 +259,7 @@ exports.deleteBook_post = async (req, res) => {
 
         if (req.user._id.toString() === book.seller._id.toString()) {
             // delete reviews of this book
-            await Review.deleteMany({book: req.params.id});
+            await Review.deleteMany({ book: req.params.id });
 
             await Book.findByIdAndDelete(req.params.id);
 
@@ -282,13 +274,13 @@ exports.deleteBook_post = async (req, res) => {
         res.status(500).json(err);
     }
 };
-exports.addToCart = async function (req, res, next) {
+exports.addToCart = async function(req, res, next) {
     const userId = req.user._id;
     const bookId = req.body.bookId;
 
-    let cart = await Cart.findOne({user: userId});
+    let cart = await Cart.findOne({ user: userId });
     if (!cart) {
-        cart = new Cart({user: userId});
+        cart = new Cart({ user: userId });
     }
 
     cart.books.push(bookId);
@@ -297,13 +289,13 @@ exports.addToCart = async function (req, res, next) {
     res.redirect('/books');
 };
 
-exports.addToCart = async function (req, res, next) {
+exports.addToCart = async function(req, res, next) {
     const userId = req.user._id;
     const bookId = req.params.id;
 
-    let cart = await Cart.findOne({user: userId});
+    let cart = await Cart.findOne({ user: userId });
     if (!cart) {
-        cart = new Cart({user: userId});
+        cart = new Cart({ user: userId });
     }
 
     console.log(cart);
@@ -312,22 +304,4 @@ exports.addToCart = async function (req, res, next) {
     await cart.save();
 
     res.redirect('/books');
-};
-
-exports.checkout_get = async function(req, res, next) {
-    try {
-        const cart = await Cart.findOne({ user: req.user._id }).populate('books');
-        const user = await User.findById(req.user._id);
-
-        let totalCost = 0;
-        cart.books.forEach(book => {
-            totalCost += book.price;
-        });
-        const canAfford = user.balance >= totalCost;
-        res.render('book/checkout', { cart, totalCost, canAfford });
-    }
-    catch (e) {
-       console.log(e);
-       res.status(500).json(e);
-    }
 };

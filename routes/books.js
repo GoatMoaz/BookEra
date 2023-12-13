@@ -26,8 +26,6 @@ router.get('/', bookController.getAllBooks);
 // get book by title
 router.get('/search', bookController.search_book);
 
-router.get('/checkout', bookController.checkout_get);
-
 // get book by author
 router.get('/author/:author', bookController.getBookByAuthor);
 
