@@ -8,10 +8,15 @@
     <link rel="stylesheet" href="/stylesheets/style.css" type="text/css">
 </head>
 <body>
+
+<%- include('./partials/navbar') %>
+<div class="container mt-5">
+
     <% if (books.length === 0) { %>
         <h1>No results found</h1>
     <% } %>
-    <ul>
+
+<div class="row">
         <% books.forEach(book => { %>
             <div class="col-md-4 mb-4">
                 <a href="/books/<%= book._id %>" class="text-decoration-none">
@@ -30,12 +35,20 @@
                                 <p class="card-text">Description: <%= book.description %></p>
                                 <p class="card-text">Price: $<%= book.price.toFixed(2) %></p>
                                 <p class="card-text">Quantity: <%= book.quantity %></p>
+                                <% if (user) { %>
+                                    <form action="/books/<%= book._id %>/addToCart" method="post">
+                                        <button type="submit" class="btn btn-primary add-to-cart">Add to Cart
+                                        </button>
+                                    </form>
+                                <% } %>
                             </div>
                         </div>
                     </div>
                 </a>
             </div>
         <% }) %>
-    </ul>
+        </div>
+</div>
+<script src="/javascripts/main.js"></script>
 </body>
 </html>
