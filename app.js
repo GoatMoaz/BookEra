@@ -28,8 +28,8 @@ const limiter = RateLimit({
 
 const mongoose = require('mongoose');
 const session = require('express-session');
-const mongoDB = process.env.mongoDB;
-const SECRET =process.env.secret;
+const mongoDB = process.env.MONGODB_URL;
+const SECRET = process.env.SECRET;
 connectDB();
 
 async function connectDB() {
