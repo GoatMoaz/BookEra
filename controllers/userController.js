@@ -98,11 +98,20 @@ exports.signup_post = async (req, res) => {
 
 // update user
 exports.updateUser_get = async (req, res) => {
-    res.send('update user get');
+    res.render('update_user_profile');
 };
 
 exports.updateUser_post = async (req, res) => {
-    res.send('update user post');
+    try {
+        const user = await User.findById(req.params.id);
+        user.first_name = req.body.first_name || user.first_name;
+        user.last_name = req.body.last_name || user.last_name;
+        user.address = req.body.address || user.address;
+        await user.save();
+        res.redirect(`/users/${user._id}`);
+    } catch (err) {
+        res.status(500).json(err);
+    }
 };
 
 // delete user
@@ -128,7 +137,7 @@ exports.login_post = (req, res, next) => {
             req.flash('error', info.message);
             return res.redirect('/users/login');
         }
-        req.logIn(user, function(err) {
+        req.logIn(user, function (err) {
             if (err) {
                 return next(err);
             }
@@ -138,7 +147,6 @@ exports.login_post = (req, res, next) => {
         });
     })(req, res, next);
 };
-
 
 // user logout
 exports.logout_get = async (req, res) => {
