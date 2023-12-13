@@ -37,7 +37,7 @@ exports.getAllBooks = async (req, res) => {
             cart = await Cart.findOne({ user: req.user._id }).populate('books');
         }
 
-        res.render('books', { title: 'Books', books: books, cart });
+        res.render('book/books', { title: 'Books', books: books, cart });
     } catch (err) {
         console.log(err);
         res.status(500).json(err);
@@ -57,7 +57,7 @@ exports.getBookById = async (req, res) => {
             'user',
             'username',
         );
-        res.render('bookInstance', {
+        res.render('book/bookInstance', {
             title: 'Book Instance',
             book: book,
             reviews,
@@ -88,7 +88,7 @@ exports.search_book = async (req, res) => {
             .populate('publisher')
             .populate('authors')
             .populate('categories');
-        res.render('bookSearchResult', { title: 'Books', books: books });
+        res.render('book/bookSearchResult', { title: 'Books', books: books });
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
@@ -129,7 +129,7 @@ exports.createBook_get = async (req, res) => {
         const authors = await Author.find({});
         const publishers = await Publisher.find({});
         const categories = await Category.find({});
-        res.render('createBook', { authors, publishers, categories });
+        res.render('book/createBook', { authors, publishers, categories });
     } catch (err) {
         console.log(err);
         res.status(500).json(err);
@@ -191,7 +191,7 @@ exports.updateBook_get = async (req, res) => {
         const authors = await Author.find({});
         const publishers = await Publisher.find({});
         const categories = await Category.find({});
-        res.render('updateBook', { book, authors, publishers, categories });
+        res.render('book/updateBook', { book, authors, publishers, categories });
     } catch (err) {
         console.log(err);
         res.status(500).json(err);

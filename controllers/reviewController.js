@@ -42,7 +42,7 @@ exports.createReview_post = async (req, res) => {
 // update a review
 exports.updateReview_get = async (req, res) => {
     const review = await Review.findById(req.params.id);
-    res.render('updateReview', { review });
+    res.render('book/updateReview', { review });
 }
 
 exports.updateReview_post = async (req, res) => {
