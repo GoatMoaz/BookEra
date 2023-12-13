@@ -5,6 +5,11 @@
             <div class="cart-item">
                 <h2><%= book.title %></h2>
                 <p class="price">Price: <%= book.price %></p>
+                <form action="/carts/<%= book._id %>/deleteFromCart" method="post">
+                    <button type="submit" class="close" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </form>
             </div>
         <% }) %>
        <form action="/orders" method="get">
