@@ -36,7 +36,7 @@
             <% const stock = book.quantity %>
             <% if( stock > 0 ){ %>
                 <p class="card-text" style="color: #0c442d ; font-weight: bold">In stock: <%= book.quantity %></p>
-                <form action="/books/<%= book._id %>" method="POST">
+                <form action="/carts/<%= book._id %>/addToCart" method="POST">
                     <button type="submit" class="cart">
                         <div class="pretext">
                             <i class="fas fa-cart-plus"></i> Add To cart
@@ -48,6 +48,17 @@
 
                     </button>
                 </form>
+                <% if (user && user._id.toString() === book.seller._id.toString()) { %>
+            <form action="/books/<%= book._id %>/delete" method="POST">
+                <button type="submit" class="btn btn-danger">Delete Book</button>
+                <a href="/books/<%= book._id %>/update" class="btn btn-primary">Update Book</a>
+            </form>
+
+            <div class="mt-4">
+                <h6>Soft Copy:</h6>
+                <canvas id="pdf-canvas" data-pdf-url="<%= book.softCopy %>"></canvas>
+            </div>
+        <% } %>
 
             <% } %>
             <% if( stock <= 0 ){ %>
@@ -119,17 +130,7 @@
                 </form>
             <% } %>
         </div>
-        <% if (user && user._id.toString() === book.seller._id.toString()) { %>
-            <form action="/books/<%= book._id %>/delete" method="POST">
-                <button type="submit" class="btn btn-danger">Delete Book</button>
-                <a href="/books/<%= book._id %>/update" class="btn btn-primary">Update Book</a>
-            </form>
 
-            <div class="mt-4">
-                <h6>Soft Copy:</h6>
-                <canvas id="pdf-canvas" data-pdf-url="<%= book.softCopy %>"></canvas>
-            </div>
-        <% } %>
     </div>
 
 </div>
