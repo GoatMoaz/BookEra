@@ -37,9 +37,9 @@
             <% if( stock > 0 ){ %>
                 <p class="card-text" style="color: #0c442d ; font-weight: bold">In stock: <%= book.quantity %></p>
                 <form action="/carts/<%= book._id %>/addToCart" method="POST">
-                    <button type="submit" class="cart">
+                    <button type="submit" class="cart mb-1">
                         <div class="pretext">
-                            <i class="fas fa-cart-plus"></i> Add To cart
+                            <i class="fas fa-cart-plus"></i><i class="bi bi-cart"></i>Add To cart
                         </div>
 
                         <div class="pretext done">
@@ -67,12 +67,12 @@
         </div>
         <div class="description">
             <h5 class="card-title"><%= book.title %></h5>
-            <p>hi there, if you are looking for <%= book.description %>, this book might be a great help for you</p>
-            <p class="card-text">Authors: <%= book.authors.map(author => author.name).join(', ') %></p>
-            <p class="card-text">Categories: <%= book.categories.map(category => category.name).join(', ') %></p>
-            <p class="card-text">Publisher: <%= book.publisher.name %></p>
-            <p class="card-text">ISBN: <%= book.isbn %></p>
-            <p class="card-text">Price: $<%= book.price.toFixed(2) %></p>
+            <p class="card-text"><strong>Authors:</strong> <%= book.authors.map(author => author.name).join(', ') %></p>
+            <p class="card-text"><strong>Description:</strong><%= book.description %></p>
+            <p class="card-text"><strong>Categories:</strong> <%= book.categories.map(category => category.name).join(', ') %></p>
+            <p class="card-text"><strong>Publisher:</strong> <%= book.publisher.name %></p>
+            <p class="card-text"><strong>ISBN:</strong> <%= book.isbn %></p>
+            <p class="card-text"><strong>Price:</strong> $<%= book.price.toFixed(2) %></p>
         </div>
         <div class="reviwes">
             <% if (reviews.length > 0) { %>
@@ -92,15 +92,16 @@
                                     <% } %>
                                     <p><em>By: <%= review.user.username %></em></p>
                                 </div>
-
                                 <% if (user && user._id.toString() === review.user._id.toString()) { %>
-                                    <div class="btn">
-                                        <a href="/reviews/<%= review._id %>/update" class="btn btn-primary">Update
-                                            Review</a>
-                                        <form action="/reviews/<%= review._id %>/delete" method="POST">
-                                            <button type="submit" class="btn btn-danger">Delete Review</button>
+                                    <div style="display: flex; gap: 10px;">
+                                        <a href="/reviews/<%= review._id %>/update" class="cart mb-1"style="width: 125px; height: 50px;font-size: 15px">
+                                            <div class="pretext">
+                                                <i class="fas fa-cart-plus" ></i>Update Review
+                                            </div>
+                                        </a>
+                                        <form action="/reviews/<%= review._id %>/delete" method="POST" class="cart mb-1"style="width: 125px; height: 50px;font-size: 15px">
+                                            <button type="submit" class="pretext fas fa-cart-plus" style="border: white;background-color: red">Delete Review</button>
                                         </form>
-
                                     </div>
                                 <% } %>
                             </div>
@@ -126,7 +127,11 @@
                         <label for="content">Review:</label>
                         <textarea class="form-control" id="content" name="content" rows="3" required></textarea>
                     </div>
-                    <button type="submit" class="btn btn-primary">Add Review</button>
+                    <button type="submit" class="cart mb-1" style="width: 125px; height: 50px;font-size: 15px">
+                        <div class="pretext">
+                            <i class="fas fa-cart-plus" ></i>Add Review
+                        </div>
+                    </button>
                 </form>
             <% } %>
         </div>
