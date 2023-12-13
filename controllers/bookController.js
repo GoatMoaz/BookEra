@@ -73,26 +73,17 @@ exports.getBookById = async (req, res) => {
 exports.search_book = async (req, res) => {
     try {
         const title = req.query.title;
-        const author = req.query.author;
-        const publisher = req.query.publisher;
-        const category = req.query.category;
         const query = {};
         if (title) {
             query.title = title;
             query.title = new RegExp(title, 'i');
         }
-        if (author) {
-            query.authors = author;
-            query.authors = new RegExp(author, 'i');
+        // handle if query is empty
+        if (Object.keys(query).length === 0) {
+            req.flash('error', 'Please enter a valid search query');
+            return res.redirect('/books');
         }
-        if (publisher) {
-            query.publisher = publisher;
-            query.publisher = new RegExp(publisher, 'i');
-        }
-        if (category) {
-            query.categories = category;
-            query.categories = new RegExp(category, 'i');
-        }
+
         const books = await Book.find(query)
             .populate('publisher')
             .populate('authors')

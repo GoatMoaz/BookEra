@@ -17,11 +17,10 @@ exports.createReview_get = async (req, res) => {
    res.send('NOT IMPLEMENTED: createReview GET');
 }
 exports.createReview_post = async (req, res) => {
+    const { content, rating } = req.body;
+    const bookId = req.params.id;
+    const userId = req.user._id;
     try {
-        const { content, rating } = req.body;
-        const bookId = req.params.id;
-        const userId = req.user._id;
-
         const newReview = await Review.create({
             content,
             rating,
