@@ -109,10 +109,10 @@ exports.updateUser_post = async (req, res) => {
         user.address = req.body.address || user.address;
         user.wallet_amount = req.body.wallet_amount || user.wallet_amount;
         await user.save();
-        flash('success', 'User updated successfully');
+        req.flash('success', 'User updated successfully');
         res.redirect(`/users/${user._id}`);
     } catch (err) {
-        flash('error', 'An error occurred');
+        req.flash('error', 'An error occurred');
         res.status(500).json(err);
     }
 };
