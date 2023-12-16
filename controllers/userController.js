@@ -1,5 +1,8 @@
 const User = require('../models/user.js');
+const Book = require('../models/book.js');
+const Review = require('../models/review.js');
 const passport = require('passport');
+const mongoose = require('mongoose');
 const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcrypt');
 
@@ -117,13 +120,39 @@ exports.updateUser_post = async (req, res) => {
     }
 };
 
-// delete user
-exports.deleteUser_get = async (req, res) => {
-    res.send('delete user get');
-};
-
 exports.deleteUser_post = async (req, res) => {
-    res.send('delete user post');
+    const session = await mongoose.startSession();
+    session.startTransaction();
+    try {
+        const user = await User.findById(req.params.id).session(session);
+        const books = await Book.find({ seller: user._id }).session(session);
+        const reviews = await Review.find({ user: user._id }).session(session);
+
+        const deleteReviews = reviews.map((review) =>
+            Review.deleteOne({ _id: review._id }).session(session),
+        );
+        const deleteBooks = books.map((book) =>
+            Book.deleteOne({ _id: book._id }).session(session),
+        );
+
+        await Promise.all([...deleteReviews, ...deleteBooks]);
+
+        await User.deleteOne({ _id: req.params.id }).session(session);
+
+        await session.commitTransaction();
+
+        req.logout(); // Log out the user
+
+        req.flash('success', 'User deleted successfully');
+        res.redirect('/');
+    } catch (err) {
+        await session.abortTransaction();
+        console.log(err);
+        req.flash('error', 'An error occurred');
+        res.status(500).json(err);
+    } finally {
+        session.endSession();
+    }
 };
 
 // user login

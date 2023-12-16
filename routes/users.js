@@ -23,7 +23,6 @@ router.get('/:id/update', userController.updateUser_get);
 router.post('/:id/update', userController.updateUser_post);
 
 // delete user
-router.get('/:id/delete', userController.deleteUser_get);
 router.post('/:id/delete', userController.deleteUser_post);
 
 // logout

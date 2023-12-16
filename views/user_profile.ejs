@@ -71,8 +71,11 @@
                         </div>
                     </div>
                 </div>
-                <div class="update-profile" style="padding: 20px;">
-                    <a href="/users/<%= user._id %>/update" class="btn btn-primary" style="font-size: 18px;">Edit Profile</a>
+                <div class="col-12 d-flex justify-content-start">
+                    <a href="/users/<%= user._id %>/update" class="btn btn-primary mr-3">Edit Profile</a>
+                    <form action="/users/<%= user._id %>/delete" method="POST" onsubmit="return confirm('Are you sure you want to delete your profile? This action cannot be undone.');">
+                        <button type="submit" class="btn btn-danger">Delete Profile</button>
+                    </form>
                 </div>
             </div>
         </div>
