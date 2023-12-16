@@ -53,11 +53,12 @@
                 <button type="submit" class="btn btn-danger">Delete Book</button>
                 <a href="/books/<%= book._id %>/update" class="btn btn-primary">Update Book</a>
             </form>
-
+                    <% if (user && (user._id.toString() === book.seller._id.toString() || orders.some(order => order.book._id.toString() === book._id.toString() && order.user._id.toString() === user._id.toString()))) { %>
                     <div class="mt-4">
                         <h6>Soft Copy:</h6>
                         <canvas id="pdf-canvas" data-pdf-url="<%= book.softCopy %>"></canvas>
                     </div>
+                    <% } %>
         <% } %>
 
             <% } %>
@@ -140,71 +141,8 @@
 
 </div>
 
-
-<script>
-    window.onload = function () {
-        const img = document.getElementById('myImage');
-        const canvas = document.getElementById('resizer');
-        const ctx = canvas.getContext('2d');
-        const newWidth = 350;
-        img.onload = function () {
-
-            const newHeight = (newWidth / img.width) * img.height;
-            canvas.width = newWidth;
-            canvas.height = newHeight;
-
-            ctx.imageSmoothingEnabled = true;
-
-            ctx.drawImage(img, 0, 0, newWidth, newHeight);
-        };
-        img.src = '<%= book.cover %>';
-    };
-    let currentRating = 0;
-    let ratingLocked = false;
-
-    function hoverStars(stars) {
-
-        if (!ratingLocked) {
-            const allStars = document.querySelectorAll('.stars');
-            allStars.forEach((star, index) => {
-                star.classList.remove('rated');
-                if (index < stars) {
-                    star.classList.add('rated');
-                }
-            });
-        }
-    }
-
-    function rate(stars) {
-        if (!ratingLocked) {
-            currentRating = stars;
-            document.getElementById('rating').value = stars;
-            ratingLocked = true;
-            displayRating();
-        } else {
-
-            currentRating = 0;
-            document.getElementById('rating').value = stars;
-            ratingLocked = false;
-            displayRating();
-        }
-    }
-
-    function displayRating() {
-        const ratingElement = document.getElementById('rating');
-        ratingElement.innerHTML = `You've rated this ${currentRating} star(s).`;
-        const stars = document.querySelectorAll('.stars');
-        stars.forEach((star, index) => {
-            star.classList.remove('rated');
-            if (index < currentRating) {
-                star.classList.add('rated');
-            }
-        });
-    }
-</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.worker.js"></script>
-
 
 <script src="/javascripts/bookInstance.js"></script>
 </body>
