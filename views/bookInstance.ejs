@@ -9,7 +9,7 @@
     <meta name="author" content="">
 
     <title>BookEra - <%= book.title %></title>
-
+    <link rel="stylesheet" href="/stylesheets/style.css" type="text/css" />
 
     <link rel="stylesheet" href="/stylesheets/bookInstance.css" type="text/css">
 
@@ -17,6 +17,7 @@
 
 <body>
 <%- include('partials/navbar') %>
+<%- include('partials/cartPane') %>
 <% if (success.length > 0) { %>
     <div class="alert alert-success">
         <%= success %>
@@ -166,6 +167,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.worker.js"></script>
 
 <script src="/javascripts/bookInstance.js"></script>
+<script src="/javascripts/main.js"></script>
+
 </body>
 
 </html>

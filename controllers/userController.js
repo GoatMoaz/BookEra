@@ -141,10 +141,13 @@ exports.deleteUser_post = async (req, res) => {
 
         await session.commitTransaction();
 
-        req.logout(); // Log out the user
-
         req.flash('success', 'User deleted successfully');
-        res.redirect('/');
+        req.logout((err) => {
+            if (err) {
+                return res.status(500).json(err);
+            }
+            res.redirect('/');
+        });
     } catch (err) {
         await session.abortTransaction();
         console.log(err);
