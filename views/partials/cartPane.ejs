@@ -1,6 +1,8 @@
 <div id="cart-pane" class="cart-pane">
     <h1>Your Cart</h1>
-    <% if (cart && cart.books && cart.books.length > 0) { %>
+    <% if (!user) { %>
+        <p>Please <a href="/login">log in</a> to view your cart.</p>
+    <% } else if (cart && cart.books && cart.books.length > 0) { %>
         <% cart.books.forEach(function(book) { %>
             <div class="cart-item">
                 <h2><%= book.title %></h2>
