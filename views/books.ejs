@@ -13,11 +13,72 @@
 
     <link rel="stylesheet" href="/stylesheets/boot.css" type="text/css">
     <link rel="stylesheet" href="/stylesheets/style.css" type="text/css">
+    <style>
+        html,
+        body,
+        .intro {
+            height: 100%;
+        }
+
+        .form-control {
+            border-color: transparent;
+        }
+
+        .input-group>.form-control:focus {
+            border-color: transparent;
+            box-shadow: inset 0 0 0 1px transparent;
+        }
+
+
+        .form-control::placeholder {
+            color: #fff;
+        }
+
+        .purple-gradient {
+            color: #fff;
+            background: linear-gradient(to right, #5379fa, black);
+        }
+        .btn.purple-gradient:hover {
+            color: #fff;
+        }
+
+        .text-pink {
+            color: #F0B6D5
+        }
+    </style>
 </head>
 <body>
 <%- include('partials/navbar') %>
 <%- include('partials/cartPane') %>
-<!--list books in bootstrap cards-->
+<!--add image here-->
+        <div class="col-md-12">
+            <img src="/images/b4.png" alt="cover"> <!--832.5*66-->
+            <div class="centered">
+                <h6 class="text-center"style="color: #FFFFFF;position: relative; bottom: 100px;font-size: 60px;font-weight: 400">Discover Books</h6>
+            </div>
+            <section class="intro">
+                <div class="mask d-flex align-items-center h-100">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-10 col-lg-8 col-xl-7 mx-auto">
+                                <div class="card mb-2"
+                                     style="border-radius: 10em; background: linear-gradient(to right,white, white);">
+                                    <div class="card-body p-2">
+                                        <div class="input-group input-group-lg">
+                                            <input type="text" class="form-control form-control-lg round bg-transparent text-black"
+                                                   placeholder="Type Keywords" aria-label="Type Keywords" aria-describedby="basic-addon2" />
+                                            <span class="input-group-text border-0" id="basic-addon2"><i class="fas fa-search fa-lg text-black"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+        </div>
+
 
 
 <div class="container mt-5">
