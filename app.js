@@ -6,6 +6,7 @@ const logger = require('morgan');
 const passport = require('passport');
 const RateLimit = require('express-rate-limit');
 const flash = require('connect-flash');
+const Cart = require('./models/cart');
 
 // use .env
 require('dotenv').config();
@@ -24,7 +25,6 @@ const limiter = RateLimit({
     windowMs: 1 * 60 * 1000,
     max: 50,
 });
-
 
 const mongoose = require('mongoose');
 const session = require('express-session');
@@ -67,6 +67,16 @@ app.use(passport.session());
 
 app.use((req, res, next) => {
     res.locals.user = req.user;
+    next();
+});
+
+app.use(async (req, res, next) => {
+    if (req.user) {
+        const cart = await Cart.findOne({ user: req.user._id }).populate(
+            'books',
+        );
+        res.locals.cart = cart;
+    }
     next();
 });
 
