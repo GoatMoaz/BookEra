@@ -4,11 +4,10 @@ window.onload = function () {
     // if pdfCanvas is null, it means we are not authorized to view the book
     // go to the logic of image resizing and rating
     if (pdfCanvas !== null) {
-
-
         const url = pdfCanvas.getAttribute('data-pdf-url');
-        console.log(url)
-        pdfjsLib.GlobalWorkerOptions.workerSrc = '//mozilla.github.io/pdf.js/build/pdf.worker.js';
+        console.log(url);
+        pdfjsLib.GlobalWorkerOptions.workerSrc =
+            '//mozilla.github.io/pdf.js/build/pdf.worker.js';
 
         let pdfDoc = null,
             pageNum = 1,
@@ -25,14 +24,14 @@ window.onload = function () {
             pageRendering = true;
             // Using promise to fetch the page
             pdfDoc.getPage(num).then(function (page) {
-                const viewport = page.getViewport({scale: scale});
+                const viewport = page.getViewport({ scale: scale });
                 pdfCanvas.height = viewport.height;
                 pdfCanvas.width = viewport.width;
 
                 // Render PDF page into canvas context
                 const renderContext = {
                     canvasContext: canvasContext,
-                    viewport: viewport
+                    viewport: viewport,
                 };
                 const renderTask = page.render(renderContext);
 
@@ -118,6 +117,22 @@ window.onload = function () {
     // Rating code
     let currentRating = 0;
     let ratingLocked = false;
+    const stars = document.querySelectorAll('.stars');
+
+    stars.forEach((star, index) => {
+        // Add mouseover event to hover stars
+        star.addEventListener('mouseover', () => {
+            hoverStars(index + 1);
+        });
+
+        // Add click event to rate
+        star.addEventListener('click', () => {
+            rate(index + 1);
+        });
+
+        // Add mouseout event to display current rating when not hovering
+        star.addEventListener('mouseout', displayRating);
+    });
 
     function hoverStars(stars) {
         if (!ratingLocked) {
@@ -146,30 +161,26 @@ window.onload = function () {
     }
 
     function displayRating() {
-        const ratingElement = document.getElementById('rating');
-        ratingElement.innerHTML = `You've rated this ${currentRating} star(s).`;
-        const stars = document.querySelectorAll('.stars');
-        stars.forEach((star, index) => {
+        const allStars = document.querySelectorAll('.stars');
+        allStars.forEach((star, index) => {
             star.classList.remove('rated');
             if (index < currentRating) {
                 star.classList.add('rated');
             }
         });
     }
-}
+};
 
-const button = document.querySelector(".cart");
-const done = document.querySelector(".done");
+const button = document.querySelector('.cart');
+const done = document.querySelector('.done');
 console.log(button);
 let added = false;
-button.addEventListener('click',()=>{
-    if(added){
-        done.style.transform = "translate(-110%) skew(-40deg)";
+button.addEventListener('click', () => {
+    if (added) {
+        done.style.transform = 'translate(-110%) skew(-40deg)';
         added = false;
-    }
-    else{
-        done.style.transform = "translate(0px)";
+    } else {
+        done.style.transform = 'translate(0px)';
         added = true;
     }
-
 });
