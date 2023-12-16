@@ -1,210 +1,328 @@
-
 <!doctype html>
 <html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="" />
+        <meta name="author" content="" />
 
-    <meta name="description" content="">
-    <meta name="author" content="">
+        <link rel="stylesheet" href="/stylesheets/boot.css" type="text/css" />
 
-    <link rel="stylesheet" href="/stylesheets/boot.css" type="text/css">
+        <link rel="stylesheet" href="/stylesheets/icons.css" type="text/css" />
 
-    <link rel="stylesheet" href="/stylesheets/icons.css" type="text/css">
+        <link href="/stylesheets/about.css" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" href="/stylesheets/style.css" type="text/css" />
 
-    <link href="/stylesheets/about.css" rel="stylesheet" type="text/css">
+        <title>BookEra-About Page</title>
+    </head>
 
-    <title>BookEra-About Page</title>
+    <body>
+        <%- include('partials/navbar') %> <%- include('partials/cartPane') %>
 
+        <main>
+            <section class="about-section section-padding" id="section_2">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-8 col-12 mx-auto">
+                            <div class="pb-5 mb-5">
+                                <div
+                                    class="section-title-wrap mb-4 animate__animated animate__fadeInDown"
+                                >
+                                    <!-- Our Story info -->
+                                    <h4 class="section-title">Our Story</h4>
+                                </div>
+                                <p class="animate__animated animate__fadeIn">
+                                    Welcome to <strong>BookEra</strong>, where
+                                    literature comes to life! We take pride in
+                                    being more than just a bookstore; we're a
+                                    thriving community of book lovers, writers,
+                                    and sellers.
+                                </p>
 
-
-</head>
-
-<body>
-<%- include('partials/navbar') %>
-
-<main>
-
-    <section class="about-section section-padding" id="section_2">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-12 mx-auto">
-                    <div class="pb-5 mb-5">
-                        <div class="section-title-wrap mb-4 animate__animated animate__fadeInDown">
-                            <!-- Our Story info -->
-                            <h4 class="section-title">Our Story</h4>
+                                <p class="animate__animated animate__fadeIn">
+                                    Our platform seamlessly connects passionate
+                                    sellers with avid readers, creating a
+                                    vibrant marketplace for literary
+                                    exploration.
+                                </p>
+                                <p class="animate__animated animate__fadeIn">
+                                    Whether you're an author looking to share
+                                    your masterpiece or a book enthusiast eager
+                                    to discover new treasures,
+                                    <strong>BookEra</strong> is your haven. Join
+                                    us in celebrating the written word,
+                                    fostering connections, and supporting the
+                                    diverse voices that make our bookshelves
+                                    come alive. Let your literary journey begin
+                                    with us!
+                                </p>
+                                <img
+                                    src="/images/b1.jpg"
+                                    class="about-image mt-5 img-fluid"
+                                    alt=""
+                                />
+                            </div>
                         </div>
-                        <p class="animate__animated animate__fadeIn">Welcome to <strong>BookEra</strong>, where literature comes to life! We take pride in being more than just a bookstore;
-                            we're a thriving community of book lovers, writers, and sellers.</p>
-
-                        <p class="animate__animated animate__fadeIn">Our platform seamlessly connects passionate sellers with avid readers, creating a vibrant marketplace for literary exploration.</p>
-                        <p class="animate__animated animate__fadeIn">Whether you're an author looking to share your masterpiece or a book enthusiast eager to discover new treasures, <strong>BookEra</strong> is your haven.
-                            Join us in celebrating the written word, fostering connections, and supporting the diverse voices that make our bookshelves come alive.
-                            Let your literary journey begin with us!</p>
-                        <img src="/images/b1.jpg" class="about-image mt-5 img-fluid" alt="">
+                        <div class="col-lg-12 col-12">
+                            <div class="section-title-wrap mb-5">
+                                <h4 class="section-title">
+                                    Meet our team members
+                                </h4>
+                            </div>
+                        </div>
+                        <!-- Team members -->
+                        <div class="col-lg-3 col-md-6 col-12 mb-6 mb-lg-3">
+                            <div class="team-thumb bg-white shadow-lg">
+                                <img
+                                    src="/images/profile/HH.jpeg"
+                                    class="about-image img-fluid"
+                                    alt=""
+                                />
+                                <div class="team-info">
+                                    <h4 class="mb-2">Hussien Hany</h4>
+                                    <span class="badge">Team Leader</span>
+                                    <span class="badge">Back-End</span>
+                                </div>
+                                <div class="social-share">
+                                    <ul class="social-icon">
+                                        <li class="social-icon-item">
+                                            <a
+                                                href="https://github.com/3ein39"
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                class="social-icon-link bi-github"
+                                            ></a>
+                                        </li>
+                                        <li class="social-icon-item">
+                                            <a
+                                                href="https://www.facebook.com/profile.php?id=100010583643964"
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                class="social-icon-link bi-facebook"
+                                            ></a>
+                                        </li>
+                                        <li class="social-icon-item">
+                                            <a
+                                                href="https://www.linkedin.com/in/3ein39/"
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                class="social-icon-link bi-linkedin"
+                                            ></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-12 mb-6 mb-lg-3">
+                            <div class="team-thumb bg-white shadow-lg">
+                                <img
+                                    src="/images/profile/AM.jpeg"
+                                    class="about-image img-fluid"
+                                    alt=""
+                                />
+                                <div class="team-info">
+                                    <h4 class="mb-2">Ahmed Mohsen</h4>
+                                    <span class="badge">Back-End</span>
+                                </div>
+                                <div class="social-share">
+                                    <ul class="social-icon">
+                                        <li class="social-icon-item">
+                                            <a
+                                                href="https://github.com/27medMo7sen"
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                class="social-icon-link bi-github"
+                                            ></a>
+                                        </li>
+                                        <li class="social-icon-item">
+                                            <a
+                                                href="https://www.facebook.com/Hoakeer"
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                class="social-icon-link bi-facebook"
+                                            ></a>
+                                        </li>
+                                        <li class="social-icon-item">
+                                            <a
+                                                href="https://www.linkedin.com/in/ahmed-mohsen-6aaba1238/"
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                class="social-icon-link bi-linkedin"
+                                            ></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-12 mb-6 mb-lg-3">
+                            <div class="team-thumb bg-white shadow-lg">
+                                <img
+                                    src="/images/profile/HS.jpeg"
+                                    class="about-image img-fluid"
+                                    alt=""
+                                />
+                                <div class="team-info">
+                                    <h4 class="mb-2">Hussien saad</h4>
+                                    <span class="badge">Back-End</span>
+                                </div>
+                                <div class="social-share">
+                                    <ul class="social-icon">
+                                        <li class="social-icon-item">
+                                            <a
+                                                href="https://github.com/hussein-saad"
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                class="social-icon-link bi-github"
+                                            ></a>
+                                        </li>
+                                        <li class="social-icon-item">
+                                            <a
+                                                href="https://www.facebook.com/HusseinSaad2020"
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                class="social-icon-link bi-facebook"
+                                            ></a>
+                                        </li>
+                                        <li class="social-icon-item">
+                                            <a
+                                                href="https://www.linkedin.com/in/hussein-saad-824439220/"
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                class="social-icon-link bi-linkedin"
+                                            ></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-12 mb-6 mb-lg-3">
+                            <div class="team-thumb bg-white shadow-lg">
+                                <img
+                                    src="/images/profile/MA.jpeg"
+                                    class="about-image img-fluid"
+                                    alt=""
+                                />
+                                <div class="team-info">
+                                    <h4 class="mb-2">Moaz Ayman</h4>
+                                    <span class="badge">Front-End</span>
+                                </div>
+                                <div class="social-share">
+                                    <ul class="social-icon">
+                                        <li class="social-icon-item">
+                                            <a
+                                                href="https://github.com/GoatMoaz"
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                class="social-icon-link bi-github"
+                                            ></a>
+                                        </li>
+                                        <li class="social-icon-item">
+                                            <a
+                                                href="https://www.facebook.com/moza.ayman.18/"
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                class="social-icon-link bi-facebook"
+                                            ></a>
+                                        </li>
+                                        <li class="social-icon-item">
+                                            <a
+                                                href="https://www.linkedin.com/in/moaz-ayman-b3076028a/"
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                class="social-icon-link bi-linkedin"
+                                            ></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-12">
+                            <div class="team-thumb bg-white shadow-lg">
+                                <img
+                                    src="/images/profile/YE.jpeg"
+                                    class="about-image img-fluid"
+                                    alt=""
+                                />
+                                <div class="team-info">
+                                    <h4 class="mb-2">Yousef Elsaiem</h4>
+                                    <span class="badge">Front-End</span>
+                                </div>
+                                <div class="social-share">
+                                    <ul class="social-icon">
+                                        <li class="social-icon-item">
+                                            <a
+                                                href="https://github.com/Elsaiem"
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                class="social-icon-link bi-github"
+                                            ></a>
+                                        </li>
+                                        <li class="social-icon-item">
+                                            <a
+                                                href="https://www.facebook.com/john.halpert.750"
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                class="social-icon-link bi-facebook"
+                                            ></a>
+                                        </li>
+                                        <li class="social-icon-item">
+                                            <a
+                                                href="https://www.linkedin.com/in/yousef-elsaiem-241326264/"
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                class="social-icon-link bi-linkedin"
+                                            ></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-md-6 col-12">
+                            <div class="team-thumb bg-white shadow-lg">
+                                <img
+                                    src="/images/profile/MK.jpg"
+                                    class="about-image img-fluid"
+                                    alt=""
+                                />
+                                <div class="team-info">
+                                    <h4 class="mb-2">Mohamed Khaled</h4>
+                                    <span class="badge">Front-End</span>
+                                </div>
+                                <div class="social-share">
+                                    <ul class="social-icon">
+                                        <li class="social-icon-item">
+                                            <a
+                                                href="https://github.com/moh18khaled"
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                class="social-icon-link bi-github"
+                                            ></a>
+                                        </li>
+                                        <li class="social-icon-item">
+                                            <a
+                                                href="https://www.facebook.com/profile.php?id=100002234904679"
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                class="social-icon-link bi-facebook"
+                                            ></a>
+                                        </li>
+                                        <li class="social-icon-item">
+                                            <a
+                                                href="https://www.linkedin.com/in/mohamed-khaled-75842118a/"
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                class="social-icon-link bi-linkedin"
+                                            ></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="col-lg-12 col-12">
-                    <div class="section-title-wrap mb-5">
-                        <h4 class="section-title">Meet our team members</h4>
-                    </div>
-                </div>
-                <!-- Team members -->
-                <div class="col-lg-3 col-md-6 col-12 mb-6 mb-lg-3">
-                    <div class="team-thumb bg-white shadow-lg">
-                        <img src="/images/profile/HH.jpeg"
-                             class="about-image img-fluid" alt="">
-                        <div class="team-info">
-                            <h4 class="mb-2">
-                                Hussien Hany
-                            </h4>
-                            <span class="badge">Team Leader</span>
-                            <span class="badge">Back-End</span>
-                        </div>
-                        <div class="social-share">
-                            <ul class="social-icon">
-                                <li class="social-icon-item">
-                                    <a href="https://github.com/3ein39" target="_blank" rel="noopener noreferrer" class="social-icon-link bi-github"></a>
-                                </li>
-                                <li class="social-icon-item">
-                                    <a href="https://www.facebook.com/profile.php?id=100010583643964" target="_blank" rel="noopener noreferrer" class="social-icon-link bi-facebook"></a>
-                                </li>
-                                <li class="social-icon-item">
-                                    <a href="https://www.linkedin.com/in/3ein39/" target="_blank" rel="noopener noreferrer" class="social-icon-link bi-linkedin"></a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-12 mb-6 mb-lg-3">
-                    <div class="team-thumb bg-white shadow-lg">
-                        <img src="/images/profile/AM.jpeg"
-                             class="about-image img-fluid" alt="">
-                        <div class="team-info">
-                            <h4 class="mb-2">
-                                Ahmed Mohsen
-                            </h4>
-                            <span class="badge">Back-End</span>
-                        </div>
-                        <div class="social-share">
-                            <ul class="social-icon">
-                                <li class="social-icon-item">
-                                    <a href="https://github.com/27medMo7sen"target="_blank" rel="noopener noreferrer" class="social-icon-link bi-github"></a>
-                                </li>
-                                <li class="social-icon-item">
-                                    <a href="https://www.facebook.com/Hoakeer" target="_blank" rel="noopener noreferrer" class="social-icon-link bi-facebook"></a>
-                                </li>
-                                <li class="social-icon-item">
-                                    <a href="https://www.linkedin.com/in/ahmed-mohsen-6aaba1238/" target="_blank" rel="noopener noreferrer"class="social-icon-link bi-linkedin"></a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-12 mb-6 mb-lg-3">
-                    <div class="team-thumb bg-white shadow-lg">
-                        <img src="/images/profile/HS.jpeg"
-                             class="about-image img-fluid" alt="">
-                        <div class="team-info">
-                            <h4 class="mb-2">
-                                Hussien saad
-                            </h4>
-                            <span class="badge">Back-End</span>
-                        </div>
-                        <div class="social-share">
-                            <ul class="social-icon">
-                                <li class="social-icon-item">
-                                    <a href="https://github.com/hussein-saad" target="_blank" rel="noopener noreferrer" class="social-icon-link bi-github"></a>
-                                </li>
-                                <li class="social-icon-item">
-                                    <a href="https://www.facebook.com/HusseinSaad2020" target="_blank" rel="noopener noreferrer" class="social-icon-link bi-facebook"></a>
-                                </li>
-                                <li class="social-icon-item">
-                                    <a href="https://www.linkedin.com/in/hussein-saad-824439220/"target="_blank" rel="noopener noreferrer" class="social-icon-link bi-linkedin"></a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-12 mb-6 mb-lg-3">
-                    <div class="team-thumb bg-white shadow-lg">
-                        <img src="/images/profile/MA.jpeg"
-                             class="about-image img-fluid" alt="">
-                        <div class="team-info">
-                            <h4 class="mb-2">
-                                Moaz Ayman
-                            </h4>
-                            <span class="badge">Front-End</span>
-                        </div>
-                        <div class="social-share">
-                            <ul class="social-icon">
-                                <li class="social-icon-item">
-                                    <a href="https://github.com/GoatMoaz" target="_blank" rel="noopener noreferrer"class="social-icon-link bi-github"></a>
-                                </li>
-                                <li class="social-icon-item">
-                                    <a href="https://www.facebook.com/moza.ayman.18/" target="_blank" rel="noopener noreferrer" class="social-icon-link bi-facebook"></a>
-                                </li>
-                                <li class="social-icon-item">
-                                    <a href="https://www.linkedin.com/in/moaz-ayman-b3076028a/" target="_blank" rel="noopener noreferrer"class="social-icon-link bi-linkedin"></a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-12">
-                    <div class="team-thumb bg-white shadow-lg">
-                        <img src="/images/profile/YE.jpeg"
-                             class="about-image img-fluid" alt="">
-                        <div class="team-info">
-                            <h4 class="mb-2">
-                                Yousef Elsaiem
-                            </h4>
-                            <span class="badge">Front-End</span>
-                        </div>
-                        <div class="social-share">
-                            <ul class="social-icon">
-                                <li class="social-icon-item">
-                                    <a href="https://github.com/Elsaiem" target="_blank" rel="noopener noreferrer"class="social-icon-link bi-github"></a>
-                                </li>
-                                <li class="social-icon-item">
-                                    <a href="https://www.facebook.com/john.halpert.750" target="_blank" rel="noopener noreferrer" class="social-icon-link bi-facebook"></a>
-                                </li>
-                                <li class="social-icon-item">
-                                    <a href="https://www.linkedin.com/in/yousef-elsaiem-241326264/" target="_blank" rel="noopener noreferrer"class="social-icon-link bi-linkedin"></a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-12">
-                    <div class="team-thumb bg-white shadow-lg">
-                        <img src="/images/profile/MK.jpg"
-                             class="about-image img-fluid" alt="">
-                        <div class="team-info">
-                            <h4 class="mb-2">
-                                Mohamed Khaled
-                            </h4>
-                            <span class="badge">Front-End</span>
-                        </div>
-                        <div class="social-share">
-                            <ul class="social-icon">
-                                <li class="social-icon-item">
-                                    <a href="https://github.com/moh18khaled" target="_blank" rel="noopener noreferrer" class="social-icon-link bi-github"></a>
-                                </li>
-                                <li class="social-icon-item">
-                                    <a href="https://www.facebook.com/profile.php?id=100002234904679" target="_blank" rel="noopener noreferrer" class="social-icon-link bi-facebook"></a>
-                                </li>
-                                <li class="social-icon-item">
-                                    <a href="https://www.linkedin.com/in/mohamed-khaled-75842118a/"target="_blank" rel="noopener noreferrer" class="social-icon-link bi-linkedin"></a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-</main>
-</body>
+            </section>
+        </main>
+        <script src="/javascripts/main.js"></script>
+    </body>
 </html>
