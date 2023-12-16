@@ -39,20 +39,21 @@ body {
     border: 1px solid #cfd1d8;
     -webkit-border-radius: 2px;
     -moz-border-radius: 2px;
-    border-radius: 2px;
     font-size: .825rem;
     background: #ffffff;
     color: #2e323c;
+    border-radius: 10px;
 }
 
 .card {
     background: #ffffff;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
-    border-radius: 5px;
     position: relative;
     top: 40px;
     border: 0;
     margin-bottom: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
