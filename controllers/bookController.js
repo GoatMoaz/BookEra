@@ -5,6 +5,7 @@ const Author = require('../models/author.js');
 const Category = require('../models/category.js');
 const User = require('../models/user.js');
 const Cart = require('../models/cart.js');
+const Order = require('../models/order.js');
 
 const multer = require('multer');
 const cloudinary = require('cloudinary');
@@ -57,10 +58,18 @@ exports.getBookById = async (req, res) => {
             'user',
             'username',
         );
+        // pass also the orders
+        const orders =
+            req.user ?
+            await Order.find({ user: req.user._id }).populate(
+            'books',
+            'title',
+        ) : [];
         res.render('bookInstance', {
             title: 'Book Instance',
             book: book,
             reviews,
+            orders
         });
     } catch (err) {
         console.log(err);
