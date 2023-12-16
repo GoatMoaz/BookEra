@@ -1,4 +1,6 @@
 const User = require('../models/user.js');
+const Book = require('../models/book.js');
+const Review = require('../models/review.js');
 const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const bcrypt = require('bcrypt');
@@ -117,13 +119,30 @@ exports.updateUser_post = async (req, res) => {
     }
 };
 
-// delete user
-exports.deleteUser_get = async (req, res) => {
-    res.send('delete user get');
-};
-
 exports.deleteUser_post = async (req, res) => {
-    res.send('delete user post');
+    try {
+        const user = await User.findById(req.params.id);
+        // find all the books that the user has created
+        const books = await Book.find({ seller: user._id });
+        // find all reviews that the user has created
+        const reviews = await Review.find({ user: user._id });
+        // delete all the reviews that the user has created
+        for (let review of reviews) {
+            await Review.deleteOne({ _id: review._id });
+        }
+        // delete all the books that the user has created
+        for (let book of books) {
+            await Book.deleteOne({ _id: book._id });
+        }
+        // delete the user
+        await User.deleteOne({ _id: req.params.id });
+        req.flash('success', 'User deleted successfully');
+        res.redirect('/');
+    } catch (err) {
+        console.log(err);
+        req.flash('error', 'An error occurred');
+        res.status(500).json(err);
+    }
 };
 
 // user login
