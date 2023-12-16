@@ -49,17 +49,23 @@
                     </button>
                 </form>
                 <% if (user && user._id.toString() === book.seller._id.toString()) { %>
-            <form action="/books/<%= book._id %>/delete" method="POST">
-                <button type="submit" class="btn btn-danger">Delete Book</button>
-                <a href="/books/<%= book._id %>/update" class="btn btn-primary">Update Book</a>
-            </form>
+                    <form action="/books/<%= book._id %>/delete" method="POST">
+                        <button type="submit" class="btn btn-danger">Delete Book</button>
+                        <a href="/books/<%= book._id %>/update" class="btn btn-primary">Update Book</a>
+                    </form>
                     <% if (user && (user._id.toString() === book.seller._id.toString() || orders.some(order => order.book._id.toString() === book._id.toString() && order.user._id.toString() === user._id.toString()))) { %>
-                    <div class="mt-4">
-                        <h6>Soft Copy:</h6>
-                        <canvas id="pdf-canvas" data-pdf-url="<%= book.softCopy %>"></canvas>
-                    </div>
+                        <div class="mt-4">
+                            <h6>Soft Copy:</h6>
+                            <div class="button-container">
+                                <button id="prev">Previous</button>
+                                <button id="next">Next</button>
+                            </div>
+                            <div>Page: <span id="page_num"></span> / <span id="page_count"></span></div>
+                            <canvas id="pdf-canvas" data-pdf-url="<%= book.softCopy %>"></canvas>
+
+                        </div>
                     <% } %>
-        <% } %>
+                <% } %>
 
             <% } %>
             <% if( stock <= 0 ){ %>
@@ -70,7 +76,8 @@
             <h5 class="card-title"><%= book.title %></h5>
             <p class="card-text"><strong>Authors:</strong> <%= book.authors.map(author => author.name).join(', ') %></p>
             <p class="card-text"><strong>Description:</strong><%= book.description %></p>
-            <p class="card-text"><strong>Categories:</strong> <%= book.categories.map(category => category.name).join(', ') %></p>
+            <p class="card-text">
+                <strong>Categories:</strong> <%= book.categories.map(category => category.name).join(', ') %></p>
             <p class="card-text"><strong>Publisher:</strong> <%= book.publisher.name %></p>
             <p class="card-text"><strong>ISBN:</strong> <%= book.isbn %></p>
             <p class="card-text"><strong>Price:</strong> $<%= book.price.toFixed(2) %></p>
@@ -95,13 +102,17 @@
                                 </div>
                                 <% if (user && user._id.toString() === review.user._id.toString()) { %>
                                     <div style="display: flex; gap: 10px;">
-                                        <a href="/reviews/<%= review._id %>/update" class="cart mb-1"style="width: 125px; height: 50px;font-size: 15px">
+                                        <a href="/reviews/<%= review._id %>/update" class="cart mb-1"
+                                           style="width: 125px; height: 50px;font-size: 15px">
                                             <div class="pretext">
-                                                <i class="fas fa-cart-plus" ></i>Update Review
+                                                <i class="fas fa-cart-plus"></i>Update Review
                                             </div>
                                         </a>
-                                        <form action="/reviews/<%= review._id %>/delete" method="POST" class="cart mb-1"style="width: 125px; height: 50px;font-size: 15px">
-                                            <button type="submit" class="pretext fas fa-cart-plus" style="border: white;background-color: red">Delete Review</button>
+                                        <form action="/reviews/<%= review._id %>/delete" method="POST" class="cart mb-1"
+                                              style="width: 125px; height: 50px;font-size: 15px">
+                                            <button type="submit" class="pretext fas fa-cart-plus"
+                                                    style="border: white;background-color: red">Delete Review
+                                            </button>
                                         </form>
                                     </div>
                                 <% } %>
@@ -130,7 +141,7 @@
                     </div>
                     <button type="submit" class="cart mb-1" style="width: 125px; height: 50px;font-size: 15px">
                         <div class="pretext">
-                            <i class="fas fa-cart-plus" ></i>Add Review
+                            <i class="fas fa-cart-plus"></i>Add Review
                         </div>
                     </button>
                 </form>

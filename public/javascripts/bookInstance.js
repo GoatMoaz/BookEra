@@ -1,38 +1,104 @@
 window.onload = function () {
     // PDF.js code
     const pdfCanvas = document.getElementById('pdf-canvas');
-    const url = pdfCanvas.getAttribute('data-pdf-url');
-    console.log(url)
-    pdfjsLib.GlobalWorkerOptions.workerSrc = '//mozilla.github.io/pdf.js/build/pdf.worker.js';
+    // if pdfCanvas is null, it means we are not authorized to view the book
+    // go to the logic of image resizing and rating
+    if (pdfCanvas !== null) {
 
-    const loadingTask = pdfjsLib.getDocument(url);
-    loadingTask.promise.then(function (pdf) {
-        console.log('PDF loaded');
 
-        const pageNumber = 1;
-        pdf.getPage(pageNumber).then(function (page) {
-            console.log('Page loaded');
+        const url = pdfCanvas.getAttribute('data-pdf-url');
+        console.log(url)
+        pdfjsLib.GlobalWorkerOptions.workerSrc = '//mozilla.github.io/pdf.js/build/pdf.worker.js';
 
-            const scale = 1.5;
-            const viewport = page.getViewport({scale: scale});
+        let pdfDoc = null,
+            pageNum = 1,
+            pageRendering = false,
+            pageNumPending = null,
+            scale = 1.5,
+            canvasContext = pdfCanvas.getContext('2d');
 
-            const context = pdfCanvas.getContext('2d');
-            pdfCanvas.height = viewport.height;
-            pdfCanvas.width = viewport.width;
+        /**
+         * Get page info from document, resize canvas accordingly, and render page.
+         * @param num Page number.
+         */
+        function renderPage(num) {
+            pageRendering = true;
+            // Using promise to fetch the page
+            pdfDoc.getPage(num).then(function (page) {
+                const viewport = page.getViewport({scale: scale});
+                pdfCanvas.height = viewport.height;
+                pdfCanvas.width = viewport.width;
 
-            const renderContext = {
-                canvasContext: context,
-                viewport: viewport
-            };
-            const renderTask = page.render(renderContext);
-            renderTask.promise.then(function () {
-                console.log('Page rendered');
+                // Render PDF page into canvas context
+                const renderContext = {
+                    canvasContext: canvasContext,
+                    viewport: viewport
+                };
+                const renderTask = page.render(renderContext);
+
+                // Wait for rendering to finish
+                renderTask.promise.then(function () {
+                    pageRendering = false;
+                    if (pageNumPending !== null) {
+                        // New page rendering is pending
+                        renderPage(pageNumPending);
+                        pageNumPending = null;
+                    }
+                });
             });
-        });
-    }, function (reason) {
-        console.error(reason);
-    });
 
+            // Update page counters
+            document.getElementById('page_num').textContent = num;
+        }
+
+        /**
+         * If another page rendering in progress, waits until the rendering is
+         * finished. Otherwise, executes rendering immediately.
+         */
+        function queueRenderPage(num) {
+            if (pageRendering) {
+                pageNumPending = num;
+            } else {
+                renderPage(num);
+            }
+        }
+
+        /**
+         * Displays previous page.
+         */
+        function onPrevPage() {
+            if (pageNum <= 1) {
+                return;
+            }
+            pageNum--;
+            queueRenderPage(pageNum);
+        }
+
+        /**
+         * Displays next page.
+         */
+        function onNextPage() {
+            if (pageNum >= pdfDoc.numPages) {
+                return;
+            }
+            pageNum++;
+            queueRenderPage(pageNum);
+        }
+
+        // Event listeners for the previous and next page buttons
+        document.getElementById('prev').addEventListener('click', onPrevPage);
+        document.getElementById('next').addEventListener('click', onNextPage);
+
+        // Asynchronously downloads PDF
+        const loadingTask = pdfjsLib.getDocument(url);
+        loadingTask.promise.then(function (pdf) {
+            pdfDoc = pdf;
+            document.getElementById('page_count').textContent = pdf.numPages;
+
+            // Initial/first page rendering
+            renderPage(pageNum);
+        });
+    }
     // Image resizing code
     const img = document.getElementById('myImage');
     const resizerCanvas = document.getElementById('resizer');
@@ -91,6 +157,7 @@ window.onload = function () {
         });
     }
 }
+
 const button = document.querySelector(".cart");
 const done = document.querySelector(".done");
 console.log(button);
@@ -106,46 +173,3 @@ button.addEventListener('click',()=>{
     }
 
 });
-;
-let currentRating = 0;
-let ratingLocked = false;
-
-function hoverStars(stars) {
-
-    if (!ratingLocked) {
-        const allStars = document.querySelectorAll('.stars');
-        allStars.forEach((star, index) => {
-            star.classList.remove('rated');
-            if (index < stars) {
-                star.classList.add('rated');
-            }
-        });
-    }
-}
-
-function rate(stars) {
-    if (!ratingLocked) {
-        currentRating = stars;
-        document.getElementById('rating').value = stars;
-        ratingLocked = true;
-        displayRating();
-    } else {
-
-        currentRating = 0;
-        document.getElementById('rating').value = stars;
-        ratingLocked = false;
-        displayRating();
-    }
-}
-
-function displayRating() {
-    const ratingElement = document.getElementById('rating');
-    ratingElement.innerHTML = `You've rated this ${currentRating} star(s).`;
-    const stars = document.querySelectorAll('.stars');
-    stars.forEach((star, index) => {
-        star.classList.remove('rated');
-        if (index < currentRating) {
-            star.classList.add('rated');
-        }
-    });
-}
