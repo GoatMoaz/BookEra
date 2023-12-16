@@ -35,7 +35,7 @@
         <div class="wallet-amount">
             <h2>Wallet Amount: <%= wallet_amount %></h2>
         </div>
-        <form action="/orders" method="get">
+        <form action="/orders/create" method="post">
             <button type="submit" class="btn btn-primary">Checkout</button>
         </form>
     <% } else { %>
