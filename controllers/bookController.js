@@ -61,13 +61,17 @@ exports.getBookById = async (req, res) => {
         // pass also the orders
         const orders =
             req.user ?
-            await Order.find({ user: req.user._id }).populate(
-            'books',
-            'title',
-        ) : [];
+            await Order.find({ user: req.user._id }): [];
+
+        console.log( orders
+            .some(order => order.bought_books
+                .some(bought_book => bought_book._id.toString() === book._id.toString())
+            )
+        )
+
         res.render('bookInstance', {
             title: 'Book Instance',
-            book: book,
+            book,
             reviews,
             orders
         });

@@ -53,23 +53,33 @@
                         <button type="submit" class="btn btn-danger">Delete Book</button>
                         <a href="/books/<%= book._id %>/update" class="btn btn-primary">Update Book</a>
                     </form>
-                    <% if (user && (user._id.toString() === book.seller._id.toString() || orders.some(order => order.book._id.toString() === book._id.toString() && order.user._id.toString() === user._id.toString()))) { %>
-                        <div class="mt-4">
-                            <h6>Soft Copy:</h6>
-                            <div class="button-container">
-                                <button id="prev">Previous</button>
-                                <button id="next">Next</button>
-                            </div>
-                            <div>Page: <span id="page_num"></span> / <span id="page_count"></span></div>
-                            <canvas id="pdf-canvas" data-pdf-url="<%= book.softCopy %>"></canvas>
-
-                        </div>
-                    <% } %>
                 <% } %>
-
             <% } %>
+
             <% if( stock <= 0 ){ %>
                 <p class="card-text" style="color: #ff0000">Out of stock</p>
+            <% } %>
+
+            <% if (user &&
+                    ((user._id.toString() === book.seller._id.toString())
+                            ||
+                            (orders
+                                            .some(order => order.bought_books
+                                                    .some(bought_book => bought_book._id.toString() === book._id.toString())
+                                            )
+                            ))
+            ) { %>
+
+                <div class="mt-4">
+                    <h6>Soft Copy:</h6>
+                    <div class="button-container">
+                        <button id="prev">Previous</button>
+                        <button id="next">Next</button>
+                    </div>
+                    <div>Page: <span id="page_num"></span> / <span id="page_count"></span></div>
+                    <canvas id="pdf-canvas" data-pdf-url="<%= book.softCopy %>"></canvas>
+
+                </div>
             <% } %>
         </div>
         <div class="description">
