@@ -2,6 +2,7 @@ const Order = require('../models/order');
 const Cart = require('../models/cart');
 const User = require('../models/user');
 const mongoose = require('mongoose');
+const Book = require('../models/book');
 // Display list of all Orders.
 exports.order_list = async (req, res) => {
     try {
@@ -109,6 +110,35 @@ exports.order_create_post = async (req, res) => {
         await session.abortTransaction();
         session.endSession();
 
+        console.log(err);
+        res.status(500).json(err);
+    }
+};
+
+
+// Display list of all books bought by the user.
+exports.order_mybooks = async (req, res) => {
+    try {
+        let books;
+        if (req.user.type === 'buyer') {
+            const orders = await Order.find({ user: req.user._id }).populate('bought_books');
+            books = orders.flatMap(order => order.bought_books);
+        } else if (req.user.type === 'seller') {
+            books = await Book.find({ seller: req.user._id });
+        }
+
+        // Loop over each book and populate
+        books = await Promise.all(books.map(async (book) => {
+            return await Book.populate(book, [
+                {path: 'authors'},
+                {path: 'publisher', select: 'name'},
+                {path: 'categories', select: 'name'}
+            ]);
+        }));
+
+        res.render('mybooks', {books: books});
+    }
+    catch(err) {
         console.log(err);
         res.status(500).json(err);
     }
