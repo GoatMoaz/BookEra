@@ -46,7 +46,7 @@ Welcome to BookEra, an e-commerce platform dedicated to book enthusiasts! Whethe
 ## Getting Started:
 
 ### Detailed Installation Guide:
-For more detailed information, refer to the [Installation Guide](./wiki/Installation-Guide.md).
+For more detailed information, refer to the [Installation Guide](https://github.com/3ein39/BookEra/wiki/Installation-Guide).
 Or, simply see our live version deployed [here](https://book-era-204eb81fbc60.herokuapp.com/)
 
 ## Contributing:
