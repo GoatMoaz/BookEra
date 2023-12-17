@@ -2,61 +2,58 @@
 
 Welcome to BookEra, an e-commerce platform dedicated to book enthusiasts! Whether you're a reader looking for your next favorite book or a seller wanting to share your collection, BookEra is the place for you.
 
-## Table of Contents
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-- [Project Overview](#project-overview)
-  - [Work Breakdown Structure (WBS)](#work-breakdown-structure-wbs)
-  - [Entity-Relationship Diagram (ERD)](#entity-relationship-diagram-erd)
-  - [Sequence Diagrams](#sequence-diagrams)
-- [Contributing to BookEra](#contributing-to-bookera)
-  - [Getting Started](#getting-started)
-  - [Making Changes](#making-changes)
-  - [Submitting Changes](#submitting-changes)
-- [Thank You!](#thank-you)
+## Project Overview:
+### Main Features and Goals:
+#### Main Features:
 
-## Project Overview
+1. **Search and Discovery:**
+   - Users can easily search for books based on genres, authors, or keywords.
+   - Personalized recommendations help readers discover new books.
 
-### Work Breakdown Structure (WBS)
+2. **Secure Transactions:**
+   - Secure payment processing ensures a safe and reliable transaction environment for buyers and sellers.
 
-Explore the project's structure and milestones through our Work Breakdown Structure (WBS). Get a visual overview of the key tasks and phases ![here](./docs/BookEra%20WBS.png)
+3. **Book Listings:**
+   - Sellers can list their books for sale, providing details such as title, author, condition, and price.
 
-### Entity-Relationship Diagram (ERD)
+4. **Rating and Reviews:**
+   - Users can rate and review books, helping others make informed decisions.
 
-Understand the database schema and relationships with our Entity-Relationship Diagram (ERD). Dive into the data model ![here](./docs/Database/erd.png)
+#### Goals:
+
+1. **Create a Vibrant Community:**
+   - Foster a thriving community of readers and sellers who share a passion for books.
+
+2. **Support Independent Sellers:**
+   - Provide a platform for independent sellers to showcase and sell their collections.
+
+3. **Promote Book Discovery:**
+   - Encourage book discovery by offering personalized recommendations and a diverse range of genres.
+
+4. **Ensure a Seamless User Experience:**
+   - Prioritize user experience with an intuitive interface, easy navigation, and responsive design.
+
+5. **Build Trust and Security:**
+   - Establish trust among users through secure transactions, transparent seller fees, and reliable order management.
+
+6. **Encourage Seller Participation:**
+   - Incentivize sellers by maintaining a low fee structure and providing tools for effective book management.
 
 
-### Class Diagram
 
-The class diagram provides a visual representation of the classes in this project, their attributes, methods, and the relationships between them. It is a useful tool for understanding the overall structure of the code and how different components interact with each other.
+## Getting Started:
 
-![here](./docs/class_digram.png)
+### Detailed Installation Guide:
+For more detailed information, refer to the [Installation Guide](https://github.com/3ein39/BookEra/wiki/Installation-Guide).
+Or, simply see our live version deployed [here](https://book-era-204eb81fbc60.herokuapp.com/)
+
+## Contributing:
+
+For more detailed information, refer to the [Contributing Guide](https://github.com/3ein39/BookEra/wiki/Contribution-Guide).
 
 
-### Sequence Diagrams
+## [Link to Wiki](https://github.com/3ein39/BookEra/wiki/)
 
-For detailed insights into the system's interactions, view our Sequence Diagrams [here](./docs/Sequence%20Diagrams/)
-## Contributing to BookEra
-
-Thank you for considering contributing to BookEra! Your involvement helps us build a vibrant community for book lovers. Here's how you can get started:
-
-### Getting Started
-
-1. Fork the repository on GitHub.
-2. Clone your fork to your local machine.
-3. Create a new branch for your changes using `git checkout -b <your-branch-name>`.
-
-### Making Changes
-
-1. Make your changes to the codebase. Ensure your code is clean and well-commented.
-2. Commit your changes in logical chunks. Follow these [git commit message guidelines](https://chris.beams.io/posts/git-commit/) to enhance the readability of your commits.
-3. Push your changes to your fork on GitHub using `git push origin <branch-name>`.
-
-### Submitting Changes
-
-1. Submit a pull request to the repository via the GitHub UI.
-2. Our maintainers will review your pull request. They may ask for changes or provide feedback.
-3. Once approved, your changes will be merged into the main codebase.
-
-## Thank You!
-
-Your contribution makes BookEra better for everyone. Whether you're fixing a bug, adding a feature, or improving documentation, your efforts are appreciated. Happy coding, and happy reading!
+Explore the Wiki for more detailed documentation, diagrams, and resources.
