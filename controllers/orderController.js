@@ -105,7 +105,7 @@ exports.order_create_post = async (req, res) => {
 
         // redirect to 'books' and display success message
         req.flash('success', 'Order placed successfully');
-        res.redirect('/books');
+        res.redirect('/orders/mybooks');
 
     } catch (err) {
         // If an error occurred, abort the transaction
