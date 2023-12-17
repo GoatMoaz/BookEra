@@ -51,9 +51,9 @@ Or, simply see our live version deployed [here](https://book-era-204eb81fbc60.he
 
 ## Contributing:
 
-For more detailed information, refer to the [Contributing Guide](./wiki/Contributiin-Guide.md).
+For more detailed information, refer to the [Contributing Guide](https://github.com/3ein39/BookEra/wiki/Contribution-Guide).
 
 
-## [Link to Wiki](./wiki)
+## [Link to Wiki](https://github.com/3ein39/BookEra/wiki/)
 
 Explore the Wiki for more detailed documentation, diagrams, and resources.
