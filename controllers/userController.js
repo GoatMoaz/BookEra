@@ -90,7 +90,6 @@ exports.signup_post = async (req, res) => {
             wallet_amount: 0,
             gender: req.body.gender,
             type: req.body.type,
-            address: req.body.address,
         });
         await user.save();
         res.redirect('/users/login');
