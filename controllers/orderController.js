@@ -43,7 +43,9 @@ exports.order_create_post = async (req, res) => {
 
         const user = await User.findById(req.user._id);
         if (user.wallet_amount < total_price) {
-            throw new Error('Insufficient funds in wallet');
+            req.flash('error', 'Insufficient funds in wallet');
+            res.redirect('back');
+            return;
         }
 
         // decrement the quantity of each book in the cart
