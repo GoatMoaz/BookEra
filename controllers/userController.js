@@ -192,3 +192,33 @@ exports.logout_get = async (req, res) => {
         res.redirect('/');
     });
 };
+
+// change password
+exports.changePassword_get = async (req, res) => {
+    res.render('change_password');
+};
+exports.changePassword_post = async (req, res) => {
+    try {
+        const user = await User.findById(req.user._id);
+        const match = await bcrypt.compare(
+            req.body.old_password,
+            user.password,
+        );
+        if (!match) {
+            req.flash('error', 'Incorrect password');
+            return res.redirect('/users/change-password');
+        }
+        user.password = bcrypt.hashSync(req.body.new_password, 10);
+        await user.save();
+        req.flash('success', 'Password changed successfully');
+        req.logout((err) => {
+            if (err) {
+                return res.status(500).json(err);
+            }
+            res.redirect('/users/login');
+        });
+    } catch (err) {
+        req.flash('error', 'An error occurred');
+        res.status(500).json(err);
+    }
+};
