@@ -11,7 +11,7 @@
 
     <title>Books</title>
 
-    <link rel="stylesheet" href="/stylesheets/boot.css" type="text/css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="/stylesheets/books.css" type="text/css">
     <link rel="stylesheet" href="/stylesheets/style.css" type="text/css">
 
@@ -21,68 +21,59 @@
 <%- include('partials/cartPane') %>
 
 <!--add search bar-->
-<div class="container bar animate__animated animate__fadeIn">
+<div class="animate__animated animate__fadeIn">
     <div class="col-md-3"style="position:absolute;top: 27%;right:37%">
         <form action="/books/search" method="GET">
-        <div class="input-group  mt-3">
-            <input type="text" name="title" class="form-control" placeholder="Search for books" aria-label="Search for books" aria-describedby="button-addon2">
-            <button class="btn btn-primary" type="submit" id="button-addon2">Search</button>
-        </div>
+            <div class="input-group">
+                <input type="text" name="title" class="form-control" placeholder="Search for books" aria-label="Search for books" aria-describedby="button-addon2">
+                <button class="btn btn-primary" type="submit" id="button-addon2">Search</button>
+            </div>
         </form>
     </div>
 </div>
-<div class="animate__animated animate__fadeIn centered"><strong>Discover Books</strong></div>
+<div class="centered">
+    <div class="animate__animated animate__fadeInUp">Discover Books</div>
+</div>
 <img src="/images/b4.png" alt="cover">
 
 
 <div class="container mt-5">
-     <% if (success.length > 0) { %>
-    <div class="alert alert-success">
-        <%= success %>
-    </div>
+    <% if (success.length > 0) { %>
+        <div class="alert alert-success">
+            <%= success %>
+        </div>
     <% } %>
     <% if (error.length > 0) { %>
-    <div class="alert alert-danger">
-        <%= error %>
-    </div>
-        <% } %>
-     <% if (user && user.type === 'seller') {%>
-    <a href="/books/create" class="btn btn-primary">Create New Book</a>
+        <div class="alert alert-danger">
+            <%= error %>
+        </div>
     <% } %>
+    <% if (user && user.type === 'seller') {%>
+        <a href="/books/create" class="btn btn-primary">Create New Book</a>
+    <% } %>
+    <div class="row">
+        <% books.forEach(book => { %>
+            <div class="col-md-3 mb-4">
+                <a href="/books/<%= book._id %>" style="display: contents">
+                    <div class="card"style="height: 350px;width: 254px;">
+                        <div class="card-img-top" style="background-image: url('<%= book.cover %>'); height: 100%; background-size: cover; background-position: center;"></div>
+                    </div>
+                    <div class="mt-2">
+                        <h5 style="font-weight: bold;"><%= book.title %></h5>
+                    </div>
 
-         <div class="row">
-             <% books.forEach(book => { %>
-                 <div class="col-md-4 mb-4">
-                     <a href="/books/<%= book._id %>" class="text-decoration-none">
-                         <div class="card shadow-lg">
-                             <!-- Book cover image as the background -->
-                             <div class="card-img-top" style="background-image: url('<%= book.cover %>'); height: 100%; background-size: cover; background-position: center;"></div>
-                             <!-- Details overlay -->
-                             <div class="card-img-overlay">
-                                 <!-- Book details -->
-                                 <div class="card-body text-dark">
-                                     <h5 class="card-title"><%= book.title %></h5>
-                                     <p class="card-text">Authors: <%= book.authors.map(author => author.name).join(', ') %></p>
-                                     <p class="card-text">Publisher: <%= book.publisher.name %></p>
-                                     <p class="card-text">Categories: <%= book.categories.map(category => category.name).join(', ') %></p>
-                                     <p class="card-text">ISBN: <%= book.isbn %></p>
-                                     <p class="card-text">Description: <%= book.description %></p>
-                                     <p class="card-text">Price: $<%= book.price.toFixed(2) %></p>
-                                     <p class="card-text">Quantity: <%= book.quantity %></p>
-                                     <% if (user && book.quantity > 0) { %>
-                                         <form action="/carts/<%= book._id %>/addToCart" method="post">
-                                             <button type="submit" class="btn btn-primary add-to-cart">Add to Cart
-                                             </button>
-                                         </form>
-                                     <% } %>
-                                 </div>
-                             </div>
-                         </div>
-                     </a>
-                 </div>
-             <% }) %>
-         </div>
+                </a>
+                <% if (user) { %>
+                    <form action="/carts/<%= book._id %>/addToCart" method="post">
+                        $<%= book.price %>.00
+                        <button type="submit" style="position: absolute;left: 254px"><i class="bi bi-bag"></i></button>
+                    </form>
+                <% } else { %>
+                    $<%= book.price %>.00
+                <% } %>
+            </div>
+        <% }) %>
+    </div>
 </div>
-<script src="/javascripts/main.js"></script>
 </body>
 </html>
