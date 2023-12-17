@@ -5,6 +5,16 @@
     <link rel="stylesheet" href="/stylesheets/boot.css" type="text/css">
 </head>
 <body>
+    <% if (success.length > 0) { %>
+        <div class="alert alert-success">
+            <%= success %>
+        </div>
+    <% } %>
+    <% if (error.length > 0) { %>
+        <div class="alert alert-danger">
+            <%= error %>
+        </div>
+    <% } %>
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-6">

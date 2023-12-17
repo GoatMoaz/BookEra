@@ -64,6 +64,16 @@
 
     <body>
         <%- include('partials/navbar') %> <%- include('partials/cartPane') %>
+        <% if (success.length > 0) { %>
+            <div class="alert alert-success">
+                <%= success %>
+            </div>
+        <% } %>
+        <% if (error.length > 0) { %>
+            <div class="alert alert-danger">
+                <%= error %>
+            </div>
+        <% } %>
         <section>
             <header>
                 <h1>Welcome to BookEra</h1>

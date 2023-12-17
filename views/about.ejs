@@ -19,7 +19,16 @@
 
     <body>
         <%- include('partials/navbar') %> <%- include('partials/cartPane') %>
-
+        <% if (success.length > 0) { %>
+            <div class="alert alert-success">
+                <%= success %>
+            </div>
+        <% } %>
+        <% if (error.length > 0) { %>
+            <div class="alert alert-danger">
+                <%= error %>
+            </div>
+        <% } %>
         <main>
             <section class="about-section section-padding" id="section_2">
                 <div class="container">
