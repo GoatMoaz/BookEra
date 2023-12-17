@@ -12,7 +12,7 @@ exports.addToCart = async function(req, res, next) {
 
     cart.books.push(bookId);
     await cart.save();
-
+    req.flash('success', 'Book added to cart successfully');
     res.redirect('back');
 };
 
@@ -30,7 +30,7 @@ exports.deleteFromCart = async function(req, res, next) {
 
     cart.books.pull(bookId);
     await cart.save();
-
+    req.flash('success', 'Book removed from cart successfully');
     // refresh the page
     res.redirect('back');
 };
