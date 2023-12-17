@@ -10,8 +10,6 @@ exports.addToCart = async function(req, res, next) {
         cart = new Cart({ user: userId });
     }
 
-    console.log(cart);
-
     cart.books.push(bookId);
     await cart.save();
 
