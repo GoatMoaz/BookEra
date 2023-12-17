@@ -28,6 +28,11 @@ router.post('/:id/delete', userController.deleteUser_post);
 // logout
 router.get('/logout', userController.logout_get);
 
+// change password
+router.get('/change-password', userController.changePassword_get);
+router.post('/change-password', userController.changePassword_post);
+
+
 // get user by id
 router.get('/:id', userController.getUserById);
 
