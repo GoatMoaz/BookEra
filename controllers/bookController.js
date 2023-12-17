@@ -107,20 +107,6 @@ exports.search_book = async (req, res) => {
     }
 };
 
-// get book by author
-exports.getBookByAuthor = async (req, res) => {
-    res.send('get book by author');
-};
-
-// get book by publisher
-exports.getBookByPublisher = async (req, res) => {
-    res.send('get book by publisher');
-};
-
-// get book by category
-exports.getBookByCategory = async (req, res) => {
-    res.send('get book by category');
-};
 
 // create book
 exports.createBook_get = async (req, res) => {
@@ -257,10 +243,7 @@ exports.updateBook_post = async (req, res) => {
     }
 };
 
-// delete book by id
-exports.deleteBook_get = async (req, res) => {
-    res.send('delete book get');
-};
+
 exports.deleteBook_post = async (req, res) => {
     try {
         const book = await Book.findById(req.params.id);

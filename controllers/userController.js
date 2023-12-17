@@ -37,32 +37,12 @@ passport.deserializeUser(async (id, done) => {
     }
 });
 
-// get all users
-exports.getAllUsers = async (req, res) => {
-    try {
-        const users = await User.find({});
-        res.status(200).json(users);
-    } catch (err) {
-        res.status(500).json(err);
-    }
-};
-
 // get user by id
 exports.getUserById = async (req, res) => {
     try {
         const user = await User.findById(req.params.id);
         // render the user profile page
         res.render('user_profile', { user });
-    } catch (err) {
-        res.status(500).json(err);
-    }
-};
-
-// get user by username
-exports.getUserByUsername = async (req, res) => {
-    try {
-        const user = await User.findOne({ username: req.params.username });
-        res.status(200).json(user);
     } catch (err) {
         res.status(500).json(err);
     }

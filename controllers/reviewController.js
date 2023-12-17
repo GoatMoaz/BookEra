@@ -2,20 +2,9 @@ const Review = require('../models/review');
 const Book = require('../models/book');
 const User = require('../models/user');
 
-// get all reviews
-exports.getAllReviews = async (req, res) => {
-    res.send('NOT IMPLEMENTED: getAllReviews');
-}
 
-// get a review
-exports.getReview = async (req, res) => {
-   res.send('NOT IMPLEMENTED: getReview');
-}
 
-// create a review
-exports.createReview_get = async (req, res) => {
-   res.send('NOT IMPLEMENTED: createReview GET');
-}
+
 exports.createReview_post = async (req, res) => {
     const { content, rating } = req.body;
     const bookId = req.params.id;
@@ -63,10 +52,7 @@ exports.updateReview_post = async (req, res) => {
     res.redirect(`/books/${bookId}`);    
 }
 
-// delete a review
-exports.deleteReview_get = async (req, res) => {
-    res.send('NOT IMPLEMENTED: deleteReview GET');
-}
+
 exports.deleteReview_post = async (req, res) => {
     // must be deleted by the user who created it
     const review = await Review.findById(req.params.id);

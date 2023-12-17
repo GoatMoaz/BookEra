@@ -2,12 +2,6 @@ const express = require('express');
 const router = express.Router();
 const userController = require('../controllers/userController.js');
 
-// get all users
-router.get('/', userController.getAllUsers);
-
-
-// get user by username
-router.get('/username/:username', userController.getUserByUsername);
 
 // create user
 router.get('/signup', userController.signup_get);

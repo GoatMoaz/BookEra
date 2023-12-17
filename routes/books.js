@@ -26,15 +26,6 @@ router.get('/', bookController.getAllBooks);
 // get book by title
 router.get('/search', bookController.search_book);
 
-// get book by author
-router.get('/author/:author', bookController.getBookByAuthor);
-
-// get book by publisher
-router.get('/publisher/:publisher', bookController.getBookByPublisher);
-
-// get book by category
-router.get('/category/:category', bookController.getBookByCategory);
-
 // create book
 router.get('/create', bookController.createBook_get);
 router.post('/create', upload.single('softCopy') ,bookController.createBook_post);
@@ -44,7 +35,6 @@ router.get('/:id/update', bookController.updateBook_get);
 router.post('/:id/update', bookController.updateBook_post);
 
 // delete book by id
-router.get('/:id/delete', bookController.deleteBook_get);
 router.post('/:id/delete', bookController.deleteBook_post);
 
 
