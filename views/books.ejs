@@ -21,18 +21,18 @@
 <%- include('partials/cartPane') %>
 
 <!--add search bar-->
-<div class="animate__animated animate__fadeIn">
-    <div class="col-md-3"style="position:absolute;top: 27%;right:37%">
-        <form action="/books/search" method="GET">
-            <div class="input-group">
-                <input type="text" name="title" class="form-control" placeholder="Search for books" aria-label="Search for books" aria-describedby="button-addon2">
-                <button class="btn btn-primary" type="submit" id="button-addon2">Search</button>
-            </div>
-        </form>
+    <div class="animate__animated animate__fadeIn">
+        <div class="col-md-3"style="position:fixed;top: 30%;left:50%;transform: translate(-50%, -50%);">
+            <form action="/books/search" method="GET">
+                <div class="input-group">
+                    <input type="text" name="title" class="form-control" placeholder="Search for books" aria-label="Search for books" aria-describedby="button-addon2">
+                    <button class="btn btn-primary" type="submit" id="button-addon2">Search</button>
+                </div>
+            </form>
+        </div>
+    <div class="centered">
+        <div class="animate__animated animate__fadeInUp">Discover Books</div>
     </div>
-</div>
-<div class="centered">
-    <div class="animate__animated animate__fadeInUp">Discover Books</div>
 </div>
 <img src="/images/b4.png" alt="cover">
 
