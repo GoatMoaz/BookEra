@@ -27,16 +27,7 @@
 <body>
 <%- include('partials/navbar') %>
 
-<% if (success.length > 0) { %>
-    <div class="alert alert-success">
-        <%= success %>
-    </div>
-<% } %>
-<% if (error.length > 0) { %>
-    <div class="alert alert-danger">
-        <%= error %>
-    </div>
-<% } %>
+
 
 <div class="background">
     <img src="/images/b2.png" alt="">
@@ -46,6 +37,17 @@
 </div>
 <div class="login animate__animated animate__fadeInDown">
     <form action="/users/signup" method="POST" style="position:relative;bottom: 110px">
+
+        <% if (success.length > 0) { %>
+            <div class="alert alert-success">
+                <%= success %>
+            </div>
+        <% } %>
+        <% if (error.length > 0) { %>
+            <div class="alert alert-danger">
+                <%= error %>
+            </div>
+        <% } %>
         <input type="text" id="first_name" name="first_name" placeholder="First Name" required>
         <input type="text" id="last_name" name="last_name" placeholder="Last Name" required>
         <input type="text" id="username" name="username" placeholder="Username" required>
