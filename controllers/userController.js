@@ -88,6 +88,7 @@ exports.signup_post = async (req, res) => {
             username: req.body.username,
             password: bcrypt.hashSync(req.body.password, 10),
             wallet_amount: 0,
+            gender: req.body.gender,
             type: req.body.type,
             address: req.body.address,
         });
