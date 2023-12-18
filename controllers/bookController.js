@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const Book = require('../models/book.js');
 const Review = require('../models/review.js');
 const Publisher = require('../models/publisher.js');
@@ -243,8 +244,9 @@ exports.updateBook_post = async (req, res) => {
     }
 };
 
-
 exports.deleteBook_post = async (req, res) => {
+    const session = await mongoose.startSession();
+    session.startTransaction();
     try {
         const book = await Book.findById(req.params.id);
 
@@ -255,9 +257,11 @@ exports.deleteBook_post = async (req, res) => {
 
         if (req.user._id.toString() === book.seller._id.toString()) {
             // delete reviews of this book
-            await Review.deleteMany({ book: req.params.id });
+            await Review.deleteMany({ book: req.params.id }, { session });
 
-            await Book.findByIdAndDelete(req.params.id);
+            await Book.findByIdAndDelete(req.params.id, { session });
+
+            await session.commitTransaction();
 
             req.flash('success', 'Book deleted successfully');
             return res.redirect('/books');
@@ -266,7 +270,11 @@ exports.deleteBook_post = async (req, res) => {
             return res.redirect('/books');
         }
     } catch (err) {
+        await session.abortTransaction();
         console.log(err);
-        res.status(500).json(err);
+        req.flash('error', 'Error deleting book');
+        res.redirect(`/books/${req.params.id}`);
+    } finally {
+        session.endSession();
     }
 };
