@@ -71,6 +71,7 @@ exports.order_create_post = async (req, res) => {
             });
             const seller_user = await User.findById(seller);
             seller_user.wallet_amount += seller_total * 0.97;
+            seller_user.wallet_amount = Math.round(seller_user.wallet_amount * 100) / 100;
 
             // the 3% profit goes to the admin
             // not yet implemented

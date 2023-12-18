@@ -1,6 +1,7 @@
 const User = require('../models/user.js');
 const Book = require('../models/book.js');
 const Review = require('../models/review.js');
+const Order = require('../models/order.js');
 const passport = require('passport');
 const mongoose = require('mongoose');
 const LocalStrategy = require('passport-local').Strategy;
@@ -106,6 +107,7 @@ exports.deleteUser_post = async (req, res) => {
         const user = await User.findById(req.params.id).session(session);
         const books = await Book.find({ seller: user._id }).session(session);
         const reviews = await Review.find({ user: user._id }).session(session);
+        const Orders = await Order.find({ user: user._id }).session(session);
 
         const deleteReviews = reviews.map((review) =>
             Review.deleteOne({ _id: review._id }).session(session),
@@ -113,8 +115,11 @@ exports.deleteUser_post = async (req, res) => {
         const deleteBooks = books.map((book) =>
             Book.deleteOne({ _id: book._id }).session(session),
         );
+        const deleteOrders = Orders.map((order) =>
+            Order.deleteOne({ _id: order._id }).session(session),
+        );
 
-        await Promise.all([...deleteReviews, ...deleteBooks]);
+        await Promise.all([...deleteReviews, ...deleteBooks, ...deleteOrders]);
 
         await User.deleteOne({ _id: req.params.id }).session(session);
 

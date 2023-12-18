@@ -37,18 +37,20 @@
             <% const stock = book.quantity %>
             <% if( stock > 0 ){ %>
                 <p class="card-text" style="color: #0c442d ; font-weight: bold">In stock: <%= book.quantity %></p>
-                <form action="/carts/<%= book._id %>/addToCart" method="POST">
-                    <button type="submit" class="cart mb-1">
-                        <div class="pretext">
-                            <i class="fas fa-cart-plus"></i><i class="bi bi-cart"></i>Add To cart
-                        </div>
+                <% if (user && user.type === 'buyer') { %>
+                    <form action="/carts/<%= book._id %>/addToCart" method="POST">
+                        <button type="submit" class="cart mb-1">
+                            <div class="pretext">
+                                <i class="fas fa-cart-plus"></i><i class="bi bi-cart"></i>Add To cart
+                            </div>
 
-                        <div class="pretext done">
-                            <div class="posttext"><i class="fas fa-check"></i> Added</div>
-                        </div>
+                            <div class="pretext done">
+                                <div class="posttext"><i class="fas fa-check"></i> Added</div>
+                            </div>
 
-                    </button>
-                </form>
+                        </button>
+                    </form>
+                <% } %>
                 <% if (user && user._id.toString() === book.seller._id.toString()) { %>
                     <form action="/books/<%= book._id %>/delete" method="POST">
                         <button type="submit" class="btn btn-danger">Delete Book</button>
@@ -134,7 +136,7 @@
             <% } else { %>
                 <p>No reviews yet.</p>
             <% } %>
-            <% if (user) { %>
+            <% if (user && user.type === 'buyer') { %>
                 <h6 class="mt-4">Add a Review:</h6>
                 <form action="/reviews/<%= book._id %>/create" method="POST">
                     <div class="form-group">
