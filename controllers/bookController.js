@@ -35,11 +35,13 @@ exports.getAllBooks = async (req, res) => {
 
         // get cart of logged in user
         let cart = null;
+        let userOrders = [];
         if (req.user) {
             cart = await Cart.findOne({ user: req.user._id }).populate('books');
+            userOrders = await Order.find({ user: req.user._id }).populate('bought_books');
         }
 
-        res.render('books', { title: 'Books', books: books, cart });
+        res.render('books', { title: 'Books', books: books, cart,userOrders});
     } catch (err) {
         console.log(err);
         res.status(500).json(err);
