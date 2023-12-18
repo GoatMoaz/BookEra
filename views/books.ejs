@@ -63,7 +63,7 @@
                     </div>
 
                 </a>
-                <% if (user) { %>
+                <% if (user &&  user.type === 'buyer') { %>
                     <form action="/carts/<%= book._id %>/addToCart" method="post">
                         $<%= book.price %>.00
                         <button type="submit" style="position: absolute;left: 254px"><i class="bi bi-bag"></i></button>
