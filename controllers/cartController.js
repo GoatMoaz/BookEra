@@ -10,6 +10,12 @@ exports.addToCart = async function(req, res, next) {
         cart = new Cart({ user: userId });
     }
 
+    // check if book already exists in cart
+    if (cart.books.includes(bookId)) {
+        req.flash('error', 'Book already exists in cart');
+        return res.redirect('back');
+    }
+
     cart.books.push(bookId);
     await cart.save();
     req.flash('success', 'Book added to cart successfully');
