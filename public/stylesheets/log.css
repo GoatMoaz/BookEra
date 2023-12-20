@@ -8,7 +8,7 @@ body{
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/images/b5.jpg');
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://res.cloudinary.com/ein39/image/upload/v1703100128/bookstore/assets/shjndwe6kc1fcu8hv25b.jpg');
     background-size: cover;
     background-position: center;
 }
