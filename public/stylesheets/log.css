@@ -1,173 +1,112 @@
-@import url(https://fonts.googleapis.com/css?family=Exo:100,200,400);
-
-
-.header{
-    position: absolute;
-    top: calc(50% - 35px);
-    left: calc(50% - 255px);
-    z-index: 2;
-}
-
-.header div{
-    float: left;
-    color: #fff;
-    font-family: 'Exo', sans-serif;
-    font-size: 35px;
-    font-weight: 200;
-}
-
-.header div span{
-    color: #5379fa !important;
-}
-
-.login{
-    position: absolute;
-    top: calc(50% - 75px);
-    left: calc(50% - 50px);
-    height: 150px;
-    width: 350px;
-    padding: 10px;
-    z-index: 2;
-}
-
-.login input[type=text]{
-    width: 250px;
-    height: 30px;
-    background: transparent;
-    border: 1px solid rgba(255,255,255,0.6);
-    border-radius: 2px;
-    color: rgba(255,255,255,0.6);
-    font-family: 'Exo', sans-serif;
-    font-size: 16px;
-    font-weight: 400;
-    padding: 4px;
-    margin-top: 10px;
-}
-
-.login input[type=password]{
-    width: 250px;
-    height: 30px;
-    background: transparent;
-    border: 1px solid rgba(255,255,255,0.6);
-    border-radius: 2px;
-    color: rgba(255,255,255,0.6);
-    font-family: 'Exo', sans-serif;
-    font-size: 16px;
-    font-weight: 400;
-    padding: 4px;
-    margin-top: 10px;
-}
-
-.login input[type=text],
-.login input[type=password] {
-    padding: 16px; /* Increase inner padding */
-}
-
-.login input[type=text]::placeholder,
-.login input[type=password]::placeholder {
-    font-weight: 700; /* Make placeholder text more bold */
-}
-
-
-.login input[type=text]:focus{
-    outline: none;
-    border: 1px solid rgba(255,255,255,0.6);
-}
-
-.login input[type=password]:focus{
-    outline: none;
-    border: 1px solid rgba(255,255,255,0.6);
-}
-
-::-webkit-input-placeholder{
-    color: rgba(255,255,255,0.6);
-}
-
-
-.select {
-    width: 250px;
-    height: 30px;
-    background: transparent;
-    border: 1px solid rgba(255,255,255,0.6);
-    border-radius: 2px;
-    color: rgba(255,255,255,0.6);
-    font-family: 'Exo', sans-serif;
-    font-size: 16px;
-    font-weight: bold;
-    padding-left: 13px;
-    margin-top: 10px;
-}
-.select:focus{
-    outline: none;
-    border: 1px solid rgba(255,255,255,0.6);
-}
-
-.button-64 {
-    position: relative;
-    top: 20px;
-    align-items: center;
-    background-image: linear-gradient(144deg,#5379fa, black 50%,white);
-    border: 0;
-    border-radius: 8px;
-    box-shadow: rgba(151, 65, 252, 0.2) 0 15px 30px -5px;
+*{
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
-    color: #FFFFFF;
+}
+body{
     display: flex;
-    font-family: 'Exo', sans-serif;
-    font-size: 20px;
     justify-content: center;
-    line-height: 1em;
-    max-width: 100%;
-    min-width: 140px;
-    padding: 3px;
-    text-decoration: none;
-    user-select: none;
-    -webkit-user-select: none;
-    touch-action: manipulation;
-    white-space: nowrap;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.3s ease;
+    align-items: center;
+    min-height: 100vh;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/images/b5.jpg');
+    background-size: cover;
+    background-position: center;
 }
-
-.button-64:active,
-.button-64:hover {
-    outline: 0;
-    background-color: #5379fa;
-    transform: scale(1.05);
+.wrapper{
+    width: 420px;
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, .2);
+    backdrop-filter: blur(9px);
+    color: #fff;
+    border-radius: 12px;
+    padding: 30px 40px;
 }
-
-.button-64 span {
-    background-color: rgb(5, 6, 45);
-    padding: 10px 15px;
-    border-radius: 6px;
+.wrapper h1{
+    font-size: 36px;
+    text-align: center;
+}
+.wrapper .input-box{
+    position: relative;
+    width: 100%;
+    height: 50px;
+    margin: 30px 0;
+}
+.input-box input{
     width: 100%;
     height: 100%;
-    transition: 300ms;
-}
+    background: transparent;
+    border: none;
+    outline: none;
+    border: 2px solid rgba(255, 255, 255, .2);
+    border-radius: 40px;
+    font-size: 16px;
+    color: #fff;
+    padding: 20px 45px 20px 20px;
+    transition: .2s ease-in-out;
 
-.button-64:hover span {
-    background: none;
 }
+.input-box input:focus{
+    border-color: #5379fa;
+}
+.input-box select{
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    border: 2px solid rgba(255, 255, 255, .2);
+    border-radius: 40px;
+    font-size: 16px;
+    color: #fff;
+    padding-left:20px ;
+    transition: .2s ease-in-out;
+}
+.input-box select:focus{
+    border-color: #5379fa;
+}
+option{
+    background-color: white;
+    color: black;
+}
+.input-box input::placeholder{
+    color: #fff;
+}
+.input-box i{
+    position: absolute;
+    right: 20px;
+    top: 30%;
+    transform: translate(-50%);
+    font-size: 20px;
 
-@media (min-width: 768px) {
-    .button-64 {
-        font-size: 24px;
-        min-width: 196px;
-    }
 }
+.wrapper .btn{
+    width: 100%;
+    height: 45px;
+    background: #fff;
+    border: none;
+    outline: none;
+    border-radius: 40px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+    cursor: pointer;
+    font-size: 16px;
+    color: #333;
+    font-weight: 600;
+    transition: .3s ease-in-out;
+}
+.wrapper .register-link{
+    font-size: 14.5px;
+    text-align: center;
+    margin: 20px 0 15px;
 
-.login input[type=text],
-.login input[type=password] {
-    transition: padding 0.3s ease, font-weight 0.3s ease;
 }
-.login_link{
-    color: #ffffff;
-    font-weight: bold;
+.register-link p a{
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    transition: .3s ease-in-out;
+
 }
-.login_link:hover {
+.register-link p a:hover{
     text-decoration: underline;
-    color:  #5379fa;
-    transform: rotateX(0deg);
-    transition: .3s;
-    opacity: 1;
+    color: #5379fa;
 }
