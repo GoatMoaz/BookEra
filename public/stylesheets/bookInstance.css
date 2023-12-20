@@ -35,7 +35,7 @@
     border: 1px solid gray;
     background-color: #d3d3d3;
     border-radius: 10px;
-    height: auto;
+    height: 100%;
     max-width: 500px;
 }
 
