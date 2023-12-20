@@ -2,6 +2,11 @@ const Author = require('../models/author.js');
 
 
 
+exports.createAuthor_get = async (req, res) => {
+    res.render('createAuthor');
+}
+
+
 exports.createAuthor_post = async (req, res) => {
     const author = new Author({
         first_name: req.body.first_name,
