@@ -20,21 +20,17 @@
 <%- include('partials/navbar') %>
 <%- include('partials/cartPane') %>
 
-<!--add search bar-->
+<div class="content">
     <div class="animate__animated animate__fadeIn">
-        <div class="col-md-3"style="position:fixed;top: 30%;left:50%;transform: translate(-50%, -50%);">
-            <form action="/books/search" method="GET">
-                <div class="input-group">
-                    <input type="text" name="title" class="form-control" placeholder="Search for books" aria-label="Search for books" aria-describedby="button-addon2">
-                    <button class="btn btn-primary" type="submit" id="button-addon2">Search</button>
-                </div>
+            <form action="/books/search" method="GET" class="bar">
+                    <input type="text" name="title" placeholder="Search for books" aria-label="Search for books" aria-describedby="button-addon2">
+                    <button type="submit"><img src="/images/search.png"></button>
             </form>
+        <div class="centered">
+            <div class="animate__animated animate__fadeInUp">Discover Books</div>
         </div>
-    <div class="centered">
-        <div class="animate__animated animate__fadeInUp">Discover Books</div>
     </div>
 </div>
-<img src="/images/b4.png" alt="cover">
 
 
 <div class="container mt-5">
@@ -66,7 +62,7 @@
                 <% if (user &&  user.type === 'buyer') { %>
                     <form action="/carts/<%= book._id %>/addToCart" method="post">
                         $<%= book.price %>.00
-                        <button type="submit" style="position: absolute;left: 254px"><i class="bi bi-bag"></i></button>
+                        <button type="submit" style="position: absolute;left: 75%"><i class="bi bi-bag"></i></button>
                     </form>
                 <% } else { %>
                     $<%= book.price %>.00
