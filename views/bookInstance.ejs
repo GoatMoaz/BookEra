@@ -59,31 +59,6 @@
                 <% } %>
             <% } %>
 
-            <% if( stock <= 0 ){ %>
-                <p class="card-text" style="color: #ff0000">Out of stock</p>
-            <% } %>
-
-            <% if (user &&
-                    ((user._id.toString() === book.seller._id.toString())
-                            ||
-                            (orders
-                                            .some(order => order.bought_books
-                                                    .some(bought_book => bought_book._id.toString() === book._id.toString())
-                                            )
-                            ))
-            ) { %>
-
-                <div class="mt-4">
-                    <h6>Soft Copy:</h6>
-                    <div class="button-container">
-                        <button id="prev">Previous</button>
-                        <button id="next">Next</button>
-                    </div>
-                    <div>Page: <span id="page_num"></span> / <span id="page_count"></span></div>
-                    <canvas id="pdf-canvas" data-pdf-url="<%= book.softCopy %>"></canvas>
-
-                </div>
-            <% } %>
         </div>
         <div class="description">
             <h5 class="card-title"><%= book.title %></h5>
@@ -161,7 +136,33 @@
             <% } %>
         </div>
 
+            <% if( stock <= 0 ){ %>
+                <p class="card-text" style="color: #ff0000">Out of stock</p>
+            <% } %>
+
     </div>
+
+            <% if (user &&
+                    ((user._id.toString() === book.seller._id.toString())
+                            ||
+                            (orders
+                                            .some(order => order.bought_books
+                                                    .some(bought_book => bought_book._id.toString() === book._id.toString())
+                                            )
+                            ))
+            ) { %>
+
+                <div class="mt-4" style="padding: 150px">
+                    <h6>Soft Copy:</h6>
+                    <div class="button-container">
+                        <button id="prev">Previous</button>
+                        <button id="next">Next</button>
+                    </div>
+                    <div>Page: <span id="page_num"></span> / <span id="page_count"></span></div>
+                    <canvas id="pdf-canvas" data-pdf-url="<%= book.softCopy %>"></canvas>
+
+                </div>
+            <% } %>
 
 </div>
 
