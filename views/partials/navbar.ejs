@@ -30,6 +30,9 @@
                     <!-- Navbar links-->
                     <a href="/" class="nav-item nav-link">Home</a>
                     <a href="/books" class="nav-item nav-link">Books</a>
+                    <% if (user && user.type === 'seller') {%>
+                        <a href="/books/create" class="nav-item nav-link">Add Book</a>
+                    <% } %>
                     <a href="/about" class="nav-item nav-link">About Us</a>
                 </div>
 
@@ -39,14 +42,13 @@
                         <a href="/users/signup" class="nav-item nav-link">Signup</a>
                     <% } else { %>
                         <!-- Add a link to the user's profile page -->
-                        <a href="/users/<%= user._id %>" class="nav-item nav-link"> <%= user.username %> </a>
-
-                            <a href="/orders/mybooks" class="nav-item nav-link">My Books</a>
-
+                            <a href="/orders/mybooks" class="nav-item nav-link"><i class="bi bi-book"></i></a>
+                            <% if (user.type === 'buyer')  { %>
+                                <a href="#" id="cart-icon"><i class="bi bi-cart nav-item nav-link"></i></a>
+                            <% } %>
+                            <a href="/users/<%= user._id %>" class="nav-item nav-link"> <%= user.username %> </a>
                             <a href="/users/logout" class="nav-item nav-link">Logout</a>
-                        <% if (user.type === 'buyer')  { %>
-                            <a href="#" id="cart-icon"><i class="bi bi-cart nav-item nav-link"></i></a>
-                        <% } %>
+
                     <% } %>
                 </div>
             </div>
