@@ -11,6 +11,7 @@ const Order = require('../models/order.js');
 const multer = require('multer');
 const cloudinary = require('cloudinary');
 const path = require('path');
+const order = require('../models/order.js');
 // multer config
 const storage = multer.diskStorage({});
 const upload = multer({ storage });
@@ -38,10 +39,12 @@ exports.getAllBooks = async (req, res) => {
         let userOrders = [];
         if (req.user) {
             cart = await Cart.findOne({ user: req.user._id }).populate('books');
-            userOrders = await Order.find({ user: req.user._id }).populate('bought_books');
+            userOrders = await Order.find({ user: req.user._id }).populate(
+                'bought_books',
+            );
         }
 
-        res.render('books', { title: 'Books', books: books, cart,userOrders});
+        res.render('books', { title: 'Books', books: books, cart, userOrders });
     } catch (err) {
         console.log(err);
         res.status(500).json(err);
@@ -62,21 +65,22 @@ exports.getBookById = async (req, res) => {
             'username',
         );
         // pass also the orders
-        const orders =
-            req.user ?
-            await Order.find({ user: req.user._id }): [];
+        const orders = req.user ? await Order.find({ user: req.user._id }) : [];
 
-        console.log( orders
-            .some(order => order.bought_books
-                .some(bought_book => bought_book._id.toString() === book._id.toString())
-            )
-        )
+        console.log(
+            orders.some((order) =>
+                order.bought_books.some(
+                    (bought_book) =>
+                        bought_book._id.toString() === book._id.toString(),
+                ),
+            ),
+        );
 
         res.render('bookInstance', {
             title: 'Book Instance',
             book,
             reviews,
-            orders
+            orders,
         });
     } catch (err) {
         console.log(err);
@@ -110,7 +114,6 @@ exports.search_book = async (req, res) => {
     }
 };
 
-
 // create book
 exports.createBook_get = async (req, res) => {
     // Check if user is logged in
@@ -136,14 +139,21 @@ exports.createBook_get = async (req, res) => {
         console.log(err);
         res.status(500).json(err);
     }
-
 };
-
-
 
 exports.createBook_post = async (req, res) => {
     try {
-        const { title, isbn, description, authors, publisher, price, cover, categories, quantity } = req.body;
+        const {
+            title,
+            isbn,
+            description,
+            authors,
+            publisher,
+            price,
+            cover,
+            categories,
+            quantity,
+        } = req.body;
         console.log(req.body);
         console.log(req.file);
 
@@ -278,5 +288,36 @@ exports.deleteBook_post = async (req, res) => {
         res.redirect(`/books/${req.params.id}`);
     } finally {
         session.endSession();
+    }
+};
+
+// view soft copy of book
+exports.viewBook_get = async (req, res) => {
+    try {
+        const book = await Book.findById(req.params.id);
+        const user = req.user;
+        const orders = await Order.find({ user: req.user._id });
+        // if user is not logged in, redirect to login page
+        if (!user) {
+            req.flash('error', 'You must be logged in to view this book');
+            return res.redirect('/users/login');
+        }
+
+        // if user has bought this book or is a seller of this book, allow viewing
+        if (user._id.toString() === book.seller.toString()||
+            orders.some((order) =>
+                order.bought_books.some(
+                    (bought_book) =>
+                        bought_book._id.toString() === book._id.toString(),
+                ),
+            )) {
+            res.render('view_book', { book: book });
+        } else {
+            req.flash('error', 'You are not authorized to view this book');
+            return res.redirect('/books');
+        }
+    } catch (err) {
+        console.log(err);
+        res.status(500).json(err);
     }
 };

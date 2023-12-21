@@ -51,14 +51,14 @@
                         </button>
                     </form>
                 <% } %>
+                <% } %>
+
                 <% if (user && user._id.toString() === book.seller._id.toString()) { %>
                     <form action="/books/<%= book._id %>/delete" method="POST">
                         <button type="submit" class="btn btn-danger">Delete Book</button>
                         <a href="/books/<%= book._id %>/update" class="btn btn-primary">Update Book</a>
                     </form>
                 <% } %>
-            <% } %>
-
         </div>
         <div class="description">
             <h5 class="card-title"><%= book.title %></h5>
@@ -151,26 +151,15 @@
                                             )
                             ))
             ) { %>
-
-                <div class="mt-4" style="padding: 150px">
-                    <h6>Soft Copy:</h6>
-                    <div class="button-container">
-                        <button id="prev">Previous</button>
-                        <button id="next">Next</button>
-                    </div>
-                    <div>Page: <span id="page_num"></span> / <span id="page_count"></span></div>
-                    <canvas id="pdf-canvas" data-pdf-url="<%= book.softCopy %>"></canvas>
-
-                </div>
+                <a href="/books/<%= book._id %>/view" target="_blank" style="display: flex; justify-content: center;">
+                    <button type="button" class="btn btn-primary" style="width: 200px; height: 50px;">View Book</button>
+                </a>
             <% } %>
 
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.worker.js"></script>
-
-<script src="/javascripts/bookInstance.js"></script>
 <script src="/javascripts/main.js"></script>
+<script src="/javascripts/bookInstance.js"></script>
 
 </body>
 

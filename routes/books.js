@@ -37,6 +37,9 @@ router.post('/:id/update', bookController.updateBook_post);
 // delete book by id
 router.post('/:id/delete', bookController.deleteBook_post);
 
+// view book
+router.get('/:id/view', bookController.viewBook_get);
+
 
 //get book by id
 router.get('/:id', bookController.getBookById);
