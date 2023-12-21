@@ -44,9 +44,6 @@
             <%= error %>
         </div>
     <% } %>
-    <% if (user && user.type === 'seller') {%>
-        <a href="/books/create" class="btn btn-primary">Create New Book</a>
-    <% } %>
     <div class="row">
         <% books.forEach(book => { %>
             <div class="col-md-3 mb-4">
