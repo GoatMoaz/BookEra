@@ -45,16 +45,7 @@
                         <div class="mt-2">
                             <h5 style="font-weight: bold;"><%= book.title %></h5>
                         </div>
-
                     </a>
-                    <% if (user &&  user.type === 'buyer') { %>
-                        <form action="/carts/<%= book._id %>/addToCart" method="post">
-                            $<%= book.price %>.00
-                            <button type="submit" style="position: absolute;left: 75%"><i class="bi bi-bag"></i></button>
-                        </form>
-                    <% } else { %>
-                        $<%= book.price %>.00
-                    <% } %>
                 </div>
             <% }) %>
         </div>

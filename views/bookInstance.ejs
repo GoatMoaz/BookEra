@@ -47,7 +47,19 @@
                             <div class="pretext done">
                                 <div class="posttext"><i class="fas fa-check"></i> Added</div>
                             </div>
-
+                            <% if (user &&
+                                    ((user._id.toString() === book.seller._id.toString())
+                                            ||
+                                            (orders
+                                                            .some(order => order.bought_books
+                                                                    .some(bought_book => bought_book._id.toString() === book._id.toString())
+                                                            )
+                                            ))
+                            ) { %>
+                                <a href="/books/<%= book._id %>/view">
+                                    <button type="button" class="btn btn-primary">View Book</button>
+                                </a>
+                            <% } %>
                         </button>
                     </form>
                 <% } %>
@@ -56,7 +68,20 @@
                 <% if (user && user._id.toString() === book.seller._id.toString()) { %>
                     <form action="/books/<%= book._id %>/delete" method="POST">
                         <button type="submit" class="btn btn-danger">Delete Book</button>
-                        <a href="/books/<%= book._id %>/update" class="btn btn-primary">Update Book</a>
+                        <a href="/books/<%= book._id %>/update" class="btn btn-primary">Update Book</a> <% if (user &&
+                                ((user._id.toString() === book.seller._id.toString())
+                                        ||
+                                        (orders
+                                                        .some(order => order.bought_books
+                                                                .some(bought_book => bought_book._id.toString() === book._id.toString())
+                                                        )
+                                        ))
+                        ) { %>
+                            <a href="/books/<%= book._id %>/view">
+                                <button type="button" class="btn btn-primary">View Book</button>
+                            </a>
+                        <% } %>
+
                     </form>
                 <% } %>
         </div>
@@ -70,7 +95,7 @@
             <p class="card-text"><strong>ISBN:</strong> <%= book.isbn %></p>
             <p class="card-text"><strong>Price:</strong> $<%= book.price.toFixed(2) %></p>
         </div>
-        <div class="reviwes">
+        <div class="reviews">
             <% if (reviews.length > 0) { %>
                 <ul class="list-group">
                     <% reviews.forEach(review => { %>
@@ -125,9 +150,9 @@
                     </div>
                     <div class="form-group">
                         <label for="content">Review:</label>
-                        <textarea class="form-control" id="content" name="content" rows="3" required></textarea>
+                        <textarea class="form-control" id="content" name="content" rows="2" required></textarea>
                     </div>
-                    <button type="submit" class="cart mb-1" style="width: 125px; height: 50px;font-size: 15px">
+                    <button type="submit" class="cart mb-1"style="margin-top: 10px">
                         <div class="pretext">
                             <i class="fas fa-cart-plus"></i>Add Review
                         </div>
@@ -141,21 +166,6 @@
             <% } %>
 
     </div>
-
-            <% if (user &&
-                    ((user._id.toString() === book.seller._id.toString())
-                            ||
-                            (orders
-                                            .some(order => order.bought_books
-                                                    .some(bought_book => bought_book._id.toString() === book._id.toString())
-                                            )
-                            ))
-            ) { %>
-                <a href="/books/<%= book._id %>/view" target="_blank" style="display: flex; justify-content: center;">
-                    <button type="button" class="btn btn-primary" style="width: 200px; height: 50px;">View Book</button>
-                </a>
-            <% } %>
-
 </div>
 
 <script src="/javascripts/main.js"></script>

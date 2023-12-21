@@ -62,8 +62,8 @@
     background-size: cover;
 }
 .row button{
-    position: absolute;
-    left: 75%;
+    position: relative;
+    left: 57%;
     width: 8%;
     border: none;
     background-color: transparent;
