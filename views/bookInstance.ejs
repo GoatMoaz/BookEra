@@ -51,14 +51,14 @@
                         </button>
                     </form>
                 <% } %>
+                <% } %>
+
                 <% if (user && user._id.toString() === book.seller._id.toString()) { %>
                     <form action="/books/<%= book._id %>/delete" method="POST">
                         <button type="submit" class="btn btn-danger">Delete Book</button>
                         <a href="/books/<%= book._id %>/update" class="btn btn-primary">Update Book</a>
                     </form>
                 <% } %>
-            <% } %>
-
         </div>
         <div class="description">
             <h5 class="card-title"><%= book.title %></h5>
