@@ -36,21 +36,20 @@
             <canvas id="resizer"></canvas>
             <% const stock = book.quantity %>
             <% if( stock > 0 ){ %>
-                <p class="card-text" style="color: #0c442d ; font-weight: bold">In stock: <%= book.quantity %></p>
-                <% if (user &&  user.type === 'buyer' && !(orders || []).some((order) =>
-                (order.bought_books || []).some(
+                <% if (user &&  user.type === 'buyer' && !orders.some((order) =>
+                order.bought_books.some(
                     (bought_book) =>
                         bought_book._id.toString() === book._id.toString(),
                     ),
                 )
-                && !(cart || []).some((cart) =>
-                (cart.books || []).some(
+                && !cart.some((cart) =>
+                cart.books.some(
                     (cart_book) =>
                         cart_book._id.toString() === book._id.toString(),
                 ),
                 )) { %>
                     <form action="/carts/<%= book._id %>/addToCart" method="POST">
-                        <button type="submit" class="cart mb-1">
+                        <button type="submit" class="cart mb-1" id="addToCartButton">
                             <div class="pretext">
                                 <i class="fas fa-cart-plus"></i><i class="bi bi-cart"></i>Add To cart
                             </div>
@@ -58,43 +57,29 @@
                             <div class="pretext done">
                                 <div class="posttext"><i class="fas fa-check"></i> Added</div>
                             </div>
-                            <% if (user &&
-                                    ((user._id.toString() === book.seller._id.toString())
-                                            ||
-                                            (orders
-                                                            .some(order => order.bought_books
-                                                                    .some(bought_book => bought_book._id.toString() === book._id.toString())
-                                                            )
-                                            ))
-                            ) { %>
-                                <a href="/books/<%= book._id %>/view">
-                                    <button type="button" class="btn btn-primary">View Book</button>
-                                </a>
-                            <% } %>
                         </button>
                     </form>
                 <% } %>
-                <% } %>
+            <% } %>
 
                 <% if (user && user._id.toString() === book.seller._id.toString()) { %>
                     <form action="/books/<%= book._id %>/delete" method="POST">
                         <button type="submit" class="btn btn-danger">Delete Book</button>
-                        <a href="/books/<%= book._id %>/update" class="btn btn-primary">Update Book</a> <% if (user &&
-                                ((user._id.toString() === book.seller._id.toString())
-                                        ||
-                                        (orders
-                                                        .some(order => order.bought_books
-                                                                .some(bought_book => bought_book._id.toString() === book._id.toString())
-                                                        )
-                                        ))
+                        <a href="/books/<%= book._id %>/update" class="btn btn-primary">Update Book</a> 
+                    </form>
+                <% } %>
+                <% if ((user && (user._id.toString() === book.seller._id.toString()) ||
+                            (orders.some(order => 
+                                order.bought_books.some(bought_book => bought_book._id.toString() === book._id.toString())
+                                        )
+                            )
+                            )
                         ) { %>
                             <a href="/books/<%= book._id %>/view">
                                 <button type="button" class="btn btn-primary">View Book</button>
                             </a>
                         <% } %>
 
-                    </form>
-                <% } %>
         </div>
         <div class="description">
             <h5 class="card-title"><%= book.title %></h5>
