@@ -12,6 +12,7 @@ const multer = require('multer');
 const cloudinary = require('cloudinary');
 const path = require('path');
 const order = require('../models/order.js');
+const cart = require('../models/cart.js');
 // multer config
 const storage = multer.diskStorage({});
 const upload = multer({ storage });
@@ -35,16 +36,14 @@ exports.getAllBooks = async (req, res) => {
         // send books to books.ejs
 
         // get cart of logged in user
-        let cart = null;
-        let userOrders = [];
+        let cart = [];
+        let orders = [];
         if (req.user) {
-            cart = await Cart.findOne({ user: req.user._id }).populate('books');
-            userOrders = await Order.find({ user: req.user._id }).populate(
-                'bought_books',
-            );
+            cart = await Cart.find({ user: req.user._id });
+            orders = await Order.find({ user: req.user._id });
         }
 
-        res.render('books', { title: 'Books', books: books, cart, userOrders });
+        res.render('books', { title: 'Books', books: books, cart, orders });
     } catch (err) {
         console.log(err);
         res.status(500).json(err);
@@ -67,6 +66,13 @@ exports.getBookById = async (req, res) => {
         // pass also the orders
         const orders = req.user ? await Order.find({ user: req.user._id }) : [];
 
+        // get cart of logged in user
+        let cart = [];
+        if (req.user) {
+            cart = await Cart.find({ user: req.user._id });
+        }
+
+
         console.log(
             orders.some((order) =>
                 order.bought_books.some(
@@ -81,6 +87,7 @@ exports.getBookById = async (req, res) => {
             book,
             reviews,
             orders,
+            cart,
         });
     } catch (err) {
         console.log(err);
@@ -304,13 +311,15 @@ exports.viewBook_get = async (req, res) => {
         }
 
         // if user has bought this book or is a seller of this book, allow viewing
-        if (user._id.toString() === book.seller.toString()||
+        if (
+            user._id.toString() === book.seller.toString() ||
             orders.some((order) =>
                 order.bought_books.some(
                     (bought_book) =>
                         bought_book._id.toString() === book._id.toString(),
                 ),
-            )) {
+            )
+        ) {
             res.render('view_book', { book: book });
         } else {
             req.flash('error', 'You are not authorized to view this book');
