@@ -140,3 +140,32 @@ i{
     justify-content: center;
     align-items: center;
 }
+.reviews button{
+    width: 125px;
+    height: 50px;
+    font-size: 15px;
+}
+
+@media only screen and (max-width: 768px) {
+   .preview{
+       flex-direction:column;
+   }
+    .imgInfo{
+         padding-left:0px;
+    }
+    .main{
+        margin:0px;
+    }
+    .description{
+        max-width:100%;
+    }
+    .cart{
+        margin-top:20px;
+    }
+    .button-container{
+        flex-direction:column;
+    }
+    #prev, #next{
+        margin:10px;
+    }
+}
