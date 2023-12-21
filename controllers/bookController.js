@@ -11,6 +11,7 @@ const Order = require('../models/order.js');
 const multer = require('multer');
 const cloudinary = require('cloudinary');
 const path = require('path');
+const order = require('../models/order.js');
 // multer config
 const storage = multer.diskStorage({});
 const upload = multer({ storage });
@@ -295,6 +296,7 @@ exports.viewBook_get = async (req, res) => {
     try {
         const book = await Book.findById(req.params.id);
         const user = req.user;
+        const orders = await Order.find({ user: req.user._id });
         // if user is not logged in, redirect to login page
         if (!user) {
             req.flash('error', 'You must be logged in to view this book');
@@ -302,16 +304,14 @@ exports.viewBook_get = async (req, res) => {
         }
 
         // if user has bought this book or is a seller of this book, allow viewing
-        if (
-            user._id.toString() === book.seller.toString() ||
-            user.orders.some((order) =>
+        if (user._id.toString() === book.seller.toString()||
+            orders.some((order) =>
                 order.bought_books.some(
                     (bought_book) =>
                         bought_book._id.toString() === book._id.toString(),
                 ),
-            )
-        ) {
-            res.render('view_book', {book:book});
+            )) {
+            res.render('view_book', { book: book });
         } else {
             req.flash('error', 'You are not authorized to view this book');
             return res.redirect('/books');
@@ -321,4 +321,3 @@ exports.viewBook_get = async (req, res) => {
         res.status(500).json(err);
     }
 };
-
