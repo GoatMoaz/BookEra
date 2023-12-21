@@ -62,7 +62,7 @@
                 <% if (user &&  user.type === 'buyer') { %>
                     <form action="/carts/<%= book._id %>/addToCart" method="post">
                         $<%= book.price %>.00
-                        <button type="submit" style="position: absolute;left: 75%"><i class="bi bi-bag"></i></button>
+                        <button type="submit" ><i class="bi bi-bag"></i></button>
                     </form>
                 <% } else { %>
                     $<%= book.price %>.00

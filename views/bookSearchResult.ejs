@@ -5,47 +5,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Search Results</title>
     <link rel="stylesheet" href="/stylesheets/boot.css" type="text/css">
+    <link rel="stylesheet" href="/stylesheets/books.css" type="text/css">
     <link rel="stylesheet" href="/stylesheets/style.css" type="text/css">
 </head>
 <body>
 
 <%- include('./partials/navbar') %>
+<div class="content">
+    <div class="animate__animated animate__fadeIn">
+        <form action="/books/search" method="GET" class="bar">
+            <input type="text" name="title" placeholder="Search for books" aria-label="Search for books" aria-describedby="button-addon2">
+            <button type="submit"><img src="https://res.cloudinary.com/ein39/image/upload/v1703099893/bookstore/assets/uigpurvkphebpaxio1m2.png"></button>
+        </form>
+        <div class="centered">
+            <div class="animate__animated animate__fadeInUp">Result</div>
+        </div>
+    </div>
+</div>
 <div class="container mt-5">
-
     <% if (books.length === 0) { %>
         <h1>No results found</h1>
     <% } %>
-
 <div class="row">
         <% books.forEach(book => { %>
-            <div class="col-md-4 mb-4">
-                <a href="/books/<%= book._id %>" class="text-decoration-none">
-                    <div class="card shadow-lg">
-                        <!-- Book cover image as the background -->
-                        <div class="card-img-top" style="background-image: url('<%= book.cover %>'); height: 100%; background-size: cover; background-position: center;"></div>
-                        <!-- Details overlay -->
-                        <div class="card-img-overlay">
-                            <!-- Book details -->
-                            <div class="card-body text-dark">
-                                <h5 class="card-title"><%= book.title %></h5>
-                                <p class="card-text">Authors: <%= book.authors.map(author => author.name).join(', ') %></p>
-                                <p class="card-text">Publisher: <%= book.publisher.name %></p>
-                                <p class="card-text">Categories: <%= book.categories.map(category => category.name).join(', ') %></p>
-                                <p class="card-text">ISBN: <%= book.isbn %></p>
-                                <p class="card-text">Description: <%= book.description %></p>
-                                <p class="card-text">Price: $<%= book.price.toFixed(2) %></p>
-                                <p class="card-text">Quantity: <%= book.quantity %></p>
-                                <% if (user && user.type === 'buyer') { %>
-                                    <form action="/books/<%= book._id %>/addToCart" method="post">
-                                        <button type="submit" class="btn btn-primary add-to-cart">Add to Cart
-                                        </button>
-                                    </form>
-                                <% } %>
-                            </div>
-                        </div>
-                    </div>
-                </a>
-            </div>
+        <div class="col-md-3 mb-4">
+            <a href="/books/<%= book._id %>" style="display: contents">
+                <div class="card"style="height: 350px;width: 254px;">
+                    <div class="card-img-top" style="background-image: url('<%= book.cover %>'); height: 100%; background-size: cover; background-position: center;"></div>
+                </div>
+                <div class="mt-2">
+                    <h5 style="font-weight: bold;"><%= book.title %></h5>
+                </div>
+
+            </a>
+            <% if (user &&  user.type === 'buyer') { %>
+                <form action="/carts/<%= book._id %>/addToCart" method="post">
+                    $<%= book.price %>.00
+                    <button type="submit" style="position: absolute;left: 75%"><i class="bi bi-bag"></i></button>
+                </form>
+            <% } else { %>
+                $<%= book.price %>.00
+            <% } %>
+        </div>
         <% }) %>
         </div>
 </div>
