@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/stylesheets/bookInstance.css" type="text/css">
+</head>
+<body>
+    <div class="mt-4" style="padding: 150px">
+        <div class="button-container">
+            <button id="prev">Previous</button>
+            <button id="next">Next</button>
+        </div>
+        <div>Page: <span id="page_num"></span> / <span id="page_count"></span></div>
+        <canvas id="pdf-canvas" data-pdf-url="<%= book.softCopy %>"></canvas>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.worker.js"></script>
+    <script src="/javascripts/bookInstance.js"></script>
+</body>
+</html>
