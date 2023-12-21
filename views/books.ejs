@@ -59,7 +59,18 @@
                     </div>
 
                 </a>
-                <% if (user &&  user.type === 'buyer') { %>
+                <% if (user &&  user.type === 'buyer' && !(orders || []).some((order) =>
+                (order.bought_books || []).some(
+                    (bought_book) =>
+                        bought_book._id.toString() === book._id.toString(),
+                    ),
+                )
+                && !(cart || []).some((cart) =>
+                (cart.books || []).some(
+                    (cart_book) =>
+                        cart_book._id.toString() === book._id.toString(),
+                ),
+                )) { %>
                     <form action="/carts/<%= book._id %>/addToCart" method="post">
                         $<%= book.price %>.00
                         <button type="submit" ><i class="bi bi-bag"></i></button>

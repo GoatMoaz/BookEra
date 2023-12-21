@@ -37,7 +37,18 @@
             <% const stock = book.quantity %>
             <% if( stock > 0 ){ %>
                 <p class="card-text" style="color: #0c442d ; font-weight: bold">In stock: <%= book.quantity %></p>
-                <% if (user && user.type === 'buyer') { %>
+                <% if (user &&  user.type === 'buyer' && !(orders || []).some((order) =>
+                (order.bought_books || []).some(
+                    (bought_book) =>
+                        bought_book._id.toString() === book._id.toString(),
+                    ),
+                )
+                && !(cart || []).some((cart) =>
+                (cart.books || []).some(
+                    (cart_book) =>
+                        cart_book._id.toString() === book._id.toString(),
+                ),
+                )) { %>
                     <form action="/carts/<%= book._id %>/addToCart" method="POST">
                         <button type="submit" class="cart mb-1">
                             <div class="pretext">
