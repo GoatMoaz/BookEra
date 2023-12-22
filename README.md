@@ -11,17 +11,16 @@ Welcome to BookEra, an e-commerce platform dedicated to book enthusiasts! Whethe
 #### Main Features:
 
 1. **Search and Discovery:**
-   - Users can easily search for books based on genres, authors, or keywords.
-   - Personalized recommendations help readers discover new books.
+   - Users can easily search for books based on title.
 
 2. **Secure Transactions:**
    - Secure payment processing ensures a safe and reliable transaction environment for buyers and sellers.
 
 3. **Book Listings:**
-   - Sellers can list their books for sale, providing details such as title, author, condition, and price.
+   - Sellers can list their books for sale, providing details such as title, author, softcopy, and price.
 
 4. **Rating and Reviews:**
-   - Users can rate and review books, helping others make informed decisions.
+   - Buyers can rate and review books, helping others make informed decisions.
 
 #### Goals:
 
