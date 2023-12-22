@@ -5,8 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%=book.title%></title>
     <link rel="stylesheet" href="/stylesheets/bookInstance.css" type="text/css">
+    <%- include('partials/navbarLinks') %>
 </head>
 <body>
+<%- include('partials/navbar')%>
+<%- include('partials/cartPane')%>
     <div class="mt-4" style="padding: 150px">
         <div class="button-container">
             <button id="prev">Previous</button>
@@ -18,5 +21,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.worker.js"></script>
     <script src="/javascripts/softCopy.js"></script>
+
+
+<script src="/javascripts/main.js"></script>
 </body>
 </html>
