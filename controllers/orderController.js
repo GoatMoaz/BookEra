@@ -37,9 +37,9 @@ exports.order_create_post = async (req, res) => {
         console.log('Creating order')
         const cart = await Cart.findOne({ user: req.user._id }).populate('books');
         let total_price = 0;
-        cart.books.forEach(book => {
+        for (let book of cart.books) {
             total_price += book.price;
-        });
+        }
 
         const user = await User.findById(req.user._id);
         if (user.wallet_amount < total_price) {
@@ -49,26 +49,26 @@ exports.order_create_post = async (req, res) => {
         }
 
         // decrement the quantity of each book in the cart
-        cart.books.forEach(async book => {
+        for (let book of cart.books) {
             book.quantity -= 1;
             await book.save({ session });
-        });
+        }
 
         // for each seller in the cart, give them 97% of the total price of their books
         let sellers = [];
-        cart.books.forEach(book => {
+        for (let book of cart.books) {
             if (!sellers.includes(book.seller)) {
                 sellers.push(book.seller);
             }
-        });
+        }
 
-        sellers.forEach(async seller => {
+        for (let seller of sellers) {
             let seller_total = 0;
-            cart.books.forEach(book => {
+            for (let book of cart.books) {
                 if (book.seller.equals(seller)) {
                     seller_total += book.price;
                 }
-            });
+            }
             const seller_user = await User.findById(seller);
             seller_user.wallet_amount += seller_total * 0.97;
             seller_user.wallet_amount = Math.round(seller_user.wallet_amount * 100) / 100;
@@ -77,9 +77,7 @@ exports.order_create_post = async (req, res) => {
             // not yet implemented
 
             await seller_user.save({session});
-            }
-        );
-
+        }
 
         // Create a new order
         const order = new Order({
