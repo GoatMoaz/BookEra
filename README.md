@@ -4,6 +4,8 @@ Welcome to BookEra, an e-commerce platform dedicated to book enthusiasts! Whethe
 
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
+![screenshot](https://res.cloudinary.com/ein39/image/upload/v1703270311/bookstore/dviis5epcpzeityc5pcr.png)
+
 ## Project Overview:
 ### Main Features and Goals:
 #### Main Features:
