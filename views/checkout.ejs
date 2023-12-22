@@ -29,27 +29,40 @@
             <%= error %>
         </div>
     <% } %>
+
     <% if (cart && cart.books && cart.books.length > 0) { %>
+            <div class="checkout">
+                <h1>My Cart</h1>
+                <a href="/books" class="continue">Continue Shopping</a>
+            </div>
+
         <% cart.books.forEach(function(book) { %>
-            <div class="cart-item">
-                <h2><%= book.title %></h2>
-                <p class="price">Price: <%= book.price %></p>
-                <form action="/carts/<%= book._id %>/deleteFromCart" method="post">
-                    <button type="submit" class="close" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </form>
+            <div class="checkout-item">
+                <div class="checkout-item-info">
+                    <div class="cartSection">
+                        <img src="<%= book.cover %>" alt="<%= book.title %>">
+                        <p class="itemIsbn"><%= book.isbn %></p>
+                        <h3><%= book.title %></h3>
+                        <p class="stockStatus">In Stock</p>
+                        <div class="prodTotal cartSection">
+                            <p>$<%= book.price %>.00</p>
+                        </div>
+                        <form action="/carts/<%= book._id %>/deleteFromCart" method="post">
+                            <button type="submit" class="close" aria-label="Close">
+                                <span aria-hidden="true"><i class="bi bi-trash-fill"></i></span>
+                            </button>
+                        </form>
+                    </div>
+                </div>
             </div>
         <% }) %>
-        <div class="total-price">
-            <h2>Total Price: <%= total_price %></h2>
-        </div>
-        <div class="wallet-amount">
-            <h2>Wallet Amount: <%= wallet_amount %></h2>
-        </div>
-        <form action="/orders/create" method="post">
-            <button type="submit" class="btn btn-primary">Checkout</button>
-        </form>
+            <div class="subtotal">
+                <div class="totalRow final"><span class="label">Wallet Amount</span><span>$<%= wallet_amount %>.00</span></div>
+                <div class="totalRow final"><span class="label">Total:</span><span>$<%= total_price %>.00</span></div>
+                <form action="/orders/create" method="post">
+                    <button type="submit" class="checkout-button">Checkout</button>
+                </form>
+            </div>
     <% } else { %>
         <div class="empty-cart">
             <h2>Your cart is empty</h2>
