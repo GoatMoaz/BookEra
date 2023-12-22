@@ -144,7 +144,7 @@ strong {
     width: 100%;
     border-collapse: collapse;
 }
-h1 {
+.checkout h1 {
     font-size: 2em;
     float: left;
 }
@@ -301,7 +301,7 @@ h1 {
         width: 100%;
     }
 
-    a.btn.continue {
+    .checkout-button {
         width: 100%;
         text-align: center;
     }
