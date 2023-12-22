@@ -45,7 +45,7 @@
                         <h3><%= book.title %></h3>
                         <p class="stockStatus">In Stock</p>
                         <div class="prodTotal cartSection">
-                            <p>$<%= book.price %>.00</p>
+                            <p>$<%= book.price %></p>
                         </div>
                         <form action="/carts/<%= book._id %>/deleteFromCart" method="post">
                             <button type="submit" class="close" aria-label="Close">
@@ -57,8 +57,8 @@
             </div>
         <% }) %>
             <div class="subtotal">
-                <div class="totalRow final"><span class="label">Wallet Amount</span><span>$<%= wallet_amount %>.00</span></div>
-                <div class="totalRow final"><span class="label">Total:</span><span>$<%= total_price %>.00</span></div>
+                <div class="totalRow final"><span class="label">Wallet Amount</span><span>$<%= wallet_amount %></span></div>
+                <div class="totalRow final"><span class="label">Total:</span><span>$<%= total_price %></span></div>
                 <form action="/orders/create" method="post">
                     <button type="submit" class="checkout-button">Checkout</button>
                 </form>

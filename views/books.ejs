@@ -65,11 +65,11 @@
                         cart_book._id.toString() === book._id.toString(),
                 )) { %>
                     <form action="/carts/<%= book._id %>/addToCart" method="post">
-                        $<%= book.price %>.00
+                        $<%= book.price %>
                         <button type="submit" ><i class="bi bi-bag"></i></button>
                     </form>
                 <% } else { %>
-                    $<%= book.price %>.00
+                    $<%= book.price %>
                 <% } %>
             </div>
         <% }) %>

@@ -4,14 +4,14 @@
         <p>Please <a href="/login">log in</a> to view your cart.</p>
     <% } else if (cart && cart.books && cart.books.length > 0) { %>
         <form action="/orders" method="get">
-            <p class="price">$<%= total_price %>.00</p>
+            <p class="price">$<%= total_price %></p>
             <button class="buy-btn">Buy Books</button>
         </form>
         <% cart.books.forEach(function(book) { %>
             <div class="cart-item">
                 <img src="<%=book.cover%>" alt="<%= book.title %>">
                 <form action="/carts/<%= book._id %>/deleteFromCart" method="post">
-                    <p class="price">$<%= book.price %>.00
+                    <p class="price">$<%= book.price %>
                         <button type="submit" class="close" aria-label="Close">
                             <span aria-hidden="true"><i class="bi bi-trash-fill"></i></span>
                         </button>
