@@ -73,19 +73,57 @@ strong {
     overflow-y: auto
 
 }
-
+.cart-pane h5 {
+    text-align: center;
+}
+.price{
+    color: #b12704; /* Change this to the color you want for the price */
+    font-weight: bold;
+    text-align: center;
+}
+.cart-pane .close {
+   border: none;
+    float: right;
+    transition: 0.3s;
+}
+.cart-pane .close:hover {
+    color: red;
+    text-decoration: none;
+    cursor: pointer;
+}
 .cart-pane.open {
     width: 300px;
     padding : 20px;
 }
+.buy-btn {
+    background-color: #4CAF50; /* Green */
+    border: #4CAF50;
+    border-radius: 20px;
+    color: white;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    width: 100%;
+    transition: 0.3s;
+}
+.buy-btn:hover {
+    background-color: #3e8e41; /* Green */
+    border: #3e8e41;
 
+}
 .cart-item {
     background-color: #f0f0f0; /* Change this to the color you want for the card background */
     border-radius: 5px;
     padding: 20px;
     margin-bottom: 20px;
 }
-
+.cart-item img {
+    width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+}
 .cart-item h2 {
     margin-bottom: 10px;
 }
@@ -95,8 +133,10 @@ strong {
 }
 
 .cart-item .price {
-    color: #ff0000; /* Change this to the color you want for the price */
+    color: black; /* Change this to the color you want for the price */
     font-weight: bold;
+    text-align: left;
+
 }
 
 

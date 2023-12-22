@@ -1,23 +1,25 @@
 <div id="cart-pane" class="cart-pane" style="z-index: 1000;">
-    <h1>Your Cart</h1>
+    <h5>Subtotal</h5>
     <% if (!user) { %>
         <p>Please <a href="/login">log in</a> to view your cart.</p>
     <% } else if (cart && cart.books && cart.books.length > 0) { %>
+        <form action="/orders" method="get">
+            <p class="price">$<%= total_price %>.00</p>
+            <button class="buy-btn">Buy Books</button>
+        </form>
         <% cart.books.forEach(function(book) { %>
             <div class="cart-item">
-                <h2><%= book.title %></h2>
-                <p class="price">Price: <%= book.price %></p>
+                <img src="<%=book.cover%>" alt="<%= book.title %>">
                 <form action="/carts/<%= book._id %>/deleteFromCart" method="post">
-                    <button type="submit" class="close" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                    <p class="price">$<%= book.price %>.00
+                        <button type="submit" class="close" aria-label="Close">
+                            <span aria-hidden="true"><i class="bi bi-trash-fill"></i></span>
+                        </button>
+                    </p>
+
                 </form>
             </div>
         <% }) %>
-            <p>Total Price: <%= total_price %></p>
-       <form action="/orders" method="get">
-          <button class="btn btn-primary">Buy Books</button>
-       </form>
     <% } else { %>
         <p>Your cart is empty.</p>
     <% } %>
