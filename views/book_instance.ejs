@@ -36,16 +36,16 @@
             <canvas id="resizer"></canvas>
             <% const stock = book.quantity %>
             <% if( stock > 0 ){ %>
-                <% if (user &&  user.type === 'buyer' && !orders.some((order) =>
-                order.bought_books.some(
+                <% if (user &&  user.type === 'buyer' && !(orders || []).some((order) =>
+                (order.bought_books || []).some(
                     (bought_book) =>
                         bought_book._id.toString() === book._id.toString(),
                     ),
-                        )
-                        && !(cart.books || []).some(
-                                (cart_book) =>
-                                        cart_book._id.toString() === book._id.toString(),
-                        )) { %>
+                )
+                && !((cart || {}).books || []).some(
+                    (cart_book) =>
+                        cart_book._id.toString() === book._id.toString(),
+                )) { %>
                     <form action="/carts/<%= book._id %>/addToCart" method="POST">
                     <button type="submit" class="cart mb-1" id="addToCartButton">
                             <div class="pretext">
@@ -67,12 +67,10 @@
                     </form>
                 <% } %>
                 <% if ((user && (user._id.toString() === book.seller._id.toString()) ||
-                            (orders.some(order => 
-                                order.bought_books.some(bought_book => bought_book._id.toString() === book._id.toString())
-                                        )
-                            )
-                            )
-                        ) { %>
+                ((orders || []).some(order => 
+                    (order.bought_books || []).some(bought_book => bought_book._id.toString() === book._id.toString())
+                    ))
+                )) { %>
                             <a href="/books/<%= book._id %>/view">
                                 <button type="button" class="btn btn-primary">View Book</button>
                             </a>
