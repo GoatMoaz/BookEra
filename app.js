@@ -76,9 +76,11 @@ app.use(async (req, res, next) => {
             'books',
         );
         let total_price = 0;
-        cart.books.forEach((book) => {
-            total_price += book.price;
-        });
+        if (cart){
+            cart.books.forEach((book) => {
+                total_price += book.price;
+            });
+        }
 
         res.locals.total_price = total_price;
         res.locals.cart = cart;

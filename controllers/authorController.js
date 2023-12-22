@@ -3,7 +3,7 @@ const Author = require('../models/author.js');
 
 
 exports.createAuthor_get = async (req, res) => {
-    res.render('createAuthor');
+    res.render('create_author');
 }
 
 

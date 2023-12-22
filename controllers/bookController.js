@@ -55,7 +55,7 @@ exports.getBookById = async (req, res) => {
             .populate('publisher')
             .populate('authors')
             .populate('categories');
-        // send book to bookInstance.ejs with its reviews
+        // send book to book_instance.ejs with its reviews
         // get reviews with book id = req.params.id and store each user's username in reviews
         const reviews = await Review.find({ book: req.params.id }).populate(
             'user',
@@ -72,7 +72,7 @@ exports.getBookById = async (req, res) => {
             ),
         );
 
-        res.render('bookInstance', {
+        res.render('book_instance', {
             title: 'Book Instance',
             book,
             reviews,
@@ -104,7 +104,7 @@ exports.search_book = async (req, res) => {
             .populate('publisher')
             .populate('authors')
             .populate('categories');
-        res.render('bookSearchResult', { title: 'Books', books: books });
+        res.render('book_search_result', { title: 'Books', books: books });
     } catch (err) {
         res.status(500).json({ message: err.message });
     }
@@ -130,7 +130,7 @@ exports.createBook_get = async (req, res) => {
         const authors = await Author.find({});
         const publishers = await Publisher.find({});
         const categories = await Category.find({});
-        res.render('createBook', { authors, publishers, categories });
+        res.render('create_book', { authors, publishers, categories });
     } catch (err) {
         console.log(err);
         res.status(500).json(err);
@@ -199,7 +199,7 @@ exports.updateBook_get = async (req, res) => {
         const authors = await Author.find({});
         const publishers = await Publisher.find({});
         const categories = await Category.find({});
-        res.render('updateBook', { book, authors, publishers, categories });
+        res.render('update_book', { book, authors, publishers, categories });
     } catch (err) {
         console.log(err);
         res.status(500).json(err);
