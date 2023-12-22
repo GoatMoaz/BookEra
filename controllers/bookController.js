@@ -36,14 +36,12 @@ exports.getAllBooks = async (req, res) => {
         // send books to books.ejs
 
         // get cart of logged in user
-        let cart = [];
         let orders = [];
         if (req.user) {
-            cart = await Cart.find({ user: req.user._id });
             orders = await Order.find({ user: req.user._id });
         }
 
-        res.render('books', { title: 'Books', books: books, cart, orders });
+        res.render('books', { title: 'Books', books: books, orders });
     } catch (err) {
         console.log(err);
         res.status(500).json(err);
@@ -65,14 +63,6 @@ exports.getBookById = async (req, res) => {
         );
         // pass also the orders
         const orders = req.user ? await Order.find({ user: req.user._id }) : [];
-
-        // get cart of logged in user
-        let cart = [];
-        if (req.user) {
-            cart = await Cart.find({ user: req.user._id });
-        }
-
-
         console.log(
             orders.some((order) =>
                 order.bought_books.some(
@@ -87,7 +77,6 @@ exports.getBookById = async (req, res) => {
             book,
             reviews,
             orders,
-            cart,
         });
     } catch (err) {
         console.log(err);

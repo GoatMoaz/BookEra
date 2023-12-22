@@ -41,15 +41,13 @@
                     (bought_book) =>
                         bought_book._id.toString() === book._id.toString(),
                     ),
-                )
-                && !cart.some((cart) =>
-                cart.books.some(
-                    (cart_book) =>
-                        cart_book._id.toString() === book._id.toString(),
-                ),
-                )) { %>
+                        )
+                        && !(cart.books || []).some(
+                                (cart_book) =>
+                                        cart_book._id.toString() === book._id.toString(),
+                        )) { %>
                     <form action="/carts/<%= book._id %>/addToCart" method="POST">
-                        <button type="submit" class="cart mb-1" id="addToCartButton">
+                    <button type="submit" class="cart mb-1" id="addToCartButton">
                             <div class="pretext">
                                 <i class="fas fa-cart-plus"></i><i class="bi bi-cart"></i>Add To cart
                             </div>
