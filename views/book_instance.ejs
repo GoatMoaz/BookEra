@@ -67,12 +67,10 @@
                     </form>
                 <% } %>
                 <% if ((user && (user._id.toString() === book.seller._id.toString()) ||
-                            (orders.some(order => 
-                                order.bought_books.some(bought_book => bought_book._id.toString() === book._id.toString())
-                                        )
-                            )
-                            )
-                        ) { %>
+                ((orders || []).some(order => 
+                    (order.bought_books || []).some(bought_book => bought_book._id.toString() === book._id.toString())
+                    ))
+                )) { %>
                             <a href="/books/<%= book._id %>/view">
                                 <button type="button" class="btn btn-primary">View Book</button>
                             </a>
