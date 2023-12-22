@@ -75,6 +75,12 @@ app.use(async (req, res, next) => {
         const cart = await Cart.findOne({ user: req.user._id }).populate(
             'books',
         );
+        let total_price = 0;
+        cart.books.forEach((book) => {
+            total_price += book.price;
+        });
+
+        res.locals.total_price = total_price;
         res.locals.cart = cart;
     }
     next();
