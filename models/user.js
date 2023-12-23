@@ -23,6 +23,7 @@ const userSchema = new Schema({
     password: {
         type: String,
         required: true,
+        minlength: 4,
     },
     wallet_amount: {
         type: Number,
