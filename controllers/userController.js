@@ -63,6 +63,10 @@ exports.signup_post = async (req, res) => {
             req.flash('error', 'Username already exists');
             return res.redirect('/users/signup');
         }
+        if (req.body.password.length < 5) {
+            req.flash('error', 'Password must be at least 4 characters long');
+            return res.redirect('/users/signup');
+        }
         const user = new User({
             first_name: req.body.first_name,
             last_name: req.body.last_name,
