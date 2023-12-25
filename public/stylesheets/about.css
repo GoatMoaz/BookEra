@@ -133,10 +133,8 @@ body {
   box-shadow: 0 1rem 3rem rgba(0,0,0,.175);
   border-radius: var(--border-radius-large);
   display: inline-block;
-  margin: auto;
-  margin-top: 40px;
-  padding: 15px 25px;
-  padding-bottom: 7px;
+  margin: 40px auto auto;
+  padding: 15px 25px 7px;
 }
 
 .owl-theme .owl-nav.disabled+.owl-dots {

@@ -70,7 +70,7 @@ strong {
     border-bottom: 1px solid #ccc;
 
     max-height: 90vh; /* Adjust this value as needed */
-    overflow-y: auto
+    overflow-y: scroll;
 
 }
 .cart-pane h5 {

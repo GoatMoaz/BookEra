@@ -50,7 +50,7 @@
 .content button span{
     background: linear-gradient(144deg,#5379fa, black 50%,white);
     height: 100%;
-    width: 0%;
+    width: 0;
     border-radius: 25px;
     position: absolute;
     transition: .3s;
