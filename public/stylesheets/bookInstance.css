@@ -109,7 +109,7 @@ i{
 
     transform:translate(-110%) skew(-40deg);
 }
-.posttext{
+.postText{
     background:#4CAF50;
 }
 .fa-check{
@@ -174,10 +174,10 @@ i{
        flex-direction:column;
    }
     .imgInfo{
-         padding-left:0px;
+         padding-left:0;
     }
     .main{
-        margin:0px;
+        margin:0;
     }
     .description{
 

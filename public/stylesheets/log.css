@@ -35,7 +35,6 @@ body{
     width: 100%;
     height: 100%;
     background: transparent;
-    border: none;
     outline: none;
     border: 2px solid rgba(255, 255, 255, .2);
     border-radius: 40px;
@@ -52,7 +51,6 @@ body{
     width: 100%;
     height: 100%;
     background: transparent;
-    border: none;
     outline: none;
     border: 2px solid rgba(255, 255, 255, .2);
     border-radius: 40px;
@@ -94,7 +92,7 @@ option{
     transition: .3s ease-in-out;
 }
 .wrapper .register-link{
-    font-size: 14.5px;
+    font-size: 15px;
     text-align: center;
     margin: 20px 0 15px;
 
