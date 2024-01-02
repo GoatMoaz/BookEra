@@ -1,8 +1,4 @@
-*{
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-}
+
 .centered {
     position: absolute;
     width: 100%;
@@ -14,7 +10,8 @@
     font-weight: bold;
 }
 .bar{
-    position:absolute;
+    position:fixed;
+    scroll-behavior: unset;
     top: 30%;
     left: 50%;
     transform: translate(-50%, -50%);

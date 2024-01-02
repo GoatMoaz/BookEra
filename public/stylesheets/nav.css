@@ -1,3 +1,9 @@
+*{
+    font-family: 'Georgia', serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 .navbar .navbar-nav {
     padding: 10px 0;
 }
