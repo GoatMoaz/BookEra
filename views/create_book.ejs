@@ -1,105 +1,127 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-
     <title>Create Book Page</title>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
 </head>
+
 <body>
-    <%- include('partials/navbar') %>
-    <div class="container mt-5">
-        <div class="row">
-            <div class="col-md-8 offset-md-2">
-                <h1>Create a new book</h1>
-                <form action="/books/create" method="POST" enctype="multipart/form-data">
-                    <div class="form-group">
-                        <label for="title">Title</label>
-                        <input type="text" class="form-control" id="title" name="title" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="isbn">ISBN</label>
-                        <input type="text" class="form-control" id="isbn" name="isbn" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="description">Description</label>
-                        <textarea class="form-control" id="description" name="description" required></textarea>
-                    </div>
+<%- include('partials/navbar') %>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h2 class="mb-0 text-center">Create a New Book</h2>
+                </div>
+                <div class="card-body">
+                    <form action="/books/create" method="POST" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label for="title">Title</label>
+                            <input type="text" class="form-control" id="title" name="title" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="isbn">ISBN</label>
+                            <input type="text" class="form-control" id="isbn" name="isbn" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Description</label>
+                            <textarea class="form-control" id="description" name="description" required></textarea>
+                        </div>
 
+                        <div class="form-group">
+                            <label for="softCopy">Upload Soft Copy</label>
+                            <input type="file" class="form-control" id="softCopy" name="softCopy">
+                        </div>
 
-                    <div class="form-group">
-                        <label for="softCopy">Upload Soft Copy</label>
-                        <input type="file" class="form-control" id="softCopy" name="softCopy">
-                    </div>
+                        <div class="form-group">
+                            <label for="authors">Authors</label>
+                            <div class="input-group">
+                                <select  class="form-control" id="authors" name="authors">
+                                    <% authors.forEach(author => { %>
+                                        <option value="<%= author._id %>"><%= author.name %></option>
+                                    <% }) %>
+                                </select>
+                                <div class="input-group-append">
+                                    <button type="button" class="btn btn-primary" onclick="location.href='/authors/create'">Add New Author</button>
+                                </div>
+                            </div>
+                        </div>
 
+                        <div class="form-group">
+                            <label for="publisher">Publisher</label>
+                            <div class="input-group">
+                                <select class="form-control" id="publisher" name="publisher" required>
+                                    <% publishers.forEach(publisher => { %>
+                                        <option value="<%= publisher._id %>"><%= publisher.name %></option>
+                                    <% }) %>
+                                </select>
+                                <div class="input-group-append">
+                                    <button type="button" class="btn btn-primary" id="add-publisher" onclick="location.href='/publishers/create'">Add New Publisher</button>
+                                </div>
+                            </div>
+                        </div>
 
-                    <div class="form-group">
-                        <label for="authors">Authors</label>
-                        <select multiple class="form-control" id="authors" name="authors">
-                            <% authors.forEach(author => { %>
-                                <option value="<%= author._id %>"><%= author.name %></option>
-                            <% }) %>
-                        </select>
-                        <button type="button" class="btn btn-primary" onclick="location.href='/authors/create'">Add New Author</button>
-                    </div>
+                        <div class="form-group">
+                            <label for="price">Price</label>
+                            <input type="text" class="form-control" id="price" name="price" required pattern="^\d+(\.\d{1,2})?$" title="Please enter a valid price.">
+                        </div>
 
-                    <div class="form-group">
-                        <label for="publisher">Publisher</label>
-                        <select class="form-control" id="publisher" name="publisher" required>
-                            <% publishers.forEach(publisher => { %>
-                                <option value="<%= publisher._id %>"><%= publisher.name %></option>
-                            <% }) %>
-                        </select>
-                        <button type="button" class="btn btn-primary" id="add-publisher" onclick="location.href='/publishers/create'">Add New Publisher</button>
-                    </div>
-                    <div class="form-group">
-                        <label for="price">Price</label>
-                        <input type="text" class="form-control" id="price" name="price" required
-                               pattern="^\d+(\.\d{1,2})?$" title="Please enter a valid price.">
-                    </div>
-                    <div class="form-group">
-                        <label for="cover">Cover Image URL</label>
-                        <input type="text" class="form-control" id="cover" name="cover" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="categories">Categories</label>
-                        <select multiple class="form-control" id="categories" name="categories" required>
-                            <% categories.forEach(category => { %>
-                                <option value="<%= category._id %>"><%= category.name %></option>
-                            <% }) %>
-                        </select>
-                        <button type="button" class="btn btn-primary" id="add-category" onclick="location.href='/categories/create'">Add New Category</button>
-                    </div>
-                    <div class="form-group">
-                        <label for="quantity">Quantity</label>
-                        <input type="number" class="form-control" id="quantity" name="quantity" required>
-                    </div>
-                   <form action="/books/create" method="POST" enctype="multipart/form-data">
-                    <button type="submit" class="btn btn-primary">Create Book</button>
-                   </form>
-                </form>
+                        <div class="form-group">
+                            <label for="cover">Cover Image URL</label>
+                            <input type="text" class="form-control" id="cover" name="cover" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="categories">Categories</label>
+                            <div class="input-group">
+                                <select  class="form-control" id="categories" name="categories" required>
+                                    <% categories.forEach(category => { %>
+                                        <option value="<%= category._id %>"><%= category.name %></option>
+                                    <% }) %>
+                                </select>
+                                <div class="input-group-append">
+                                    <button type="button" class="btn btn-primary" id="add-category" onclick="location.href='/categories/create'">Add New Category</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="quantity">Quantity</label>
+                            <input type="number" class="form-control" id="quantity" name="quantity" required>
+                        </div>
+
+                        <div class="form-group text-center">
+                            <button type="submit" class="btn btn-primary">Create Book</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-    <div id="loading" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 9999; justify-content: center; align-items: center;">
-        <div class="spinner-border text-primary" role="status">
-        </div>
-        <p style="color: #fff; margin-left: 10px;">Uploading...</p>
-    </div>
+</div>
 
-    <style>
-        #loading {
-            display: flex;
-        }
-    </style>
+<div id="loading" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 9999; justify-content: center; align-items: center;">
+    <div class="spinner-border text-primary" role="status"></div>
+    <p style="color: #fff; margin-left: 10px;">Uploading...</p>
+</div>
 
-    <script>
-        document.querySelector('form').addEventListener('submit', function() {
-            document.getElementById('loading').style.display = 'flex';
-        });
-    </script>
+<style>
+    #loading {
+        display: flex;
+    }
+</style>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+<script>
+    document.querySelector('form').addEventListener('submit', function () {
+        document.getElementById('loading').style.display = 'flex';
+    });
+</script>
 </body>
+
 </html>
